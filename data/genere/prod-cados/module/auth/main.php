@@ -17,35 +17,35 @@ class module_auth extends abstract_module{
 
 	public function _login(){
 		
-if(isset($_GET['log']) && isset($_GET['cle'])){
+            if(isset($_GET['log']) && isset($_GET['cle'])){
 			
-			$email = htmlspecialchars($_GET['log']);
-			$cle = htmlspecialchars($_GET['cle']);
+                $email = htmlspecialchars($_GET['log']);
+                $cle = htmlspecialchars($_GET['cle']);
 
-			$iIdUtilisateur = model_utilisateur::getInstance()->getIdUtilisateur($email);				
-			$aConfirmation = model_utilisateur::getInstance()->getConfirmation($iIdUtilisateur->id_utilisateur);
-			
-			if($aConfirmation->actif == 1){
-				$sConfirmation = "Vous avez déjà confirmé votre compte.";
-			} else {
-				if($aConfirmation->cle != $cle){
-					$sConfirmation = "Erreur. Votre compte ne peux pas être activé.";
-				}else{
-					model_utilisateur::getInstance()->setActif($iIdUtilisateur->id_utilisateur);
-					$sConfirmation = "Votre compte à bien été activé.";
-				}
-			}			
-		}else{
-			$sConfirmation = "";
-		}
+                $iIdUtilisateur = model_utilisateur::getInstance()->getIdUtilisateur($email);				
+                $aConfirmation = model_utilisateur::getInstance()->getConfirmation($iIdUtilisateur->id_utilisateur);
 
-		$sMessage=$this->checkLoginPass();
-		
-		$oView=new _view('auth::login');
-		$oView->sError=$sMessage;
-if(isset($_GET['log'])){$oView->sEmail=$email;}
-		$oView->sConfirmation=$sConfirmation;
-		$this->oLayout->add('main',$oView);
+                if($aConfirmation->actif == 1){
+                        $sConfirmation = "Vous avez déjà confirmé votre compte.";
+                } else {
+                    if($aConfirmation->cle != $cle){
+                            $sConfirmation = "Erreur. Votre compte ne peux pas être activé.";
+                    }else{
+                            model_utilisateur::getInstance()->setActif($iIdUtilisateur->id_utilisateur);
+                            $sConfirmation = "Votre compte à bien été activé.";
+                    }
+                }			
+            }else{
+                $sConfirmation = "";
+            }
+
+            $sMessage=$this->checkLoginPass();
+
+            $oView=new _view('auth::login');
+            $oView->sError=$sMessage;
+            if(isset($_GET['log'])){$oView->sEmail=$email;}
+            $oView->sConfirmation=$sConfirmation;
+            $this->oLayout->add('main',$oView);
 
 	}
 
@@ -212,9 +212,9 @@ public function sendEmailinscription($sRecipient,$sName,$sSurname,$cle){
 		
 		$sLogin=_root::getParam('email');
 		$sPassword=_root::getParam('password');
-            $sName = _root::getParam('nom');
-            $sSurname = _root::getParam('prenom');
-            $dBirthday = _root::getParam('date_de_naissance');
+                $sName = _root::getParam('nom');
+                $sSurname = _root::getParam('prenom');
+                $dBirthday = _root::getParam('date_de_naissance');
 
 		if($sPassword!=_root::getParam('password2')){
 			return array('email'=>array('Les deux mots de passe doivent etre identiques'));
@@ -231,9 +231,9 @@ public function sendEmailinscription($sRecipient,$sName,$sSurname,$cle){
 		$oUtilisateur=new row_utilisateur;
 		$oUtilisateur->email=$sLogin;
 		$oUtilisateur->password=model_utilisateur::getInstance()->hashPassword($sPassword);
-            $oUtilisateur->nom=$sName;
-            $oUtilisateur->prenom=$sSurname;
-            $oUtilisateur->date_de_naissance=$dBirthday;
+                $oUtilisateur->nom=$sName;
+                $oUtilisateur->prenom=$sSurname;
+                $oUtilisateur->date_de_naissance=$dBirthday;
 		if($oUtilisateur->save()==false){
 
 			return $oUtilisateur->getListError();

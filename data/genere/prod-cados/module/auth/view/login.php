@@ -6,14 +6,13 @@
 	
 	<input type="submit" value="Se connecter"  class="btn btn-lg btn-primary btn-block"/> <a class="btn btn-link" href="<?/*php echo _root::getLink('auth::inscription')*/?>">S'inscrire</a></p>
 
-	<?php// if($this->sError!=''):?>
-		<p style="color:red"><?php //echo $this->sError?></p>
-	<?php// endif;?>
-</form>
--->
+	//<?php // if($this->sError!=''):?>
+		<p style="color:red"><?php // echo $this->sError?></p>
+	<?php // endif;?>
+</form>-->
 
 
-<?php if($this->sConfirmation!=''):?>
+<?php if($this->sConfirmation!=''){?>
 		
 	<form action="" method="POST"  class="form-signin form-signin-login" role="form">
 		<h2 class="form-signin-heading">Authentification</h2>
@@ -31,7 +30,7 @@
 		
 		
 		
-<?php else:?>
+<?php }else{?>
 
 
 	<form action="" method="POST"  class="form-signin form-signin-login" role="form">
@@ -48,4 +47,4 @@
 		
 	</form>
 	
-<?php endif;?>
+<?php }?>

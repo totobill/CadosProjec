@@ -87,6 +87,42 @@ class plugin_form{
 		$sHtml.=$this->getMessage($sName);
 		return $sHtml;
 	}
+        /** 
+	* retourne un champ input password
+	* @access public
+	* @param string $sName nom du champ
+	* @param array $tOption options du champ texte
+	*/
+        public function getInputPassword($sName,$tOption=null){
+		$sHtml=null;
+		$sHtml.='<input type="password" name="'.$sName.'" value="'.$this->getValue($sName).'" '.$this->getOption($tOption).'/>';
+		$sHtml.=$this->getMessage($sName);
+		return $sHtml;
+	}
+        /** 
+	* retourne un champ input password
+	* @access public
+	* @param string $sName nom du champ
+	* @param array $tOption options du champ texte
+	*/
+        public function getInputDate($sName,$tOption=null){
+		$sHtml=null;
+		$sHtml.='<input type="date" name="'.$sName.'" value="'.$this->getValue($sName).'" '.$this->getOption($tOption).'/>';
+		$sHtml.=$this->getMessage($sName);
+		return $sHtml;
+	}
+         /** 
+	* retourne un champ input password
+	* @access public
+	* @param string $sName nom du champ
+	* @param array $tOption options du champ texte
+	*/
+        public function getInputEmail($sName,$tOption=null){
+		$sHtml=null;
+		$sHtml.='<input type="email" name="'.$sName.'" value="'.$this->getValue($sName).'" '.$this->getOption($tOption).'/>';
+		$sHtml.=$this->getMessage($sName);
+		return $sHtml;
+	}
 	/** 
 	* retourne un champ input textarea
 	* @access public

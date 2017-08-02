@@ -4,8 +4,8 @@ Class module_menu_auth extends abstract_moduleembedded{
 	public function _index(){
 		
 		$tLink=array(
-			'Se connect&eacute;' => 'auth::login',
-'Inscription' => 'auth::inscription',
+                    'Se connecter' => 'auth::login',
+                    'Inscription' => 'auth::inscription',
 
 		);
 		

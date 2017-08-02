@@ -13,15 +13,15 @@ class model_utilisateur extends abstract_model{
 	}
 
 	public function findById($uId){
-		return $this->findOne('SELECT * FROM '.$this->sTable.' WHERE id_utilisateur=?',$uId );
+            return $this->findOne('SELECT * FROM '.$this->sTable.' WHERE id_utilisateur=?',$uId );
 	}
 	public function findAll(){
-		return $this->findMany('SELECT * FROM '.$this->sTable);
+            return $this->findMany('SELECT * FROM '.$this->sTable); 
 	}
 	
 
- public function findByEmail($sEmail){
-                return $this->findOne('SELECT * FROM '.$this->sTable.' WHERE email=?', $sEmail);
+        public function findByEmail($sEmail){
+            return $this->findOne('SELECT * FROM '.$this->sTable.' WHERE email=?', $sEmail);
         }
         
         public function setIdBouton($iIdBouton,$iIdUtilisateur){
@@ -79,8 +79,8 @@ class model_utilisateur extends abstract_model{
 
             if($tAccount){
                 foreach($tAccount as $oAccount){
-                //on cree ici un tableau indexe par nom d'utilisateur et mot de pase
-                $tLoginPassAccount[$oAccount->email][$oAccount->password]=$oAccount;
+                    //on cree ici un tableau indexe par nom d'utilisateur et mot de pase
+                    $tLoginPassAccount[$oAccount->email][$oAccount->password]=$oAccount;
                 }
             }
 
@@ -110,7 +110,17 @@ class row_utilisateur extends abstract_row{
 	private function getCheck(){
 		$oPluginValid=new plugin_valid($this->getTab());
 		
-		
+		$oPluginValid=new plugin_valid($this->getTab());
+		$oPluginValid->isEmailValid('email','L\'email est invalide');
+		$oPluginValid->isNotEmpty('email','Le champ ne doit pas être vide');
+		$oPluginValid->isNotEmpty('password','Le champ ne doit pas être vide');
+		$oPluginValid->isNotEmpty('nom','Le champ ne doit pas être vide');
+		$oPluginValid->isNotEmpty('prenom','Le champ ne doit pas être vide');
+		$oPluginValid->isNotEmpty('date_de_naissance','Le champ ne doit pas être vide');
+                $oPluginValid->matchExpression('date_de_naissance','/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/','Le champ n\'est pas au bon format');
+                $oPluginValid->isNotEmpty('numero','Le champ ne doit pas être vide');
+                $oPluginValid->matchExpression('numero','/[0-9]{10}/','Le champ n\'est pas au bon format');
+                
 		/* renseigner vos check ici
 		$oPluginValid->isEqual('champ','valeurB','Le champ n\est pas égal à '.$valeurB);
 		$oPluginValid->isNotEqual('champ','valeurB','Le champ est égal à '.$valeurB);
