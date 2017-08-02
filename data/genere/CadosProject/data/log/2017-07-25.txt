@@ -1,0 +1,11 @@
+Erreur dans module/configuration/main.php
+Pas de m&eacute;thode _modifier() dans le module "configuration" &agrave; charger
+Note: vous pouvez modifier le couple module/action par defaut 
+en modifiant la section [navigation] dans le fichier conf/site.ini.php
+#0 /var/www/html/public/index.php(47): _root->run()
+#1 {main}
+
+Detail:
+#0 /var/www/html/public/index.php (47) 
+ _root -> run(  ) 
+#1 {main}

@@ -1,0 +1,55 @@
+include(../module/map/main.php): failed to open stream: No such file or directory
+#0 /var/www/html/CadosProject/plugin/plugin_autoload.php(13): exception_error_handler(2, 'include(../modu...', '/var/www/html/C...', 13, Array)
+#1 /var/www/html/CadosProject/plugin/plugin_autoload.php(13): plugin_autoload::autoload()
+#2 [internal function]: plugin_autoload::autoload('module_map')
+#3 /var/www/html/lib/framework/class_root.php(229): spl_autoload_call('module_map')
+#4 /var/www/html/CadosProject/public/index.php(47): _root->run()
+#5 {main}
+
+Detail:
+#0 /var/www/html/CadosProject/plugin/plugin_autoload.php (13) 
+ exception_error_handler(  , 'include(../module/map/main.php): failed to open stream: No such file or directory' , '/var/www/html/CadosProject/plugin/plugin_autoload.php' ,  , Array (     [sClass] => module_map     [tab] => Array         (             [0] => module             [1] => map         )  )  ) 
+#1 /var/www/html/CadosProject/plugin/plugin_autoload.php (13) 
+ plugin_autoload :: autoload(  ) 
+#2  plugin_autoload :: autoload( 'module_map' ) 
+#3 /var/www/html/lib/framework/class_root.php (229) 
+ spl_autoload_call( 'module_map' ) 
+#4 /var/www/html/CadosProject/public/index.php (47) 
+ _root -> run(  ) 
+#5 {main}include(../module/map/main.php): failed to open stream: No such file or directory
+#0 /var/www/html/CadosProject/plugin/plugin_autoload.php(13): exception_error_handler(2, 'include(../modu...', '/var/www/html/C...', 13, Array)
+#1 /var/www/html/CadosProject/plugin/plugin_autoload.php(13): plugin_autoload::autoload()
+#2 [internal function]: plugin_autoload::autoload('module_map')
+#3 /var/www/html/lib/framework/class_root.php(229): spl_autoload_call('module_map')
+#4 /var/www/html/CadosProject/public/index.php(47): _root->run()
+#5 {main}
+
+Detail:
+#0 /var/www/html/CadosProject/plugin/plugin_autoload.php (13) 
+ exception_error_handler(  , 'include(../module/map/main.php): failed to open stream: No such file or directory' , '/var/www/html/CadosProject/plugin/plugin_autoload.php' ,  , Array (     [sClass] => module_map     [tab] => Array         (             [0] => module             [1] => map         )  )  ) 
+#1 /var/www/html/CadosProject/plugin/plugin_autoload.php (13) 
+ plugin_autoload :: autoload(  ) 
+#2  plugin_autoload :: autoload( 'module_map' ) 
+#3 /var/www/html/lib/framework/class_root.php (229) 
+ spl_autoload_call( 'module_map' ) 
+#4 /var/www/html/CadosProject/public/index.php (47) 
+ _root -> run(  ) 
+#5 {main}include(../module/purpose/main.php): failed to open stream: No such file or directory
+#0 /var/www/html/CadosProject/plugin/plugin_autoload.php(13): exception_error_handler(2, 'include(../modu...', '/var/www/html/C...', 13, Array)
+#1 /var/www/html/CadosProject/plugin/plugin_autoload.php(13): plugin_autoload::autoload()
+#2 [internal function]: plugin_autoload::autoload('module_purpose')
+#3 /var/www/html/lib/framework/class_root.php(229): spl_autoload_call('module_purpose')
+#4 /var/www/html/CadosProject/public/index.php(47): _root->run()
+#5 {main}
+
+Detail:
+#0 /var/www/html/CadosProject/plugin/plugin_autoload.php (13) 
+ exception_error_handler(  , 'include(../module/purpose/main.php): failed to open stream: No such file or directory' , '/var/www/html/CadosProject/plugin/plugin_autoload.php' ,  , Array (     [sClass] => module_purpose     [tab] => Array         (             [0] => module             [1] => purpose         )  )  ) 
+#1 /var/www/html/CadosProject/plugin/plugin_autoload.php (13) 
+ plugin_autoload :: autoload(  ) 
+#2  plugin_autoload :: autoload( 'module_purpose' ) 
+#3 /var/www/html/lib/framework/class_root.php (229) 
+ spl_autoload_call( 'module_purpose' ) 
+#4 /var/www/html/CadosProject/public/index.php (47) 
+ _root -> run(  ) 
+#5 {main}
