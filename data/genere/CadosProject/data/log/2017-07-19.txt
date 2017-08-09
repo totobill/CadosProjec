@@ -1,0 +1,145 @@
+Object of class PDOStatement could not be converted to int
+#0 /var/www/html/model/model_utilisateur.php(55): exception_error_handler(8, 'Object of class...', '/var/www/html/m...', 55, Array)
+#1 /var/www/html/module/auth/main.php(21): model_utilisateur->getIdUtilisateur('Rohr')
+#2 /var/www/lib/framework/class_root.php(264): module_auth->_login()
+#3 /var/www/html/public/index.php(47): _root->run()
+#4 {main}
+
+Detail:
+#0 /var/www/html/model/model_utilisateur.php (55) 
+ exception_error_handler(  , 'Object of class PDOStatement could not be converted to int' , '/var/www/html/model/model_utilisateur.php' ,  , Array (     [email] => Rohr )  ) 
+#1 /var/www/html/module/auth/main.php (21) 
+ model_utilisateur -> getIdUtilisateur( 'Rohr' ) 
+#2 /var/www/lib/framework/class_root.php (264) 
+ module_auth -> _login(  ) 
+#3 /var/www/html/public/index.php (47) 
+ _root -> run(  ) 
+#4 {main}Object of class PDOStatement could not be converted to int
+#0 /var/www/html/model/model_utilisateur.php(55): exception_error_handler(8, 'Object of class...', '/var/www/html/m...', 55, Array)
+#1 /var/www/html/module/auth/main.php(21): model_utilisateur->getIdUtilisateur('Rohr')
+#2 /var/www/lib/framework/class_root.php(264): module_auth->_login()
+#3 /var/www/html/public/index.php(47): _root->run()
+#4 {main}
+
+Detail:
+#0 /var/www/html/model/model_utilisateur.php (55) 
+ exception_error_handler(  , 'Object of class PDOStatement could not be converted to int' , '/var/www/html/model/model_utilisateur.php' ,  , Array (     [email] => Rohr )  ) 
+#1 /var/www/html/module/auth/main.php (21) 
+ model_utilisateur -> getIdUtilisateur( 'Rohr' ) 
+#2 /var/www/lib/framework/class_root.php (264) 
+ module_auth -> _login(  ) 
+#3 /var/www/html/public/index.php (47) 
+ _root -> run(  ) 
+#4 {main}Object of class PDOStatement could not be converted to int
+#0 /var/www/html/model/model_utilisateur.php(55): exception_error_handler(8, 'Object of class...', '/var/www/html/m...', 55, Array)
+#1 /var/www/html/module/auth/main.php(21): model_utilisateur->getIdUtilisateur('antho.rohr@yaho...')
+#2 /var/www/lib/framework/class_root.php(264): module_auth->_login()
+#3 /var/www/html/public/index.php(47): _root->run()
+#4 {main}
+
+Detail:
+#0 /var/www/html/model/model_utilisateur.php (55) 
+ exception_error_handler(  , 'Object of class PDOStatement could not be converted to int' , '/var/www/html/model/model_utilisateur.php' ,  , Array (     [email] => antho.rohr@yahoo.fr )  ) 
+#1 /var/www/html/module/auth/main.php (21) 
+ model_utilisateur -> getIdUtilisateur( 'antho.rohr@yahoo.fr' ) 
+#2 /var/www/lib/framework/class_root.php (264) 
+ module_auth -> _login(  ) 
+#3 /var/www/html/public/index.php (47) 
+ _root -> run(  ) 
+#4 {main}Object of class row_utilisateur could not be converted to string
+#0 [internal function]: exception_error_handler(4096, 'Object of class...', '/var/www/lib/fr...', 246, Array)
+#1 /var/www/lib/framework/abstract/abstract_sgbd_pdo.php(246): implode(' | ', Array)
+#2 /var/www/lib/framework/abstract/abstract_sgbd_pdo.php(194): abstract_sgbd_pdo->query('UPDATE utilisat...', Array)
+#3 /var/www/lib/framework/abstract/abstract_model.php(159): abstract_sgbd_pdo->execute(Array)
+#4 /var/www/html/model/model_utilisateur.php(51): abstract_model->execute('UPDATE utilisat...', Object(row_utilisateur))
+#5 /var/www/html/module/auth/main.php(32): model_utilisateur->setActif(Object(row_utilisateur))
+#6 /var/www/lib/framework/class_root.php(264): module_auth->_login()
+#7 /var/www/html/public/index.php(47): _root->run()
+#8 {main}
+
+Detail:
+#0  exception_error_handler(  , 'Object of class row_utilisateur could not be converted to string' , '/var/www/lib/framework/abstract/abstract_sgbd_pdo.php' ,  , Array (     [sReq] => UPDATE utilisateur SET actif=1 WHERE id_utilisateur=?     [tParam] => Array         (             [0] => row_utilisateur Object                 (                     [sClassModel:protected] => model_utilisateur                     [_bChooseUpdate:abstract_row:private] => 1                     [_tProperty:protected] => Array                         (                             [id_utilisateur] => 39                         )                      [_tPropertyToUpdate:protected] =>                  )          )      [tATTRERRMODE] => Array         (             [SILENT] => 0             [WARNING] => 1             [EXCEPTION] => 2         )      [tATTRCASE] => Array         (             [LOWER] => 2             [NATURAL] => 0             [UPPER] => 1         )  )  ) 
+#1 /var/www/lib/framework/abstract/abstract_sgbd_pdo.php (246) 
+ implode( ' | ' , Array (     [0] => row_utilisateur Object         (             [sClassModel:protected] => model_utilisateur             [_bChooseUpdate:abstract_row:private] => 1             [_tProperty:protected] => Array                 (                     [id_utilisateur] => 39                 )              [_tPropertyToUpdate:protected] =>          )  )  ) 
+#2 /var/www/lib/framework/abstract/abstract_sgbd_pdo.php (194) 
+ abstract_sgbd_pdo -> query( 'UPDATE utilisateur SET actif=1 WHERE id_utilisateur=?' , Array (     [0] => row_utilisateur Object         (             [sClassModel:protected] => model_utilisateur             [_bChooseUpdate:abstract_row:private] => 1             [_tProperty:protected] => Array                 (                     [id_utilisateur] => 39                 )              [_tPropertyToUpdate:protected] =>          )  )  ) 
+#3 /var/www/lib/framework/abstract/abstract_model.php (159) 
+ abstract_sgbd_pdo -> execute( Array (     [0] => UPDATE utilisateur SET actif=1 WHERE id_utilisateur=?     [1] => row_utilisateur Object         (             [sClassModel:protected] => model_utilisateur             [_bChooseUpdate:abstract_row:private] => 1             [_tProperty:protected] => Array                 (                     [id_utilisateur] => 39                 )              [_tPropertyToUpdate:protected] =>          )  )  ) 
+#4 /var/www/html/model/model_utilisateur.php (51) 
+ abstract_model -> execute( 'UPDATE utilisateur SET actif=1 WHERE id_utilisateur=?' ,  ) 
+#5 /var/www/html/module/auth/main.php (32) 
+ model_utilisateur -> setActif(  ) 
+#6 /var/www/lib/framework/class_root.php (264) 
+ module_auth -> _login(  ) 
+#7 /var/www/html/public/index.php (47) 
+ _root -> run(  ) 
+#8 {main}Variable sEmail inexistante dans le template auth::login
+#0 /var/www/html/module/auth/view/login.php(6): _view->__get('sEmail')
+#1 /var/www/lib/framework/class_view.php(85): include('/var/www/html/m...')
+#2 /var/www/lib/framework/class_layout.php(158): _view->show()
+#3 /var/www/html/layout/bootstrap.php(32): _layout->load('main')
+#4 /var/www/lib/framework/class_layout.php(122): include('/var/www/html/l...')
+#5 /var/www/html/module/auth/main.php(243): _layout->show()
+#6 /var/www/lib/framework/class_root.php(276): module_auth->after()
+#7 /var/www/html/public/index.php(47): _root->run()
+#8 {main}
+
+Detail:
+#0 /var/www/html/module/auth/view/login.php (6) 
+ _view -> __get( 'sEmail' ) 
+#1 /var/www/lib/framework/class_view.php (85) 
+ include( '/var/www/html/module/auth/view/login.php' ) 
+#2 /var/www/lib/framework/class_layout.php (158) 
+ _view -> show(  ) 
+#3 /var/www/html/layout/bootstrap.php (32) 
+ _layout -> load( 'main' ) 
+#4 /var/www/lib/framework/class_layout.php (122) 
+ include( '/var/www/html/layout/bootstrap.php' ) 
+#5 /var/www/html/module/auth/main.php (243) 
+ _layout -> show(  ) 
+#6 /var/www/lib/framework/class_root.php (276) 
+ module_auth -> after(  ) 
+#7 /var/www/html/public/index.php (47) 
+ _root -> run(  ) 
+#8 {main}Variable sEmail inexistante dans le template auth::login
+#0 /var/www/html/module/auth/view/login.php(6): _view->__get('sEmail')
+#1 /var/www/lib/framework/class_view.php(85): include('/var/www/html/m...')
+#2 /var/www/lib/framework/class_layout.php(158): _view->show()
+#3 /var/www/html/layout/bootstrap.php(32): _layout->load('main')
+#4 /var/www/lib/framework/class_layout.php(122): include('/var/www/html/l...')
+#5 /var/www/html/module/auth/main.php(243): _layout->show()
+#6 /var/www/lib/framework/class_root.php(276): module_auth->after()
+#7 /var/www/html/public/index.php(47): _root->run()
+#8 {main}
+
+Detail:
+#0 /var/www/html/module/auth/view/login.php (6) 
+ _view -> __get( 'sEmail' ) 
+#1 /var/www/lib/framework/class_view.php (85) 
+ include( '/var/www/html/module/auth/view/login.php' ) 
+#2 /var/www/lib/framework/class_layout.php (158) 
+ _view -> show(  ) 
+#3 /var/www/html/layout/bootstrap.php (32) 
+ _layout -> load( 'main' ) 
+#4 /var/www/lib/framework/class_layout.php (122) 
+ include( '/var/www/html/layout/bootstrap.php' ) 
+#5 /var/www/html/module/auth/main.php (243) 
+ _layout -> show(  ) 
+#6 /var/www/lib/framework/class_root.php (276) 
+ module_auth -> after(  ) 
+#7 /var/www/html/public/index.php (47) 
+ _root -> run(  ) 
+#8 {main}Undefined variable: email
+#0 /var/www/html/module/auth/main.php(42): exception_error_handler(8, 'Undefined varia...', '/var/www/html/m...', 42, Array)
+#1 /var/www/lib/framework/class_root.php(264): module_auth->_login()
+#2 /var/www/html/public/index.php(47): _root->run()
+#3 {main}
+
+Detail:
+#0 /var/www/html/module/auth/main.php (42) 
+ exception_error_handler(  , 'Undefined variable: email' , '/var/www/html/module/auth/main.php' ,  , Array (     [sConfirmation] =>      [sMessage] =>      [oView] => _view Object         (             [_sModule:protected] => auth             [_sTpl:protected] => login             [_tVar:protected] => Array                 (                     [sError] =>                  )              [_sPath:protected] => ../module/auth/view/login.php         )  )  ) 
+#1 /var/www/lib/framework/class_root.php (264) 
+ module_auth -> _login(  ) 
+#2 /var/www/html/public/index.php (47) 
+ _root -> run(  ) 
+#3 {main}

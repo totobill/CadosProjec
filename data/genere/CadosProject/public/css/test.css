@@ -1,0 +1,319 @@
+/*bar de navigation haut*/
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+
+.example3 .navbar-brand {
+  height: 150px;
+}
+
+.example3 .nav >li >a {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.example3 .navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}
+
+.navbar-inverse {
+    background-image: -webkit-linear-gradient(top, #22427C 0%, #22427C 100%);
+    background-image: -o-linear-gradient(top, #22427C 0%, #22427C 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#22427C), to(#22427C));
+    background-image: linear-gradient(to bottom, #22427C 0%, #22427C 100%);
+    background-repeat: repeat-x;
+    background-color: #22427C;
+    border-color: #22427C;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: #0040FF;
+}
+
+/* CSS de la page d'authentification login' */
+h2.form-signin-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+h1.form-signing-heading{
+   text-align: center;
+    margin-top: 50px; 
+}
+.form-signin {
+    width: 80%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+.form-signin-login {
+    margin-top: 80px;
+}
+
+.form-signin-inscription {
+   margin-top: 40px; 
+}
+
+input.form-control {
+    margin-bottom: 15px;
+}
+
+/* css de la page d'acceuil : Profil, communauté, reservation, info */
+
+
+.reservation_div_centrale {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    height: 30vh;
+}
+
+img.reservation_image_centrale {
+    display: inline-block;
+    width: 40%;
+    opacity: 1;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.reservation_text_middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.reservation_div_centrale:hover img.reservation_image_centrale {
+    opacity: 0.3;
+}
+
+.reservation_div_centrale:hover .reservation_text_middle {
+    opacity: 1;
+}
+
+.reservation_text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+/* Page réservation avec affichage des boutons casier pour réservation */
+
+.reservation_reserver_casier {
+    display: inline-block;
+    text-align: center;
+
+}
+
+.casier_libre ,.casier_reserver {
+    width: 100%;
+}
+
+input.casier_libre, input.casier_reserver {
+    border: none;
+}
+
+/* CSS Page réservation avec affichage du casier réservé et ses informations */
+
+.reservation_principale {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.reservation_utilisation_logo {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+
+.reservation_utilisation_casier {
+    display: inline-block; 
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid #22427C;
+    border-top :none;
+    border-right: none;
+    border-left: none;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 100%;
+
+}
+
+.reservation_utilisation_button {
+    display : inline-block;
+    width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reservation_utilisation_titre, .reservation_utilisation_attribut  {
+    height: 30px;
+}
+
+.reservation_utilisation_attribut {
+    color: #0040FF;
+}
+
+.reservation_utilisation_button .btn {
+    width: 100%;
+}
+
+/* CSS de la page Profil */
+
+body {
+  background: #F1F3FA;
+}
+
+/* Profile container */
+.profile {
+  margin: 20px 0;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 20px 0 10px 0;
+  background: #fff;
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-userbuttons .btn {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 15px;
+  margin-right: 5px;
+}
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 0px;
+}
+    
+.profile-usermenu {
+  margin-top: 30px;
+}
+
+.profile-usermenu ul li {
+  border-bottom: 1px solid #f0f4f7;
+}
+
+.profile-usermenu ul li:last-child {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profile-usermenu ul li a i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.profile-usermenu ul li a:hover {
+  background-color: #fafcfd;
+  color: #5b9bd1;
+}
+
+.profile-usermenu ul li.active {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li.active a {
+  color: #5b9bd1;
+  background-color: #f6f9fb;
+  border-left: 2px solid #5b9bd1;
+  margin-left: -2px;
+}
+
+/* Profile Content */
+.profile-content {
+  padding: 20px;
+  background: #fff;
+  min-height: 460px;
+}
+
+
+/* CSS de la page communauté */
+
+.communaute_affichage_deco, .communaute_affichage_co, .communaute_affichage_prenom, .communaute_affichage_nom  {
+	height: 50px;
+	font-size : 120%;
+        margin-top: auto;
+        margin-bottom: auto;
+        text-align: center;
+}
+
+/*.communaute_affichage_prenom, .communaute_affichage_nom {
+	text-align: center;
+        margin-top: auto;
+        margin-bottom: auto;
+        
+}
+
+.communaute_affichage_deco, .communaute_affichage_co {
+	text-align: center;
+}*/
+
+.ligne_co {
+   border-left-style: solid;
+   border-left-color: green;
+   background-color: greenyellow; 
+}
+
+.ligne_deco {
+   border-left-style: solid;
+   border-left-color: red;
+   background-color: #ce8483; 
+}
