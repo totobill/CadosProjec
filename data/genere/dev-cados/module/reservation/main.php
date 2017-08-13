@@ -1,11 +1,11 @@
 <?php 
 class module_reservation extends abstract_module{
 	
-	public function before(){
-		$this->oLayout=new _layout('bootstrap');
-		
-		$this->oLayout->addModule('menu','menu::index');
-	}
+        public function before(){
+                $this->oLayout=new _layout('bootstrap');
+
+                $this->oLayout->addModule('menu','menu::index');
+        }
 	
 	
 	public function _reserver(){
@@ -19,10 +19,10 @@ class module_reservation extends abstract_module{
                 if(isset($returnValue)){
                     //Si l'utilisateur à taper sur Ouvrir :
                     if($returnValue == 'ouvrir'){
-						$id_bouton = model_utilisateur::getInstance()->getId_Bouton($iIdUtilisateur);
+                        $id_bouton = model_utilisateur::getInstance()->getId_Bouton($iIdUtilisateur);
                         $bMessage = $this->ouvertureCasier($id_bouton);
                         if($bMessage == TRUE){ // l'ouverture s'est bien passée
-                            $sMessage = 'l\'ouverture s\'est bien passée. 1';
+                            $sMessage = 'l\'ouverture s\'est bien passée.';
                             
                         }else { // l'ouverture s'est mal passé
                             $sMessage = 'L\'ouverture du casier n\a pas fonctionée. Contactez un admin sur site.'; 
@@ -39,13 +39,13 @@ class module_reservation extends abstract_module{
                         $id_bouton = model_utilisateur::getInstance()->getId_Bouton($iIdUtilisateur);
                         $bMessage = $this->viderCasier($id_bouton, $iIdUtilisateur);
                         if($bMessage == TRUE){
-                            $sMessage = 'l\'ouverture s\'est bien passée. 3';
+                            $sMessage = 'l\'ouverture s\'est bien passée.';
                             $oView=new _view('reservation::reserver');
                             $this->oLayout->add('main',$oView);
                             $oCasier = model_casier::getInstance()->findAll();
                             $oView->oCasier=$oCasier;
                         }else{
-                            $sMessage = 'L\'ouverture du casier n\a pas fonctionée. Contactez un admin sur site. 4';
+                            $sMessage = 'L\'ouverture du casier n\a pas fonctionée. Contactez un admin sur site.';
                             $oView=new _view('reservation::utilisation');
                             $this->oLayout->add('main',$oView);
                             $oUtilisateur = model_utilisateur::getInstance()->findById($iIdUtilisateur);
@@ -56,44 +56,51 @@ class module_reservation extends abstract_module{
                     }
                 //Si l'utilisateur n'a pas taper sur l'un des deux boutons.
                 }else{
-                    
+
                     //On regarde si l'utilisateur à déjà réserver un casier
                     // Si oui on afficher alors son casier réservé avec les informations
-                    // relartves à sa réservation. Si non on affiche l'ensemble des casiers.
+                    // relartives à sa réservation. Si non on affiche l'ensemble des casiers.
                     $id_bouton = model_utilisateur::getInstance()->getId_Bouton($iIdUtilisateur);
                     if($id_bouton != 0){
+                        $oCasier=model_casier::getInstance()->findById($id_bouton);
                         $oView=new _view('reservation::utilisation');
                         $this->oLayout->add('main',$oView);
                         $oUtilisateur = model_utilisateur::getInstance()->findById($iIdUtilisateur);
                         $oView->infoReservation=$oUtilisateur;
                         $oView->sMessage=$sMessage;
+                        $oView->oCasier=$oCasier;
                     }else{
                         //On vérifie si l'utilisateur à
                         //soumis un choix de réservation d'un casier, si oui on le réserve
                         //si non on affiche l'ensemble des casiers.
                         $bReservation = $this->checkNumeroReservation(); 
                         if($bReservation){
+                            $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
+                            $dStartReservation=$today = date("Y-m-d H:i:s"); //format date time de mysql
+                            $oCasier->start_location=$dStartReservation;
+                            $oCasier->save();
+                            
+//                            var_dump($dStartReservation);
+//                            var_dump($oCasier);
+//                            var_dump((int)_root::getParam('num_bouton'));
                             $oView=new _view('reservation::utilisation');
                             $this->oLayout->add('main',$oView);
                             $oUtilisateur = model_utilisateur::getInstance()->findById($iIdUtilisateur);
                             $oView->infoReservation=$oUtilisateur;
                             $oView->sMessage=$sMessage;
+                            $oView->oCasier=$oCasier;
                         }else{
                             $oView=new _view('reservation::reserver');
                             $this->oLayout->add('main',$oView);
                             $oCasier = model_casier::getInstance()->findAll();
                             $oView->oCasier=$oCasier;
-                        }
-                        
-                        
-                        
-                        
+                        }               
                     }
                 }
         }
 	
         public function ouvertureCasier($iNumCasier){
-            $requete = "python /var/www/html/Casiers/ouverture2.py $iNumCasier";
+            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
             $resultat = system($requete);
             if($resultat == 'casier ouvert'){
                 return TRUE;
@@ -103,7 +110,7 @@ class module_reservation extends abstract_module{
         }
         
         public function viderCasier($iNumCasier,$iIdutilisateur){
-            $requete = "python /var/www/html/Casiers/ouverture2.py $iNumCasier";
+            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
             $resultat = system($requete);
             if($resultat == 'casier ouvert'){
                 model_casier::getInstance()->setEtat0($iNumCasier);
@@ -141,11 +148,12 @@ class module_reservation extends abstract_module{
             $id_utilisateur =(int)_root::getAuth()->getAccount()->id_utilisateur;
             model_casier::getInstance()->setEtat1($iIdCasier,$id_utilisateur);
             model_utilisateur::getInstance()->setIdBouton($iIdCasier,$id_utilisateur);
+            
             if(isset($iIdCasier)){
-				return TRUE;
-			}else{
-				return FALSE;
-			}
+                    return TRUE;
+            }else{
+                    return FALSE;
+            }
             //_root::redirect('reservation::utilisation');
 
             

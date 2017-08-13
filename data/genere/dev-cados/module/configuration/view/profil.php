@@ -5,7 +5,7 @@
             <div class="profile-sidebar">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
-                    <img src="css/images/profil/<?php echo $this->oUtilisateur->prenom.' '.$this->oUtilisateur->nom.'.jpg';?> " class="img-responsive" alt="">
+                    <img src="<?php echo $this->oUtilisateur->profilPicture ?>" class="img-responsive" alt="Photo de profil">
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
@@ -27,7 +27,7 @@
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
                         <button type="button" class="btn btn-success btn-sm">Follower</button>
-                        <button type="button" class="btn btn-danger btn-sm">Change Photo</button>
+                        <a href="<?php echo $this->getLink("configuration::modifierPhoto",array('id'=>$this->oUtilisateur->getId())); ?>"><button type="button" class="btn btn-danger btn-sm">Change Photo</button></a>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->

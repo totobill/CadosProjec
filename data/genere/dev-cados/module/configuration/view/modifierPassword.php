@@ -8,7 +8,7 @@ $oForm->setMessage($this->tMessage);
             <div class="profile-sidebar">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
-                    <img src="css/images/profil/<?php echo $this->oUtilisateur->prenom.' '.$this->oUtilisateur->nom.'.jpg';?> " class="img-responsive" alt="">
+                    <img src="<?php echo $this->oUtilisateur->profilPicture ?>" class="img-responsive" alt="Photo de profil">
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
@@ -29,8 +29,8 @@ $oForm->setMessage($this->tMessage);
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                        <button type="button" class="btn btn-success btn-sm">Follower</button>
-                        <button type="button" class="btn btn-danger btn-sm">Change Photo</button>
+                    <button type="button" class="btn btn-success btn-sm">Follower</button>
+                        <button type="button" class="btn btn-danger btn-sm">Change Photo<a href="<?php echo $this->getLink("configuration::modifierPhoto",array('id'=>$this->oUtilisateur->getId())); ?>"></a></button>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
@@ -71,10 +71,16 @@ $oForm->setMessage($this->tMessage);
                         <?php echo $oForm->getInputHidden('numero',array('class'=>'form-control')) ?>
                         <?php echo $oForm->getInputHidden('email',array('class'=>'form-control')) ?>
                         <?php echo $oForm->getInputHidden('pseudo',array('class'=>'form-control')) ?>
-
+                        
+                    
                         <div class="form-group">
-                                <label class="col-sm-2 control-label">mot de passe</label>
-                                <div class="col-sm-10"><?php echo $oForm->getInputPassword('password',array('class'=>'form-control')) ?></div>
+                                <label class="col-sm-2 control-label">Ancien mot de passe</label>
+                                <div class="col-sm-10"><?php echo $oForm->getInputPassword('Password',array('class'=>'form-control')) ?></div>
+                        </div>
+                    
+                        <div class="form-group">
+                                <label class="col-sm-2 control-label">Nouveau mot de passe</label>
+                                <div class="col-sm-10"><?php echo $oForm->getInputPassword('newPassword',array('class'=>'form-control')) ?></div>
                         </div>
                     
                         <div class="form-group">
@@ -87,7 +93,7 @@ $oForm->setMessage($this->tMessage);
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                                    <input type="submit" class="btn btn-success" value="Modifier" /> <a class="btn btn-link" href="<?php echo $this->getLink('configuration::modifierPassword',array('id'=>$this->oUtilisateur->getId()))?>">Changer mot de passe</a> <a class="btn btn-link" href="<?php echo $this->getLink('configuration::profil')?>">Annuler</a>
+                                    <input type="submit" class="btn btn-success" value="Modifier" /> <a class="btn btn-link" href="<?php echo $this->getLink('configuration::profil')?>">Annuler</a>
                         </div>
                     </div>
                 </form>
