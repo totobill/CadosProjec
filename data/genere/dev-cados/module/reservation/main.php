@@ -74,7 +74,7 @@ class module_reservation extends abstract_module{
                         //soumis un choix de réservation d'un casier, si oui on le réserve
                         //si non on affiche l'ensemble des casiers.
                         $tMessage = $this->checkNumeroReservation(); 
-                        if(!$tMessage){
+                        if(empty($tMessage)){
                             $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
                             $dStartReservation= date("Y-m-d H:i:s"); //format date time de mysql
                             $dEndReservation=date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
@@ -160,10 +160,10 @@ class module_reservation extends abstract_module{
                 if($dNow > $dLimite){
                     return array('date_limite'=>'Vous ne pouvez pas réserver un casier après 18h, l\'heure de fermeture de l\'établissement');
                 }else{
-                    return FALSE;
+                    return array();
                 }
             }else{
-                    return FALSE;
+                    return array();
             }
             //_root::redirect('reservation::utilisation');
 
