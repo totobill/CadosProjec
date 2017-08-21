@@ -18,7 +18,7 @@
         </div>
         <div class="reservation_utilisation_casier col-xs-12">
             <p class="reservation_utilisation_titre"><b>Heure de fin de réservation :</b></p>
-            <p class="reservation_utilisation_attribut">En attente ...</p>
+            <p class="reservation_utilisation_attribut"><?php echo $this->oCasier->end_location?></p>
         </div>
         <div class="reservation_utilisation_casier col-xs-12">
             <p><?php echo $sMessage; ?></p>

@@ -5,7 +5,7 @@
                 <div class="reservation_reserver_casier col-xs-6 col-lg-2">
                     <a href="#">
                         <img class="casier_reserver" src="css/images/casier_reserver.png" alt="Responsive image">
-                        <input class="casier_reserver" type="submit" value='<?php echo $casier->numero; ?>' name="num_bouton">
+                        <button class="casier_reserver" type="button" value='<?php echo $casier->numero.'TEST'; ?>' name="num_bouton">
                     </a>
                 </div>
             <?php }else{ ?>

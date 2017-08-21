@@ -73,11 +73,13 @@ class module_reservation extends abstract_module{
                         //On vérifie si l'utilisateur à
                         //soumis un choix de réservation d'un casier, si oui on le réserve
                         //si non on affiche l'ensemble des casiers.
-                        $bReservation = $this->checkNumeroReservation(); 
-                        if($bReservation){
+                        $tMessage = $this->checkNumeroReservation(); 
+                        if(!$tMessage){
                             $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
-                            $dStartReservation=$today = date("Y-m-d H:i:s"); //format date time de mysql
+                            $dStartReservation= date("Y-m-d H:i:s"); //format date time de mysql
+                            $dEndReservation=date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
                             $oCasier->start_location=$dStartReservation;
+                            $oCasier->end_location=$dEndReservation;
                             $oCasier->save();
                             
 //                            var_dump($dStartReservation);
@@ -94,6 +96,7 @@ class module_reservation extends abstract_module{
                             $this->oLayout->add('main',$oView);
                             $oCasier = model_casier::getInstance()->findAll();
                             $oView->oCasier=$oCasier;
+                            $oView->tMessage=$tMessage;
                         }               
                     }
                 }
@@ -145,12 +148,20 @@ class module_reservation extends abstract_module{
             }
 
             $iIdCasier=(int)_root::getParam('num_bouton');
-            $id_utilisateur =(int)_root::getAuth()->getAccount()->id_utilisateur;
-            model_casier::getInstance()->setEtat1($iIdCasier,$id_utilisateur);
-            model_utilisateur::getInstance()->setIdBouton($iIdCasier,$id_utilisateur);
-            
+
             if(isset($iIdCasier)){
-                    return TRUE;
+                $id_utilisateur =(int)_root::getAuth()->getAccount()->id_utilisateur;
+                model_casier::getInstance()->setEtat1($iIdCasier,$id_utilisateur);
+                model_utilisateur::getInstance()->setIdBouton($iIdCasier,$id_utilisateur);    
+                $dNow = date("Y-m-d H:i:s");
+                $dLimite = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
+                echo "<br><br><br><br><br>";
+                var_dump($dNow > $dLimite);
+                if($dNow > $dLimite){
+                    return array('date_limite'=>'Vous ne pouvez pas réserver un casier après 18h, l\'heure de fermeture de l\'établissement');
+                }else{
+                    return FALSE;
+                }
             }else{
                     return FALSE;
             }
