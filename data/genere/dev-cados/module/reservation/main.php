@@ -74,6 +74,9 @@ class module_reservation extends abstract_module{
                         //soumis un choix de réservation d'un casier, si oui on le réserve
                         //si non on affiche l'ensemble des casiers.
                         $tMessage = $this->checkNumeroReservation();
+                        $iIdCasier=(int)_root::getParam('num_bouton');
+                        echo "<br><br><br><br><br><br>";
+                        var_dump($iIdCasier);
                         if(empty($tMessage)){
 //                            $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
                             $oCasier=model_casier::getInstance()->findById(5);
