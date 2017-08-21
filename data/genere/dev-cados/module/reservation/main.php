@@ -148,22 +148,24 @@ class module_reservation extends abstract_module{
             }
 
             $iIdCasier=(int)_root::getParam('num_bouton');
-
-            if(isset($iIdCasier)){
+            $dNow = date("Y-m-d H:i:s");
+            $dLimite = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
+            echo "<br><br><br><br><br>";
+            var_dump($dNow > $dLimite);
+            if(isset($iIdCasier) && ($dNow > $dLimite)){
                 $id_utilisateur =(int)_root::getAuth()->getAccount()->id_utilisateur;
                 model_casier::getInstance()->setEtat1($iIdCasier,$id_utilisateur);
                 model_utilisateur::getInstance()->setIdBouton($iIdCasier,$id_utilisateur);    
-                $dNow = date("Y-m-d H:i:s");
-                $dLimite = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
-                echo "<br><br><br><br><br>";
-                var_dump($dNow > $dLimite);
-                if($dNow > $dLimite){
-                    return array('date_limite'=>'Vous ne pouvez pas réserver un casier après 18h, l\'heure de fermeture de l\'établissement');
-                }else{
-                    return array();
-                }
+               
+               
+//                if($dNow > $dLimite){
+//                    return array('date_limite'=>'Vous ne pouvez pas réserver un casier après 18h, l\'heure de fermeture de l\'établissement');
+//                }else{
+//                    return array();
+//                }
+                return array();
             }else{
-                    return array();
+                    return array('date_limite'=>'Vous ne pouvez pas réserver un casier après 18h, l\'heure de fermeture de l\'établissement');
             }
             //_root::redirect('reservation::utilisation');
 
