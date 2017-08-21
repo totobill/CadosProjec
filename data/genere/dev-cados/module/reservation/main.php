@@ -73,15 +73,16 @@ class module_reservation extends abstract_module{
                         //On vérifie si l'utilisateur à
                         //soumis un choix de réservation d'un casier, si oui on le réserve
                         //si non on affiche l'ensemble des casiers.
-                        $tMessage = $this->checkNumeroReservation(); 
+                        $tMessage = $this->checkNumeroReservation();
                         if(empty($tMessage)){
-                            $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
+//                            $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
+                            $oCasier=model_casier::getInstance()->findById(5);
                             $dStartReservation= date("Y-m-d H:i:s"); //format date time de mysql
                             $dEndReservation=date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
                             $oCasier->start_location=$dStartReservation;
                             $oCasier->end_location=$dEndReservation;
                             $oCasier->save();
-                            
+                            var_dump($tMessage);
 //                            var_dump($dStartReservation);
 //                            var_dump($oCasier);
 //                            var_dump((int)_root::getParam('num_bouton'));
