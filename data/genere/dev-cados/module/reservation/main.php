@@ -157,7 +157,7 @@ class module_reservation extends abstract_module{
             $dLimite = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
             echo "<br><br><br><br><br>";
             var_dump($dNow > $dLimite);
-            if(($iIdCasier!=0) && ($dNow < $dLimite)){
+            if(!(isset($iIdCasier0)) && ($dNow < $dLimite)){
                 $id_utilisateur =(int)_root::getAuth()->getAccount()->id_utilisateur;
                 model_casier::getInstance()->setEtat1($iIdCasier,$id_utilisateur);
                 model_utilisateur::getInstance()->setIdBouton($iIdCasier,$id_utilisateur);    
