@@ -1,6 +1,6 @@
 <form action="" method="POST" role="form">
     <div class="row">
-        <?php var_dump($this->tMessage) ?>
+        <?php if(!empty($this->tMessage)){echo $this->tMessage['date_limite'];} ?>
         <?php foreach ($this->oCasier as $casier){ ?>
             <?php if ($casier->etat == 1) { ?>
                 <div class="reservation_reserver_casier col-xs-6 col-lg-2">

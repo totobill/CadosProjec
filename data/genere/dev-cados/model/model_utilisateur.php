@@ -44,8 +44,8 @@ class model_utilisateur extends abstract_model{
 		return $this->findOne('SELECT cle, actif FROM ' .$this->sTable. ' WHERE id_utilisateur=?', $iIdUtilisateur);
 	}
 
-	public function setCle($sLogan, $cle){
-		$this->execute('UPDATE ' .$this->sTable. ' SET cle=? WHERE email=?',$cle,$sLogan);
+	public function setCle($sLogin, $cle){
+		$this->execute('UPDATE ' .$this->sTable. ' SET cle=? WHERE email=?',$cle,$sLogin);
 	}
 	
 	public function setActif($iIdUtilisateur){

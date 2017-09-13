@@ -1,8 +1,8 @@
 ;<?php die()?>
 [db]
 
-pdoMysqlExple.dsn="mysql:dbname=Cados;host=localhost"
+pdoMysqlExple.dsn="mysql:dbname=db675117633;host=db675117633.db.1and1.com"
 pdoMysqlExple.sgbd=pdo_mysql
-pdoMysqlExple.username=root
+pdoMysqlExple.username=dbo675117633
 pdoMysqlExple.password=cadosAdmin
 

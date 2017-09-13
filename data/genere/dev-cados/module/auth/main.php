@@ -1,6 +1,6 @@
 <?php
 
-require '/var/www/html/dev-cados/PHPMailer-master/PHPMailerAutoload.php';
+require '/kunden/homepages/46/d675115566/htdocs/CadosProject/data/genere/dev-cados/PHPMailer-master/PHPMailerAutoload.php';
 
 class module_auth extends abstract_module{
 	
@@ -126,13 +126,13 @@ class module_auth extends abstract_module{
         $mail->Debugoutput = 'html';
 
         //Set the hostname of the mail server
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = 'smtp.1and1.com';
         // use
         // $mail->Host = gethostbyname('smtp.gmail.com');
         // if your network does not support SMTP over IPv6
 
         //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-        $mail->Port = 587;
+        $mail->Port = 25;
 
         //Set the encryption system to use - ssl (deprecated) or tls
         $mail->SMTPSecure = 'tls';
@@ -141,13 +141,13 @@ class module_auth extends abstract_module{
         $mail->SMTPAuth = true;
 
         //Username to use for SMTP authentication - use full email address for gmail
-        $mail->Username = "cados.development@gmail.com";
+        $mail->Username = "anthony.rohr@cados.website";
 
         //Password to use for SMTP authentication
         $mail->Password = "cadosAdmin2017";
 
         //Set who the message is to be sent from
-        $mail->setFrom('cados.development@gmail.com', 'Cados');
+        $mail->setFrom('anthony.rohr@cados.website', 'Cados');
 
         //Set an alternative reply-to address
         $mail->addReplyTo('cados.development@gmail.com', 'Cados');
@@ -174,7 +174,7 @@ class module_auth extends abstract_module{
                     <p><font size=\"4\"> Salut " .$sSurname. ", bienvenu sur Cados. Tu viens de t'inscrire sur l'appli web, et pour finaliser tout ça je te propose de confirmer ton inscription. </font></p>
                     <p><font size=\"4\"> Pour cela rien de plus simple, clique sur le liens pour vite nous rejoindre ainsi que toute la communauté. </font></p> 
                     <div align=\"center\">
-                        <a href=\"http://dev-cados.zapto.org/dev-cados/CadosProject/data/genere/dev-cados/public/index.php?:nav=auth::login&log=$sRecipient&cle=$cle\">
+                        <a href=\"https://cados.website/CadosProject/data/genere/dev-cados/public/index.php?:nav=auth::login&log=$sRecipient&cle=$cle\">
                             <font size=\"6\">Confirmer votre email</font>
                         </a>
                     </div>
