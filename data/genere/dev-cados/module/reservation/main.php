@@ -83,7 +83,6 @@ class module_reservation extends abstract_module{
 			var_dump($bReserv);
                         $dStartReservation = new DateTime('now Europe/Paris');
                         var_dump($dStartReservation);
-                        echo $dStartReservation;
                         $dEndReservation = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
                         var_dump($dEndReservation);
                         if($bReserv != null){
@@ -200,7 +199,7 @@ class module_reservation extends abstract_module{
             }
 
             $iIdCasier=(int)_root::getParam('num_bouton');
-            $dNow = date("Y-m-d H:i:s");
+            $dNow = new DateTime('now Europe/Paris');
             $dLimite = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
 //            echo "<br><br><br><br><br>";
 //            var_dump($dNow > $dLimite);
