@@ -76,10 +76,11 @@ class module_reservation extends abstract_module{
                         //si non on affiche l'ensemble des casiers.
                         $tMessage = $this->checkNumeroReservation();
                         $iIdCasier=(int)_root::getParam('num_bouton');
-//                        echo "<br><br><br><br><br><br>";
+                        echo "<br><br><br><br><br><br>";
 //                        var_dump($iIdCasier);
-//			var_dump($tMessage);
-//			var_dump('ceci est un test');
+			var_dump($tMessage);
+			var_dump('ceci est un test');
+			var_dump(empty($tMessage));
                         if($tMessage == NULL){
                             $oView=new _view('reservation::reserver');
                             $this->oLayout->add('main',$oView);
@@ -90,7 +91,10 @@ class module_reservation extends abstract_module{
                             $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
 //                            $oCasier=model_casier::getInstance()->findById(5);
 //                            $dStartReservation = date("Y-m-d H:i:s"); //format date time de mysql
-                            $dStartReservation = new DateTime('now Europe/Paris');
+                            echo "Je veux savoir si la valeur de empty(tmessage) est bien vide";
+			    var_dump(empty($tMessage));
+			    $dStartReservation = new DateTime('now Europe/Paris');
+			    var_dump($dStartReservation);
                             $dEndReservation = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
                             $oCasier->start_location=$dStartReservation;
                             $oCasier->end_location=$dEndReservation;
