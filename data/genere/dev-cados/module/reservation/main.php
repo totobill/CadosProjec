@@ -82,7 +82,8 @@ class module_reservation extends abstract_module{
 			var_dump('ceci est un test');
 			var_dump($bReserv);
                         $dStartReservation = new DateTime('now Europe/Paris');
-                        var_dump($dStartReservation->getOffset());
+                        var_dump($dStartReservation);
+                        echo $dStartReservation;
                         $dEndReservation = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
                         var_dump($dEndReservation);
                         if($bReserv != null){
