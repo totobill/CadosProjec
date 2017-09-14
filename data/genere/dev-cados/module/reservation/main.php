@@ -166,7 +166,7 @@ class module_reservation extends abstract_module{
 //            echo "<br><br><br><br><br>";
 //            var_dump($dNow > $dLimite);
 //	    var_dump('AHAHAHAHA');
-            if(!(isset($iIdCasier)) && ($dNow < $dLimite)){
+            if((isset($iIdCasier)) && ($dNow < $dLimite)){
                 $id_utilisateur =(int)_root::getAuth()->getAccount()->id_utilisateur;
                 model_casier::getInstance()->setEtat1($iIdCasier,$id_utilisateur);
                 model_utilisateur::getInstance()->setIdBouton($iIdCasier,$id_utilisateur);    
