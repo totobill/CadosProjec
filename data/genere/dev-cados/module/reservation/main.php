@@ -75,26 +75,13 @@ class module_reservation extends abstract_module{
                         //soumis un choix de réservation d'un casier, si oui on le réserve
                         //si non on affiche l'ensemble des casiers.
                         $bReserv = $this->checkNumeroReservation();
-                        $iIdCasier=(int)_root::getParam('num_bouton');
-                      echo "<br><br><br><br><br><br>";
-////                        var_dump($iIdCasier);
-//			var_dump($tMessage);
-			var_dump('ceci est un test');
-			var_dump($bReserv);
-                        $dStartReservation = new DateTime('now Europe/Paris');
-                        $dStartReservation = $dStartReservation->format('Y-m-d H:i:s');
-                        var_dump($dStartReservation);
-                        $dEndReservation = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
-                        var_dump($dEndReservation);
+                        
                         if($bReserv != null){
                             if($bReserv){
                                 $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
-//                            $dStartReservation = date("Y-m-d H:i:s"); //format date time de mysql
-                                echo "Je veux savoir si la valeur de empty(tmessage) est bien vide";
-                                var_dump(empty($tMessage));
+//                              $dStartReservation = date("Y-m-d H:i:s"); //format date time de mysql
                                 $dStartReservation = new DateTime('now Europe/Paris');
                                 $dStartReservation = $dStartReservation->format('Y-m-d H:i:s');
-                                var_dump($dStartReservation);
                                 $dEndReservation = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
                                 $oCasier->start_location=$dStartReservation;
                                 $oCasier->end_location=$dEndReservation;
@@ -106,6 +93,7 @@ class module_reservation extends abstract_module{
                                 $oView->infoReservation=$oUtilisateur;
                                 $oView->sMessage=$sMessage;
                                 $oView->oCasier=$oCasier;
+                                
                             }else{
                                 $oView=new _view('reservation::reserver');
                                 $this->oLayout->add('main',$oView);
@@ -119,38 +107,7 @@ class module_reservation extends abstract_module{
                             $oCasier = model_casier::getInstance()->findAll();
                             $oView->oCasier=$oCasier;
                             $oView->tMessage=array();
-                        }
-//			} else if(empty($tMessage)){
-//                            $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
-////                            $oCasier=model_casier::getInstance()->findById(5);
-////                            $dStartReservation = date("Y-m-d H:i:s"); //format date time de mysql
-//                            echo "Je veux savoir si la valeur de empty(tmessage) est bien vide";
-//			    var_dump(empty($tMessage));
-//			    $dStartReservation = new DateTime('now Europe/Paris');
-//			    var_dump($dStartReservation);
-//                            $dEndReservation = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
-//                            $oCasier->start_location=$dStartReservation;
-//                            $oCasier->end_location=$dEndReservation;
-//                            $oCasier->save();
-//                            
-//                            
-////                            var_dump($tMessage);
-////                            var_dump($dStartReservation);
-////                            var_dump($oCasier);
-////                            var_dump((int)_root::getParam('num_bouton'));
-//                            $oView=new _view('reservation::utilisation');
-//                            $this->oLayout->add('main',$oView);
-//                            $oUtilisateur = model_utilisateur::getInstance()->findById($iIdUtilisateur);
-//                            $oView->infoReservation=$oUtilisateur;
-//                            $oView->sMessage=$sMessage;
-//                            $oView->oCasier=$oCasier;
-//                        }else{
-//                            $oView=new _view('reservation::reserver');
-//                            $this->oLayout->add('main',$oView);
-//                            $oCasier = model_casier::getInstance()->findAll();
-//                            $oView->oCasier=$oCasier;
-//                            $oView->tMessage=$tMessage;
-//                        }               
+                        }            
                     }
                 }
         }
@@ -214,26 +171,13 @@ class module_reservation extends abstract_module{
                 $id_utilisateur =(int)_root::getAuth()->getAccount()->id_utilisateur;
                 model_casier::getInstance()->setEtat1($iIdCasier,$id_utilisateur);
                 model_utilisateur::getInstance()->setIdBouton($iIdCasier,$id_utilisateur);    
-               
-               
-//                if($dNow > $dLimite){
-//                    return array('date_limite'=>'Vous ne pouvez pas réserver un casier après 18h, l\'heure de fermeture de l\'établissement');
-//                }else{
-//                    return array();
-//                }
                 return true;
             }else{
-//                return array('date_limite'=>'Vous ne pouvez pas réserver un casier après 18h, l\'heure de fermeture de l\'établissement');
                 return false;
-            }
-            //_root::redirect('reservation::utilisation');
-
-            
+            } 
         }
 	public function _utilisation(){
-	
 		$oView=new _view('reservation::utilisation');
-		
 		$this->oLayout->add('main',$oView);
 	}
 			
