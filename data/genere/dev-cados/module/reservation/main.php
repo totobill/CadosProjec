@@ -33,8 +33,10 @@ class module_reservation extends abstract_module{
                         $oView=new _view('reservation::utilisation');
                         $this->oLayout->add('main',$oView);
                         $oUtilisateur = model_utilisateur::getInstance()->findById($iIdUtilisateur);
+                        $oCasier = model_casier::getInstance()->findById($oUtilisateur->id_bouton);
                         $oView->sMessage=$sMessage;
                         $oView->infoReservation=$oUtilisateur;
+                        $oView->oCasier=$oCasier;
                     //Si l'utilisateur à taper sur Vider :
                     }else if($returnValue == 'vider'){
                         $id_bouton = model_utilisateur::getInstance()->getId_Bouton($iIdUtilisateur);
@@ -50,8 +52,10 @@ class module_reservation extends abstract_module{
                             $oView=new _view('reservation::utilisation');
                             $this->oLayout->add('main',$oView);
                             $oUtilisateur = model_utilisateur::getInstance()->findById($iIdUtilisateur);
+                            $oCasier = model_casier::getInstance()->findById($oUtilisateur->id_bouton);
                             $oView->infoReservation=$oUtilisateur;
                             $oView->sMessage=$sMessage;
+                            $oView->oCasier=$oCasier;
                         }
                         
                     }
@@ -113,7 +117,8 @@ class module_reservation extends abstract_module{
         }
 	
         public function ouvertureCasier($iNumCasier){
-            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
+//            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
+            $requete = "python dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
             $resultat = system($requete);
             if($resultat == 'casier ouvert'){
                 return TRUE;
@@ -123,7 +128,7 @@ class module_reservation extends abstract_module{
         }
         
         public function viderCasier($iNumCasier,$iIdutilisateur){
-            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
+//            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
             $resultat = system($requete);
             if($resultat == 'casier ouvert'){
                 model_casier::getInstance()->setEtat0($iNumCasier);
