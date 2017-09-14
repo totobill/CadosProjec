@@ -48,7 +48,7 @@ class module_reservation extends abstract_module{
                             $oCasier = model_casier::getInstance()->findAll();
                             $oView->oCasier=$oCasier;
                         }else{
-                            $sMessage = 'L\'ouverture du casier n\a pas fonctionée. Contactez un admin sur site.';
+                            $sMessage = 'Vider le casier n\'a pas fonctionée. Contactez un admin sur site.';
                             $oView=new _view('reservation::utilisation');
                             $this->oLayout->add('main',$oView);
                             $oUtilisateur = model_utilisateur::getInstance()->findById($iIdUtilisateur);
