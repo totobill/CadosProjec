@@ -200,6 +200,8 @@ class module_reservation extends abstract_module{
 
             $iIdCasier=(int)_root::getParam('num_bouton');
             $dNow = new DateTime('now Europe/Paris');
+            $dNow = $dNow->format('Y-m-d H:i:s');
+            var_dump($dNow);
             $dLimite = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
             echo "<br><br><br><br><br>";
             var_dump($iIdCasier);
