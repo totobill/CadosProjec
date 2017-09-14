@@ -1,15 +1,15 @@
 #!/usr/local/bin/python3
 
 import sys
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 
 # Configure the GPIO pin
-GPIO.setmode(GPIO.BCM)
-LOCK_PIN = 18
-OPEN_TIME = 5
+#GPIO.setmode(GPIO.BCM)
+#LOCK_PIN = 18
+OPEN_TIME = 2
 
-GPIO.setup(LOCK_PIN, GPIO.OUT)
+#GPIO.setup(LOCK_PIN, GPIO.OUT)
 
 def unlock_door():
 	GPIO.output(LOCK_PIN,True)
@@ -25,9 +25,9 @@ num_casier = sys.argv[1]
 success = True
 
 if success :
-	unlock_door()
+	#unlock_door()
 	time.sleep(OPEN_TIME)
 	print( 'casier ouvert')
 else:
     print('probleme ouverture casier')
-GPIO.cleanup()
+#GPIO.cleanup()
