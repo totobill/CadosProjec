@@ -76,11 +76,11 @@ class module_reservation extends abstract_module{
                         //si non on affiche l'ensemble des casiers.
                         $bReserv = $this->checkNumeroReservation();
                         $iIdCasier=(int)_root::getParam('num_bouton');
-//                        echo "<br><br><br><br><br><br>";
+                      echo "<br><br><br><br><br><br>";
 ////                        var_dump($iIdCasier);
 //			var_dump($tMessage);
-//			var_dump('ceci est un test');
-//			var_dump(empty($tMessage));
+			var_dump('ceci est un test');
+			var_dump($bReserv);
                         if($bReserv != null){
                             if($bReserv){
                                 $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
