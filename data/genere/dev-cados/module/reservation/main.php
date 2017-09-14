@@ -9,6 +9,7 @@ class module_reservation extends abstract_module{
 	
 	
 	public function _reserver(){
+            
                 $iIdUtilisateur = (int)_root::getAuth()->getAccount()->id_utilisateur;
                 $sMessage = '';
                 
@@ -80,7 +81,7 @@ class module_reservation extends abstract_module{
 //			var_dump($tMessage);
 //			var_dump('ceci est un test');
                         if($tMessage == NULL){
-				$oView=new _view('reservation::reserver');
+                            $oView=new _view('reservation::reserver');
                             $this->oLayout->add('main',$oView);
                             $oCasier = model_casier::getInstance()->findAll();
                             $oView->oCasier=$oCasier;
@@ -88,11 +89,13 @@ class module_reservation extends abstract_module{
 			} else if(empty($tMessage)){
                             $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
 //                            $oCasier=model_casier::getInstance()->findById(5);
-                            $dStartReservation= date("Y-m-d H:i:s"); //format date time de mysql
-                            $dEndReservation=date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
+//                            $dStartReservation = date("Y-m-d H:i:s"); //format date time de mysql
+                            $dStartReservation = new DateTime('now Europe/Paris');
+                            $dEndReservation = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
                             $oCasier->start_location=$dStartReservation;
                             $oCasier->end_location=$dEndReservation;
                             $oCasier->save();
+                            
                             
 //                            var_dump($tMessage);
 //                            var_dump($dStartReservation);
