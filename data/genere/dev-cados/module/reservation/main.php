@@ -83,13 +83,15 @@ class module_reservation extends abstract_module{
 			var_dump($bReserv);
                         $dStartReservation = new DateTime('now Europe/Paris');
                         var_dump($dStartReservation);
+                        $dEndReservation = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
+                        var_dump($dEndReservation);
                         if($bReserv != null){
                             if($bReserv){
                                 $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
 //                            $dStartReservation = date("Y-m-d H:i:s"); //format date time de mysql
                                 echo "Je veux savoir si la valeur de empty(tmessage) est bien vide";
                                 var_dump(empty($tMessage));
-                                $dStartReservation = new DateTime('now Europe/Paris');
+                                $dStartReservation = new DateTime('now Europe/Paris')->;
                                 var_dump($dStartReservation);
                                 $dEndReservation = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
                                 $oCasier->start_location=$dStartReservation;
