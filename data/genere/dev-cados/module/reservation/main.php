@@ -81,6 +81,8 @@ class module_reservation extends abstract_module{
 //			var_dump($tMessage);
 			var_dump('ceci est un test');
 			var_dump($bReserv);
+                        $dStartReservation = new DateTime('now Europe/Paris');
+                        var_dump($dStartReservation);
                         if($bReserv != null){
                             if($bReserv){
                                 $oCasier=model_casier::getInstance()->findById((int)_root::getParam('num_bouton'));
