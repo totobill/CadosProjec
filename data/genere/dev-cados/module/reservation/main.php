@@ -201,9 +201,10 @@ class module_reservation extends abstract_module{
             $iIdCasier=(int)_root::getParam('num_bouton');
             $dNow = new DateTime('now Europe/Paris');
             $dLimite = date("Y-m-d H:i:s", mktime(18,0,0,date("m"),date("d"),date("Y")));
-//            echo "<br><br><br><br><br>";
-//            var_dump($dNow > $dLimite);
-//	    var_dump('AHAHAHAHA');
+            echo "<br><br><br><br><br>";
+            var_dump($iIdCasier);
+            var_dump($dNow < $dLimite);
+	    var_dump('AHAHAHAHA');
             if(!(isset($iIdCasier)) && ($dNow < $dLimite)){
                 $id_utilisateur =(int)_root::getAuth()->getAccount()->id_utilisateur;
                 model_casier::getInstance()->setEtat1($iIdCasier,$id_utilisateur);
