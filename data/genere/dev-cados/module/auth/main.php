@@ -144,7 +144,7 @@ class module_auth extends abstract_module{
         $mail->Username = "anthony.rohr@cados.website";
 
         //Password to use for SMTP authentication
-        $mail->Password = "cadosAdmin2017";
+        $mail->Password = "t9Y7wQ4k";
 
         //Set who the message is to be sent from
         $mail->setFrom('anthony.rohr@cados.website', 'Cados');
