@@ -235,7 +235,7 @@ class module_auth extends abstract_module{
             $oUtilisateur->prenom=$sSurname;
             $oUtilisateur->date_de_naissance=$dBirthday;
             if($oUtilisateur->save()==false){
-                    return $oUtilisateur->getListError();
+                return $oUtilisateur->getListError();
 
             }
 
@@ -243,6 +243,14 @@ class module_auth extends abstract_module{
 //            echo $cle;
             model_utilisateur::getInstance()->setCle($sLogin,$cle);	
             $this->sendEmailinscription($sLogin,$sName,$sSurname,$cle);
+            //Lors d'une inscription on met par defaut l'utilisateur avec un statu utilisateur
+            $oGroupsUsers=new row_GroupsUsers;
+            $oGroupsUsers->users_id = (int)_root::getAuth()->getAccount()->id_utilisateur;
+            $oGroupsUsers->groups_id = 4;
+            if($oGroupsUsers->save()==false){
+                return $oGroupsUsers->getListError();
+            }
+            
             return array('success'=>array('Votre compte a bien été créé. Veuillez confirmer votre compte, un email vous a été envoyé.'));
 
 	}
