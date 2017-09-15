@@ -238,12 +238,10 @@ class module_auth extends abstract_module{
                 return $oUtilisateur->getListError();
 
             }
-
+            
             $cle = md5(microtime(TRUE)*100000);
-//            echo $cle;
-            model_utilisateur::getInstance()->setCle($sLogin,$cle);	
-            $this->sendEmailinscription($sLogin,$sName,$sSurname,$cle);
-            //Lors d'une inscription on met par defaut l'utilisateur avec un statu utilisateur
+
+            model_utilisateur::getInstance()->setCle($sLogin,$cle);
             $oGroupsUsers=new row_GroupsUsers;
             $oUtilisateurWithId = model_utilisateur::getInstance()->findByEmail($sLogin);
             $oGroupsUsers->users_id = $oUtilisateurWithId->id_utilisateur;
@@ -251,6 +249,9 @@ class module_auth extends abstract_module{
             if($oGroupsUsers->save()==false){
                 return $oGroupsUsers->getListError();
             }
+            $this->sendEmailinscription($sLogin,$sName,$sSurname,$cle);
+            //Lors d'une inscription on met par defaut l'utilisateur avec un statu utilisateur
+            
             
             return array('success'=>array('Votre compte a bien été créé. Veuillez confirmer votre compte, un email vous a été envoyé.'));
 
