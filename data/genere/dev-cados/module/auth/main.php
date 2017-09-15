@@ -216,6 +216,9 @@ class module_auth extends abstract_module{
             $tAccount=model_utilisateur::getInstance()->getListAccount();
 
             $sLogin=_root::getParam('email');
+            if(array_key_exists($sLogin, $tAccount)){
+                return array('email' => 'L\'email choisi n\'est pas disponible');
+            }
             $sPassword=_root::getParam('password');
             $sConfirmationPassword=_root::getParam('confirmationPassword');
             if(strcmp($sPassword, $sConfirmationPassword) != 0){
