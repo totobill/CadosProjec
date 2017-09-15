@@ -245,7 +245,7 @@ class module_auth extends abstract_module{
             $this->sendEmailinscription($sLogin,$sName,$sSurname,$cle);
             //Lors d'une inscription on met par defaut l'utilisateur avec un statu utilisateur
             $oGroupsUsers=new row_GroupsUsers;
-            $oGroupsUsers->users_id = (int)_root::getAuth()->getAccount()->id_utilisateur;
+            $oGroupsUsers->users_id = PDO::lastInsertId();
             $oGroupsUsers->groups_id = 4;
             if($oGroupsUsers->save()==false){
                 return $oGroupsUsers->getListError();
