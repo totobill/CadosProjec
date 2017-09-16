@@ -12,7 +12,7 @@ $oForm->setMessage($this->tMessage);
             </p>
             <p>
                <label>Réponse :</label>
-               <?php echo $oForm->getInputText('answer',array('class'=>'form-control'))?>
+               <?php echo $oForm->getInputText('answer',array('class'=>'form-control'),false)?>
             </p>
            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Vérification" />
            <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::forgotPasswordEmail')?>">Retour</a>

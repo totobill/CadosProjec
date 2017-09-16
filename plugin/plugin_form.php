@@ -81,9 +81,14 @@ class plugin_form{
 	* @param string $sName nom du champ
 	* @param array $tOption options du champ texte
 	*/
-	public function getInputText($sName,$tOption=null){
+	public function getInputText($sName,$tOption=null,$bDisplay=true){
 		$sHtml=null;
-		$sHtml.='<input type="text" name="'.$sName.'" value="'.$this->getValue($sName).'" '.$this->getOption($tOption).'/>';
+		$sHtml.='<input type="text" name="'.$sName.'" value="';
+                if($bDisplay){
+                    $sHtml.=$this->getValue($sName).'" '.$this->getOption($tOption).'/>';
+                }else{
+                    $sHtml.='" '.$this->getOption($tOption).'/>';
+                }       
 		$sHtml.=$this->getMessage($sName);
 		return $sHtml;
 	}

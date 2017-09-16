@@ -126,10 +126,6 @@ class module_auth extends abstract_module{
                 $oView->oUser=$oUtilisateur;
                 $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
                 $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
-                echo '<br><br><br><br><br><br>';
-                var_dump($oQuestionSecrete);
-                var_dump($oQuestionsUsers);
-                var_dump($oUtilisateur);
                 $oView->sQuestion =$oQuestionSecrete->question;
             }else{
                 $oView = new _view('auth::forgotPasswordEmail');
