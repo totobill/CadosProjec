@@ -105,9 +105,11 @@ class module_auth extends abstract_module{
                 $oView=new _view('auth::login');
             }else{
                 $oView=new _view('auth::inscription');
+                $tQuestions=model_QuestionSecrete::getInstance()->getSelect();
+                $oView->tQuestion=$tQuestions;
             }
             $oView->tMessage=$tMessage;
-
+            
             $oView->oUser=new row_utilisateur;
 
             $this->oLayout->add('main',$oView);
@@ -344,6 +346,7 @@ class module_auth extends abstract_module{
                 $sName = _root::getParam('nom');
                 $sSurname = _root::getParam('prenom');
                 $dBirthday = _root::getParam('date_de_naissance');
+                $sAnswer = _root::getParam('answer');
 
                 $oUtilisateur=new row_utilisateur;
                 $oUtilisateur->email=$sLogin;
@@ -351,6 +354,7 @@ class module_auth extends abstract_module{
                 $oUtilisateur->nom=$sName;
                 $oUtilisateur->prenom=$sSurname;
                 $oUtilisateur->date_de_naissance=$dBirthday;
+                $oUtilisateur->answer=$sAnswer;
                 if($oUtilisateur->save()==false){
                     return $oUtilisateur->getListError();
 
@@ -367,9 +371,21 @@ class module_auth extends abstract_module{
                     return $oGroupsUsers->getListError();
                 }
                 $this->sendEmailinscription($sLogin,$sName,$sSurname,$cle);
-                //Lors d'une inscription on met par defaut l'utilisateur avec un statu utilisateur
+                //Lors d'une inscription on met par defaut l'utilisateur avec un statut utilisateur
+                
+                //On enregistre dans la table de jointure la question choisie par l'utilisateur
+                $tQuestions=model_QuestionSecrete::getInstance()->getSelect();
+                $sQuestion = _root::getParam('questionSecrete');
+                $iId_question = array_search($sQuestion, $tQuestions);
+                $iIdUtilisateur = $oUtilisateurWithId->id_utilisateur;
+                $oQuestionUsers = new row_QuestionUsers;
+                $oQuestionUsers->id_user=$iIdUtilisateur;
+                $oQuestionUsers->id_question=$iId_question;
+                if($oQuestionUsers->save()==false){
+                    return $oQuestionUsers->getListError();
 
-
+                }
+                
                 return array('success'=>array('Votre compte a bien été créé. Veuillez confirmer votre compte, un email vous a été envoyé.'));
 
             }
