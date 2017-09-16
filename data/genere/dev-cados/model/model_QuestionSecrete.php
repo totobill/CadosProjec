@@ -13,7 +13,7 @@ class model_QuestionSecrete extends abstract_model{
 	}
 
 	public function findById($uId){
-		return $this->findOne('SELECT * FROM '.$this->sTable.' WHERE id=?',$uId );
+		return $this->findOne('SELECT * FROM '.$this->sTable.' WHERE id_question=?',$uId );
 	}
 	public function findAll(){
 		return $this->findMany('SELECT * FROM '.$this->sTable);
