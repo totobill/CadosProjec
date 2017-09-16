@@ -37,7 +37,7 @@ $oForm2->setMessage($this->tMessage);
            </p>
            <p>
                <label>Question secrète :</label>
-               <?php echo $oForm2->getSelect('questionSecrete', array('class'=>'form-control'))?>
+               <?php echo $oForm2->getSelect('questionSecrete', $this->tQuestions)?>
            </p>
            <p>
                <label>Réponse :</label>
