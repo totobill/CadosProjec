@@ -106,7 +106,7 @@ class module_auth extends abstract_module{
             }else{
                 $oView=new _view('auth::inscription');
                 $tQuestions=model_QuestionSecrete::getInstance()->getSelect();
-                $oView->tQuestion=$tQuestions;
+                $oView->tQuestions=$tQuestions;
             }
             $oView->tMessage=$tMessage;
             
