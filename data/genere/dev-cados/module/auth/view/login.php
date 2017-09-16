@@ -12,7 +12,7 @@
 </form>-->
 
 
-<?php if($this->sConfirmation!=''){?>
+<?php if(isset($this->sConfirmation) and $this->sConfirmation!=''){?>
 		
 	<form action="" method="POST"  class="form-signin form-signin-login" role="form">
 		<h2 class="form-signin-heading">Authentification</h2>
