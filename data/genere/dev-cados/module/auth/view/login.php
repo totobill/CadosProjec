@@ -22,7 +22,7 @@
 		
 	        <input type="submit" value="Se connecter"  class="btn btn-lg btn-primary btn-block"/> <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::inscription')?>">S'inscrire</a></p>
 	
-		<?php if($this->sError!=''):?>
+		<?php if(isset($this->sError) and $this->sError!=''):?>
 			<p style="color:red"><?php echo $this->sError?></p>
 		<?php endif;?>
 		<p style="color:red"><?php echo $this->sConfirmation?></p>
@@ -41,7 +41,7 @@
 		
 	        <input type="submit" value="Se connecter"  class="btn btn-lg btn-primary btn-block"/> <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::inscription')?>">S'inscrire</a></p>
 	
-		<?php if($this->sError!=''):?>
+		<?php if(isset($this->sError) and $this->sError!=''):?>
 			<p style="color:red"><?php echo $this->sError?></p>
 		<?php endif;?>
 		<?php if(isset($this->tMessage) and isset($this->tMessage['success'])):?>
