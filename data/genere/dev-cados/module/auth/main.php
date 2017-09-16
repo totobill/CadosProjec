@@ -37,6 +37,7 @@ class module_auth extends abstract_module{
                 }			
             }else{
                 $sConfirmation = "";
+                $tMessage = array();
             }
 
             $sMessage=$this->checkLoginPass();

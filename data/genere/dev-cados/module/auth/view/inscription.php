@@ -37,12 +37,6 @@ $oForm->setMessage($this->tMessage);
    
    <p><input class="btn btn-lg btn-primary btn-block" type="submit" value="S'enregistrer" /> <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::login')?>">Login</a> </p>
 
-
-<?php if($this->tMessage and isset($this->tMessage['success'])):?>
-  <p><?php echo implode($this->tMessage['success'])?> </p>
-<?php else:?>
-  <p><?php echo var_dump($this->tMessage)?></p>
-<?php endif;?>
 </form>
    
 

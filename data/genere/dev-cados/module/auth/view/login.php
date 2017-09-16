@@ -44,7 +44,7 @@
 		<?php if($this->sError!=''):?>
 			<p style="color:red"><?php echo $this->sError?></p>
 		<?php endif;?>
-		<?php if($this->tMessage and isset($this->tMessage['success'])):?>
+		<?php if(isset($this->tMessage) and isset($this->tMessage['success'])):?>
                     <p><?php echo implode($this->tMessage['success'])?> </p>
                 <?php endif;?>
 	</form>
