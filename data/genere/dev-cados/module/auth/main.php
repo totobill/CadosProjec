@@ -376,12 +376,15 @@ class module_auth extends abstract_module{
                 //On enregistre dans la table de jointure la question choisie par l'utilisateur
                 $tQuestions=model_QuestionSecrete::getInstance()->getSelect();
                 $sQuestion = _root::getParam('questionSecrete');
+                
                 $iId_question = array_search($sQuestion, $tQuestions);
                 $iIdUtilisateur = $oUtilisateurWithId->id_utilisateur;
                 $oQuestionsUsers = new row_QuestionsUsers;
                 $oQuestionsUsers->id_user=$iIdUtilisateur;
                 $oQuestionsUsers->id_question=$iId_question;
                 echo '<br><br><br><br><br><br>';
+                var_dump($sQuestion);
+                var_dump($tQuestions);
                 var_dump($iIdUtilisateur);
                 var_dump($iId_question);
                 if($oQuestionsUsers->save()==false){
