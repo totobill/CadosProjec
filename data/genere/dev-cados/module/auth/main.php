@@ -124,6 +124,13 @@ class module_auth extends abstract_module{
                 $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sEmail);
                 $oView->email=$sEmail;
                 $oView->oUser=$oUtilisateur;
+                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
+                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
+                echo '<br><br><br><br><br><br>';
+                var_dump($oQuestionSecrete);
+                var_dump($oQuestionsUsers);
+                var_dump($oUtilisateur);
+                $oView->sQuestion =$oQuestionSecrete->question;
             }else{
                 $oView = new _view('auth::forgotPasswordEmail');
                 $oView->oUser=new row_utilisateur;
@@ -162,15 +169,15 @@ class module_auth extends abstract_module{
             }else{
                 $oView = new _view('auth::forgotPasswordQuestion');
                 $oView->oUser=new row_utilisateur;
-                $sLogin = _root::getParam('email');
-                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
-                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
-                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
-                echo '<br><br><br><br><br><br>';
-                var_dump($oQuestionSecrete);
-                var_dump($oQuestionsUsers);
-                var_dump($oUtilisateur);
-                $oView->sQuestion =$oQuestionSecrete->question;
+//                $sLogin = _root::getParam('email');
+//                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
+//                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
+//                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
+//                echo '<br><br><br><br><br><br>';
+//                var_dump($oQuestionSecrete);
+//                var_dump($oQuestionsUsers);
+//                var_dump($oUtilisateur);
+//                $oView->sQuestion =$oQuestionSecrete->question;
             }
             $oView->tMessage=$tMessage;
 
