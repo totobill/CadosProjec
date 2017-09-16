@@ -8,7 +8,8 @@ Class module_menu extends abstract_moduleembedded{
                 'Accueil' => 'default::index',
                 'Droits' => 'rightsManagerMulti::index',
                 'À Propos' => 'purpose::info',
-                'Administrer utilisateurs' => 'utilisateur::list'
+                'Administrer utilisateurs' => 'utilisateur::list',
+                'Profil' => 'configuration::profil'
             );
 		
                 foreach ($tLink as $sLabel => $sLink){
