@@ -100,7 +100,7 @@ class module_auth extends abstract_module{
 	public function _inscription(){
 		$tMessage=$this->processInscription();
 
-		$oView=new _view('auth::inscription');
+		$oView=new _view('auth::login');
 		$oView->tMessage=$tMessage;
 
 		$oView->oUser=new row_utilisateur;
