@@ -378,11 +378,14 @@ class module_auth extends abstract_module{
                 $sQuestion = _root::getParam('questionSecrete');
                 $iId_question = array_search($sQuestion, $tQuestions);
                 $iIdUtilisateur = $oUtilisateurWithId->id_utilisateur;
-                $oQuestionUsers = new row_QuestionsUsers;
-                $oQuestionUsers->id_user=$iIdUtilisateur;
-                $oQuestionUsers->id_question=$iId_question;
-                if($oQuestionUsers->save()==false){
-                    return $oQuestionUsers->getListError();
+                $oQuestionsUsers = new row_QuestionsUsers;
+                $oQuestionsUsers->id_user=$iIdUtilisateur;
+                $oQuestionsUsers->id_question=$iId_question;
+                echo '<br><br><br><br><br><br>';
+                var_dump($iIdUtilisateur);
+                var_dump($iId_question);
+                if($oQuestionsUsers->save()==false){
+                    return $oQuestionsUsers->getListError();
 
                 }
                 
