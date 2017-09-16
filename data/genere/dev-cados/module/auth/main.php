@@ -145,7 +145,7 @@ class module_auth extends abstract_module{
                return array('email' => 'L\'adresse email fourni n\'existe pas.');
            //Si elle existe, alors on renvoie un message de succès.
            }else{
-               return array('succes' => '');
+               return array('success' => '');
            }
            
         }
