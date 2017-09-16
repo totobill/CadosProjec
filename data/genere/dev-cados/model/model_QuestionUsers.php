@@ -1,9 +1,9 @@
 <?php
 class model_QuestionUsers extends abstract_model{
 	
-	protected $sClassRow='row_QuestionUsers';
+	protected $sClassRow='row_QuestionsUsers';
 	
-	protected $sTable='QuestionUsers';
+	protected $sTable='QuestionsUsers';
 	protected $sConfig='pdoMysqlExple';
 	
 	protected $tId=array('id');
@@ -35,9 +35,9 @@ class model_QuestionUsers extends abstract_model{
 
 }
 
-class row_QuestionUsers extends abstract_row{
+class row_QuestionsUsers extends abstract_row{
 	
-	protected $sClassModel='model_QuestionUsers';
+	protected $sClassModel='model_QuestionsUsers';
 	
 	/*exemple jointure 
 	public function findAuteur(){
