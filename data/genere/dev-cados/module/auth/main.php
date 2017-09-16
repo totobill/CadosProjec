@@ -143,7 +143,7 @@ class module_auth extends abstract_module{
            //Si elle n'existe pas en renvoie un message d'erreur
            if(!_root::getAuth()->checkEmail($tAccount,$sLogin)){
                echo "<br><br><br><br><br><br><br>";
-               var_dump($tAccount);
+               var_dump($tAccount['anthony.rohr@rocketmail.com']);
                return array('email' => 'L\'adresse email fourni n\'existe pas.');
            //Si elle existe, alors on renvoie un message de succès.
            }else{
