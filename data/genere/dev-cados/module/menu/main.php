@@ -4,12 +4,12 @@ Class module_menu extends abstract_moduleembedded{
 	public function _index(){
 		
             $tLink=array(
-                'Se déconnecter' => 'auth::logout',
                 'Accueil' => 'default::index',
                 'Droits' => 'rightsManagerMulti::index',
-                'À Propos' => 'purpose::info',
                 'Administrer utilisateurs' => 'utilisateur::list',
-                'Profil' => 'configuration::profil'
+                'Profil' => 'configuration::profil',
+                'À Propos' => 'purpose::info',
+                'Se déconnecter' => 'auth::logout'
             );
 		
                 foreach ($tLink as $sLabel => $sLink){
