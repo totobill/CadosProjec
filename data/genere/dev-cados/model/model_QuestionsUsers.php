@@ -19,6 +19,9 @@ class model_QuestionsUsers extends abstract_model{
 		return $this->findMany('SELECT * FROM '.$this->sTable);
 	}
 	
+        public function findByUserId($iId){
+            return $this->findOne('SELECT * FROM '.$this->sTable.' WHERE id_user=?',$iId );
+        }
 	
 	public function getSelect(){
 		$tab=$this->findAll();

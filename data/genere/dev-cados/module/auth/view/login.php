@@ -22,7 +22,7 @@
 		
 	        <input type="submit" value="Se connecter"  class="btn btn-lg btn-primary btn-block"/>
                 <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::inscription')?>">S'inscrire</a>
-                <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::forgotPassword')?>">Mot de passe oublié ?</a>
+                <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::forgotPasswordEmail')?>">Mot de passe oublié ?</a>
 		<?php if(isset($this->sError) and $this->sError!=''):?>                    
                     <p style="color:red"><?php echo $this->sError?></p>
 		<?php endif;?>
@@ -42,7 +42,7 @@
 		
 	        <input type="submit" value="Se connecter"  class="btn btn-lg btn-primary btn-block"/>
                 <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::inscription')?>">S'inscrire</a>
-                <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::forgotPassword')?>">Mot de passe oublié ?</a>
+                <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::forgotPasswordEmail')?>">Mot de passe oublié ?</a>
 		<?php if(isset($this->sError) and $this->sError!=''):?>
                     <p style="color:red"><?php echo $this->sError?></p>
 		<?php endif;?>

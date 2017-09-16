@@ -162,6 +162,9 @@ class module_auth extends abstract_module{
             }else{
                 $oView = new _view('auth::forgotPasswordQuestion');
                 $oView->oUser=new row_utilisateur;
+                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
+                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
+                $oView->oQuestionSecrete =$oQuestionSecrete;
             }
             $oView->tMessage=$tMessage;
 
@@ -374,16 +377,12 @@ class module_auth extends abstract_module{
                 //Lors d'une inscription on met par defaut l'utilisateur avec un statut utilisateur
                 
                 //On enregistre dans la table de jointure la question choisie par l'utilisateur
-//                $tQuestions=model_QuestionSecrete::getInstance()->getSelect();
                 $iIdQuestion = _root::getParam('questionSecrete');
                 $iIdUtilisateur = $oUtilisateurWithId->id_utilisateur;
                 $oQuestionsUsers = new row_QuestionsUsers;
                 $oQuestionsUsers->id_user=$iIdUtilisateur;
                 $oQuestionsUsers->id_question=$iIdQuestion;
-//                echo '<br><br><br><br><br><br>';
-//                var_dump($iIdQuestion);
-//                var_dump($tQuestions);
-//                var_dump($iIdUtilisateur);
+
                 if($oQuestionsUsers->save()==false){
                     return $oQuestionsUsers->getListError();
 

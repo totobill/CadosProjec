@@ -8,7 +8,7 @@ $oForm->setMessage($this->tMessage);
                <?php echo $oForm->getInputEmail('email',array('class'=>'form-control'))?>
             </p>
             <p>
-               <label>Votre question secrète : <?php echo $this->oUser->secretQuestion ?></label>
+               <label>Votre question secrète : <?php echo $this->oQuestionSecrete->question ?></label>
             </p>
             <p>
                <label>Réponse :</label>
