@@ -37,13 +37,14 @@ class module_auth extends abstract_module{
                 }			
             }else{
                 $sConfirmation = "";
-                $tMessage = array();
+                
             }
 
             $sMessage=$this->checkLoginPass();
 
             $oView=new _view('auth::login');
             $oView->sError=$sMessage;
+            
             if(isset($_GET['log'])){$oView->sEmail=$email;}
             $oView->sConfirmation=$sConfirmation;
             $this->oLayout->add('main',$oView);
@@ -100,8 +101,11 @@ class module_auth extends abstract_module{
 
 	public function _inscription(){
 		$tMessage=$this->processInscription();
-
-		$oView=new _view('auth::login');
+                if(array_key_exists('success', $tMessage)){
+                    $oView=new _view('auth::login');
+                }else{
+                    $oView=new _view('auth::inscription');
+                }
 		$oView->tMessage=$tMessage;
 
 		$oView->oUser=new row_utilisateur;
