@@ -166,6 +166,10 @@ class module_auth extends abstract_module{
                 $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
                 $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
                 $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
+                echo '<br><br><br><br><br><br>';
+                var_dump($oQuestionSecrete);
+                var_dump($oQuestionsUsers);
+                var_dump($oUtilisateur);
                 $oView->sQuestion =$oQuestionSecrete->question;
             }
             $oView->tMessage=$tMessage;
