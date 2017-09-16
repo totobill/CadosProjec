@@ -62,8 +62,8 @@
                 <form action="" method="POST" enctype="multipart/form-data">
                     Photo de profil : <input type="file" name="profilPicture" />
 
-                    <?php if($this->oAccount->profilPicture!=''):?>
-                    <img src="<?php echo $this->oAccount->profilPicture ?>" />
+                    <?php if($this->oUtilisateur->profilPicture!=''):?>
+                    <img src="<?php echo $this->oUtilisateur->profilPicture ?>" />
                     <?php endif;?>
 
                     <input type="submit" value="Sauvegarder"/>
