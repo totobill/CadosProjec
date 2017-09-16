@@ -1,5 +1,5 @@
 <?php
-class model_QuestionUsers extends abstract_model{
+class model_QuestionsUsers extends abstract_model{
 	
 	protected $sClassRow='row_QuestionsUsers';
 	
