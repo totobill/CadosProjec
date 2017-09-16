@@ -374,19 +374,16 @@ class module_auth extends abstract_module{
                 //Lors d'une inscription on met par defaut l'utilisateur avec un statut utilisateur
                 
                 //On enregistre dans la table de jointure la question choisie par l'utilisateur
-                $tQuestions=model_QuestionSecrete::getInstance()->getSelect();
-                $sQuestion = _root::getParam('questionSecrete');
-                
-                $iId_question = array_search($sQuestion, $tQuestions);
+//                $tQuestions=model_QuestionSecrete::getInstance()->getSelect();
+                $iIdQuestion = _root::getParam('questionSecrete');
                 $iIdUtilisateur = $oUtilisateurWithId->id_utilisateur;
                 $oQuestionsUsers = new row_QuestionsUsers;
                 $oQuestionsUsers->id_user=$iIdUtilisateur;
-                $oQuestionsUsers->id_question=$iId_question;
-                echo '<br><br><br><br><br><br>';
-                var_dump($sQuestion);
-                var_dump($tQuestions);
-                var_dump($iIdUtilisateur);
-                var_dump($iId_question);
+                $oQuestionsUsers->id_question=$iIdQuestion;
+//                echo '<br><br><br><br><br><br>';
+//                var_dump($iIdQuestion);
+//                var_dump($tQuestions);
+//                var_dump($iIdUtilisateur);
                 if($oQuestionsUsers->save()==false){
                     return $oQuestionsUsers->getListError();
 
