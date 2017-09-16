@@ -100,22 +100,132 @@ class module_auth extends abstract_module{
 	}
 
         public function _inscription(){
-                $tMessage=$this->processInscription();
-                if(isset($tMessage) and array_key_exists('success', $tMessage)){
-                    $oView=new _view('auth::login');
-                }else{
-                    $oView=new _view('auth::inscription');
-                }
-                $oView->tMessage=$tMessage;
+            $tMessage=$this->processInscription();
+            if(isset($tMessage) and array_key_exists('success', $tMessage)){
+                $oView=new _view('auth::login');
+            }else{
+                $oView=new _view('auth::inscription');
+            }
+            $oView->tMessage=$tMessage;
 
+            $oView->oUser=new row_utilisateur;
+
+            $this->oLayout->add('main',$oView);
+        }
+        
+        public function _forgotPasswordEmail(){
+            $tMessage = $this->checkEmail();
+            //Si tMessage est différent de null, c'est que le questionnaire a été soumis
+            if(isset($tMessage)and array_key_exists('success', $tMessage)){
+                $oView = new _view('auth::forgotPasswordQuestion');
+                $sEmail = _root::getParam('email');
+                $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sEmail);
+                $oView->email=$sEmail;
+                $oView->oUser=$oUtilisateur;
+            }else{
+                $oView = new _view('auth::forgotPasswordEmail');
                 $oView->oUser=new row_utilisateur;
-
-                $this->oLayout->add('main',$oView);
+            }
+            $oView->tMessage=$tMessage;
+            
+            $this->oLayout->add('main',$oView);
         }
-
-        public function _forgotPassword(){
-
+        
+        public function checkEmail(){
+           //si le formulaire n'est pas envoye on s'arrete la
+            if(!_root::getRequest()->isPost() ){
+                    return null;
+            }
+            
+           $sLogin = _root::getParam('login');
+           $tAccount=model_utilisateur::getInstance()->getListEmail();
+           //On vérifie si l'adresse email entrée existe en base.
+           //Si elle n'existe pas en renvoie un message d'erreur
+           if(!_root::getAuth()->checkEmail($tAccount,$sLogin)){
+               return array('email' => 'L\'adresse email fourni n\'existe pas.');
+           //Si elle existe, alors on renvoie un message de succès.
+           }else{
+               return array('succes' => '');
+           }
+           
         }
+        
+        public function _forgotPasswordQuestion(){
+            $tMessage = $this->checkSecretQuestion();
+            if(isset($tMessage)and array_key_exists('success', $tMessage)){
+                $oView = new _view('auth::forgotPasswordNew');
+                $sLogin = _root::getParam('email');
+                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
+                $oView->oUser=$oUtilisateur;
+            }else{
+                $oView = new _view('auth::forgotPasswordQuestion');
+                $oView->oUser=new row_utilisateur;
+            }
+            $oView->tMessage=$tMessage;
+
+            $this->oLayout->add('main',$oView);
+        }
+        
+        
+        public function checkSecretQuestion(){
+            //si le formulaire n'est pas envoye on s'arrete la
+            if(!_root::getRequest()->isPost() ){
+                    return null;
+            }
+            
+            $sLogin = _root::getParam('email');
+            $sAnswer = _root::getParam('answer');
+            $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sLogin);
+            if($oUtilisateur->answser != $sAnswer){
+                return array('answer' => 'La réponse ne correspond pas');
+            }else{
+                return array('succes' => '');
+            }
+            
+            
+            if($oUtilisateur->answser != $sAnswer){
+                return array('answer' => 'Le réponse fournie ne correspond pas avec la réponse en base de donnée');
+            }
+        }
+        
+        public function _forgotPasswordNew(){
+            $tMessage=$this->checkNewPassword();
+            if(isset($tMessage)and array_key_exists('success', $tMessage)){
+                $oView = new _view('auth::login');
+            }else{
+                $oView = new _view('auth::forgotPasswordNew');
+                $sLogin = _root::getParam('email');
+                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
+                $oView->oUser=$oUtilisateur;
+            }
+            $oView->tMessage=$tMessage;
+            $this->oLayout->add('main',$oView);
+        }
+        
+        public function checkNewPassword(){
+            //si le formulaire n'est pas envoye on s'arrete la
+            if(!_root::getRequest()->isPost() ){
+                    return null;
+            }
+            $sLogin = _root::getParam('email');
+            $sPassword = _root::getParam('password');
+            $sConfirmationPassword = _root::getParam('confirmationPassword');
+            if(strcmp($sPassword, $sConfirmationPassword) != 0){
+                return array('password' => 'Le mot de passe et la confirmation ne sont pas identiques.');
+            }else{
+                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
+                $sHashPassword=model_utlisateur::getInstance()->hashPassword($sPassword);
+                $oUtilisateur->password=$sHashPassword;
+                if($oUtilisateur->saveModification()){
+                    return array('succes' => 'La modification du mot de passe à fonctionné.');
+                }else{
+                    return $oUtilisateur->getListErrorModification();
+                }
+                
+            }
+            
+        }
+        
         public function sendEmailinscription($sRecipient,$sName,$sSurname,$cle){
             //Create a new PHPMailer instance
             $mail = new PHPMailer;

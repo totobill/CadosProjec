@@ -59,7 +59,33 @@ class plugin_auth extends abstract_auth{
 	public function checkLoginPass($tElements,$sLogin,$sPass){
 		return $this->verifLoginPass($tElements,$sLogin,$sPass);
 	}
-	/**
+        /**
+	* verifie si le couple login/pass est present dans le tableau
+	* @access public
+	* @param array $tElements tableau respectant la structure suivante: $array[login][pass]
+	* @param string $sLogin login a verifier
+	* @return bool retourne true/false selon le login est correcte ou non
+	*/
+        public function checkEmail($tElements,$sLogin){
+            return $this->verifLogin($tElements,$sLogin);
+        }
+        /**
+	* verifie si le login est present dans le tableau
+	* @access public
+	* @param array $tElements tableau respectant la structure suivante: $array[login][pass]
+	* @param string $sLogin login a verifier
+	* @return bool retourne true/false selon le login est correcte ou non
+	*/
+        public function verifLogin($tElements,$sLogin){
+            if(isset($tElements[$sLogin])){
+			$this->_connect();
+			$this->setAccount($tElements[$sLogin]);
+			
+			return true;
+		}
+		return false;
+        }
+        /**
 	* verifie si le couple login/pass est present dans le tableau
 	* @access public
 	* @param array $tElements tableau respectant la structure suivante: $array[login][pass]

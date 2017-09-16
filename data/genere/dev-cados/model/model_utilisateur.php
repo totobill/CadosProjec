@@ -88,6 +88,22 @@ class model_utilisateur extends abstract_model{
 
         }
         
+        public function getListEmail(){
+            
+            $tAccount=$this->findAll();
+
+            $tLoginPassAccount=array();
+
+            if($tAccount){
+                foreach($tAccount as $oAccount){
+                    //on cree ici un tableau indexe par email d'utilisateur
+                    $tLoginPassAccount[$oAccount->email]=$oAccount;
+                }
+            }
+
+            return $tLoginPassAccount;
+        }
+        
         public function hashPassword($sPassword){
             //utiliser ici la methode de votre choix pour hasher votre mot de passe
             return sha1('bonja2AdnERk'.$sPassword);
