@@ -101,7 +101,7 @@ class module_auth extends abstract_module{
 
 	public function _inscription(){
 		$tMessage=$this->processInscription();
-                if(array_key_exists('success', $tMessage)){
+                if(isset($tMessage) and array_key_exists('success', $tMessage)){
                     $oView=new _view('auth::login');
                 }else{
                     $oView=new _view('auth::inscription');
