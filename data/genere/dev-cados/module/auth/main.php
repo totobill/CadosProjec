@@ -370,7 +370,7 @@ class module_auth extends abstract_module{
                 if($oGroupsUsers->save()==false){
                     return $oGroupsUsers->getListError();
                 }
-                $this->sendEmailinscription($sLogin,$sName,$sSurname,$cle);
+                //$this->sendEmailinscription($sLogin,$sName,$sSurname,$cle);
                 //Lors d'une inscription on met par defaut l'utilisateur avec un statut utilisateur
                 
                 //On enregistre dans la table de jointure la question choisie par l'utilisateur
