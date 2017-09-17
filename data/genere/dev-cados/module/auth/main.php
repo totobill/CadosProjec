@@ -317,13 +317,15 @@ class module_auth extends abstract_module{
             $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
             // En-têtes additionnels
-            $headers .= 'To:'. $sRecipient . "\r\n";
-            $headers .= 'From: Team Cados <anthony.rohr@cados.website>' . "\r\n";
+            $headers .= 'To: Test <'. $sRecipient . ">\r\n";
+            $headers .= 'From: TeamCados <anthony.rohr@cados.website>' . "\r\n";
 //            $headers .= 'Cc: anniversaire_archive@example.com' . "\r\n";
 //            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
 
             // Envoi
-            mail($to, $subject, $sMessage, $headers);
+            echo '<br><br><br><br><br><br><br>';
+            var_dump(mail($to, $subject, $sMessage, $headers));
+//            mail($to, $subject, $sMessage, $headers);
         }
         
         public function sendEmail($sRecipient){
