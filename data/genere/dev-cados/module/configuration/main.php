@@ -133,8 +133,10 @@ class module_configuration extends abstract_module{
             if(strcmp($sNewPassword, $sConfirmationPassword) != 0){
                 $tMessage['newPassword'] = 'Le nouveau mot de passe et la confirmation ne sont pas identiques';
             }
-            var_dump($tMessage);
+
             if(isset($tMessage)){
+                return $tMessage;
+            }else{
                 $oUtilisateur->password=model_utilisateur::getInstance()->hashPassword($sNewPassword);
                 if($oUtilisateur->save()){
                     //une fois enregistre on redirige (vers la page profil)
@@ -142,9 +144,7 @@ class module_configuration extends abstract_module{
                     _root::redirect('configuration::profil');
                 }else{
                     return $oUtilisateur->getListErrorModification();
-                }
-            }else{
-                return $tMessage;
+                }   
             }
             
 
