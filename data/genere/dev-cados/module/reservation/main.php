@@ -172,7 +172,7 @@ class module_reservation extends abstract_module{
 //            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
             $oUtilisateur = _root::getAuth()->getAccount();
             $requete = "python /kunden/homepages/46/d675115566/htdocs/CadosProject/data/genere/dev-cados/Casiers/ouverture2.py $oUtilisateur->id_bouton";
-            $resultat = shell_exec($requete);
+            $resultat = trim(shell_exec($requete));
             echo '<br><br><br><br><br>';
             var_dump($resultat);
             if(strcmp($resultat,'casier ouvert') == 0){
@@ -186,7 +186,7 @@ class module_reservation extends abstract_module{
 //            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
             $oUtilisateur = _root::getAuth()->getAccount();
             $requete = "python /kunden/homepages/46/d675115566/htdocs/CadosProject/data/genere/dev-cados/Casiers/ouverture2.py $oUtilisateur->id_bouton";
-            $resultat = shell_exec($requete);
+            $resultat = trim(shell_exec($requete));
 
             if($resultat == 'casier ouvert'){
                 
