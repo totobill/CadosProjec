@@ -1,8 +1,3 @@
-<?php 
-
-    $sMessage = $this->sMessage;
-    $Numero = $InfoReservation->id_bouton; 
-?>
 <form action="" method="POST">
     <div class="reservation_principale">
         <div class="reservation_utilisation_logo col-xs-12">
