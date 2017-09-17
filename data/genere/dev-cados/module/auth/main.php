@@ -71,6 +71,8 @@ class module_auth extends abstract_module{
 		
 		//on va verifier que l'on trouve dans le tableau retourne par notre model
 		//l'entree $tAccount[ login ][ mot de passe hashe ]
+                echo '<br><br><br><br><br><br>';
+                var_dump($tAccount['email']['password']);
 		if(!_root::getAuth()->checkLoginPass($tAccount,$sLogin,$sHashPassword)){
 			return 'Mauvais login/mot de passe';
 		}
@@ -82,14 +84,13 @@ class module_auth extends abstract_module{
                 if(isset($oUser)){
                     $iIdUtilisateur = (int)_root::getAuth()->getAccount()->id_utilisateur;
                     $aInfoConfirmation = model_utilisateur::getInstance()->getConfirmation($iIdUtilisateur);
-		if($aInfoConfirmation->actif == 1){
-                    model_utilisateur::getInstance()->setConnecte1($iIdUtilisateur);
-		}else{
-                    return 'Veuillez confirmer votre email pour pouvoir vous connecter.';
-		} 
-                    
-            }
-                
+                    if($aInfoConfirmation->actif == 1){
+                        model_utilisateur::getInstance()->setConnecte1($iIdUtilisateur);
+                    }else{
+                        return 'Veuillez confirmer votre email pour pouvoir vous connecter.';
+                    } 
+                }
+                $_SESSION['current_user_id'] = 
 		_root::redirect('default::index');
                 
                 
