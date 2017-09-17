@@ -134,7 +134,7 @@ class module_configuration extends abstract_module{
                 $tMessage['newPassword'] = 'Le nouveau mot de passe et la confirmation ne sont pas identiques';
             }
 
-            if(empty($tMessage)){
+            if(!empty($tMessage)){
                 return $tMessage;
             }else{
                 $oUtilisateur->password=model_utilisateur::getInstance()->hashPassword($sNewPassword);
