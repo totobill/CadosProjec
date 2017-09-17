@@ -128,7 +128,6 @@ class module_auth extends abstract_module{
             if(!_root::getRequest()->isPost() ){
                     return null;
             }
-            
            $sLogin = _root::getParam('email');
            $tAccount=model_utilisateur::getInstance()->getListEmail();
            //On vérifie si l'adresse email entrée existe en base.
@@ -144,8 +143,11 @@ class module_auth extends abstract_module{
                if($oUtilisateur->save()==false){
                     return $oUtilisateur->getListError();
                }
-               $this->sendMailOneAndOne($sNewPassword,$sLogin);
-               return array('success' => 'Un email contenant un nouveau mot de passe vous a été envoyé, si vous n\'avez pas reçu d\'email, contactez un administrateur '.$sLogin.' '.$sNewPassword);
+               if($this->sendMailOneAndOneForgotPassword($sNewPassword,$sLogin)){
+                   return array('success' => 'Un email contenant un nouveau mot de passe vous a été envoyé, si vous n\'avez pas reçu d\'email, contactez un administrateur.');
+               }else{
+                   return array('email' => 'L\'envoie de l\'email n\'a pas fonctioné, merci de contacter un administrateur');
+               }
            }
         }
 //        
@@ -263,35 +265,10 @@ class module_auth extends abstract_module{
 //            
 //        }
         
-        public function sendMailOneAndOne($sNewPassword,$sRecipient){
+        public function sendMailOneAndOneForgotPassword($sNewPassword,$sRecipient){
 
             $to  = $sRecipient;
-            
-            // Sujet
             $subject = 'Réinitilisation mot de passe';
-
-            // message
-//            $message = '
-//            <html>
-//             <head>
-//              <title>Calendrier des anniversaires pour Août</title>
-//             </head>
-//             <body>
-//              <p>Voici les anniversaires à venir au mois d\'Août !</p>
-//              <table>
-//               <tr>
-//                <th>Personne</th><th>Jour</th><th>Mois</th><th>Année</th>
-//               </tr>
-//               <tr>
-//                <td>Josiane</td><td>3</td><td>Août</td><td>1970</td>
-//               </tr>
-//               <tr>
-//                <td>Emma</td><td>26</td><td>Août</td><td>1973</td>
-//               </tr>
-//              </table>
-//             </body>
-//            </html>
-//            ';
             $sMessage = "
                     <html>
                     <head>
@@ -301,7 +278,7 @@ class module_auth extends abstract_module{
                     <div style=\"width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;\">
                       <h1 align=\"center\">Nouveau mot de passe</h1>
                       <div align=\"center\">
-                        <img src=\"http://prod-cados.zapto.org/test.png\" height=\"154\" width=\"320\" alt=\"Cados logo\">
+                        <img src=\"https://cados.website/CadosProject/data/genere/dev-cados/public/css/images/Rouge.png\" height=\"154\" width=\"320\" alt=\"Cados logo\">
                       </div>
                       <div align=\"center\">
                             <p><font size=\"4\">Tu as demandé de réinitilisé ton mot de passe. Nous avons générer un nouveaut mot de passe pour que tu puisses de nouveau te connecter, le voici :</font></p>
@@ -323,10 +300,58 @@ class module_auth extends abstract_module{
 //            $headers .= 'Cc: anniversaire_archive@example.com' . "\r\n";
 //            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
 
-            // Envoi
-            echo '<br><br><br><br><br><br><br>';
-            var_dump(mail($to, $subject, $sMessage, $headers));
-//            mail($to, $subject, $sMessage, $headers);
+            if(mail($to, $subject, $sMessage, $headers)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
+        
+        public function sendMailOneAndOneInscription($sRecipient,$sSurname,$cle){
+
+            $to  = $sRecipient;
+            $subject = 'Confirmation inscription Cados';
+            $sMessage = "
+                    <html>
+                        <head>
+                         <title align=\"center\">Confirmation Inscription</title>
+                        </head>
+                        <body>
+                        <div style=\"width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;\">
+                          <h1 align=\"center\">Confirmation d'inscription à Cados</h1>
+                          <div align=\"center\">
+                            <img src=\"https://cados.website/CadosProject/data/genere/dev-cados/public/css/images/Rouge.png\" height=\"154\" width=\"320\" alt=\"Cados logo\">
+                          </div>
+                          <div align=\"center\">
+                                <p><font size=\"4\"> Salut " .$sSurname. ", bienvenu sur Cados. Tu viens de t'inscrire sur l'appli web, et pour finaliser tout ça je te propose de confirmer ton inscription. </font></p>
+                                <p><font size=\"4\"> Pour cela rien de plus simple, clique sur le liens pour vite nous rejoindre ainsi que toute la communauté. </font></p> 
+                                <div align=\"center\">
+                                    <a href=\"https://cados.website/CadosProject/data/genere/dev-cados/public/index.php?:nav=auth::login&log=$sRecipient&cle=$cle\">
+                                        <font size=\"6\">Confirmer votre email</font>
+                                    </a>
+                                </div>
+                          </div>
+                        </div>
+                        </body>
+                    </html>";
+
+            // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+            // En-têtes additionnels
+//            $headers .= 'To: Test <'. $sRecipient . ">\r\n";
+            $headers .= 'From: "TeamCados" <anthony.rohr@cados.website>' . "\r\n";
+            $headers .= 'Reply-To: cados.development@gmail.com'."\n";
+//            $headers .= 'Cc: anniversaire_archive@example.com' . "\r\n";
+//            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
+
+            if(mail($to, $subject, $sMessage, $headers)){
+                return true;
+            }else{
+                return false;
+            }
         }
         
         public function sendEmail($sRecipient){
@@ -434,38 +459,6 @@ class module_auth extends abstract_module{
 
             }
 
-//            public function sendEmailForgotEmail($sNewPassword,$sRecipient){
-//                $mail = $this->sendEmail($sRecipient);
-//                //Set the subject line
-//                $mail->Subject = 'Envoie d\'un nouveau mot de passe';
-//
-//                $msgHtml = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-//                    <html>
-//                    <head>
-//                      <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">
-//                      <title align=\"center\">Nouveau mot de passe</title>
-//                    </head>
-//                    <body>
-//                    <div style=\"width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;\">
-//                      <h1 align=\"center\">Nouveau mot de passe</h1>
-//                      <div align=\"center\">
-//                        <img src=\"http://prod-cados.zapto.org/test.png\" height=\"154\" width=\"320\" alt=\"Cados logo\">
-//                      </div>
-//                      <div align=\"center\">
-//                            <p><font size=\"4\">Tu as demandé de réinitilisé ton mot de passe. Nous avons générer un nouveaut mot de passe pour que tu puisses de nouveau te connecter, le voici :</font></p>
-//                            <p><font size=\"5\">Nouveau mot de passe : $sNewPassword</font></p>
-//                            <p><font size=\"4\">N'oubli pas de modifier ton mot de passe dans ton profil.</font></p> 
-//                      </div>
-//                    </div>
-//                    </body>
-//                    </html>";
-//
-//                $mail->Body = $msgHtml;
-//
-//                $mail->send();
-//            }
-
-
             private function processInscription(){
                 if(!_root::getRequest()->isPost()){
                         return null;
@@ -510,6 +503,7 @@ class module_auth extends abstract_module{
                     return $oGroupsUsers->getListError();
                 }
                 //$this->sendEmailinscription($sLogin,$sSurname,$cle);
+                $this->sendMailOneAndOneInscription($sLogin,$sSurname,$cle);
                 //Lors d'une inscription on met par defaut l'utilisateur avec un statut utilisateur
                 
                 //On enregistre dans la table de jointure la question choisie par l'utilisateur
