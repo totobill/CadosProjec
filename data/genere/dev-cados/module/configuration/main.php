@@ -151,26 +151,11 @@ class module_configuration extends abstract_module{
         }
         
         public function _modifierPhoto(){
-            $oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id') );
-            if(!$oUtilisateur){
-                 $iId = (int)_root::getAuth()->getAccount()->id_utilisateur;
-                 $oUtilisateur=model_utilisateur::getInstance()->findById($iId);
-            }
             
+            $oUtilisateur = _root::getAuth()->getAccount();
             $tMessage = $this->checkUpload($oUtilisateur);
-
-//            $oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id') );
-
             $oView=new _view('configuration::modifierPhoto');
-//            $oView->oAccount=$oUtilisateur;
-
-            
-//            $oView=new _view('configuration::modifier');
             $oView->oUtilisateur=$oUtilisateur;
-            $oView->tId=model_utilisateur::getInstance()->getIdTab();
-
-
-
             $oPluginXsrf=new plugin_xsrf();
             $oView->token=$oPluginXsrf->getToken();
             $oView->tMessage=$tMessage;
@@ -180,12 +165,10 @@ class module_configuration extends abstract_module{
         }
 
         private function checkUpload($oUtilisateur){
+
             if(!_root::getRequest()->isPost() ){ //si ce n'est pas une requete POST on ne soumet pas
                 return null;
             }
-
-//            $oAccount=model_Account::getInstance()->findById( $this->id );
-
             $sColumn='profilPicture';
             $oPluginUpload=new plugin_upload($sColumn);
 
@@ -196,6 +179,7 @@ class module_configuration extends abstract_module{
                $oUtilisateur->profilPicture=$oPluginUpload->getPath();
 
                $oUtilisateur->save();
+               _root::getAuth()->setAccount($oUtilisateur);
             }
 
         }
