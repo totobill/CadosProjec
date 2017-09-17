@@ -145,7 +145,7 @@ class module_auth extends abstract_module{
                     return $oUtilisateur->getListError();
                }
                $this->sendMailOneAndOne($sNewPassword,$sLogin);
-               return array('success' => 'Un email contenant un nouveau mot de passe vous a été envoyé, si vous n\'avez pas reçu d\'email, contactez un administrateur.');
+               return array('success' => 'Un email contenant un nouveau mot de passe vous a été envoyé, si vous n\'avez pas reçu d\'email, contactez un administrateur '.$sLogin);
            }
         }
 //        

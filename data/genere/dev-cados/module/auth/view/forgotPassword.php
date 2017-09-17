@@ -9,4 +9,7 @@ $oForm->setMessage($this->tMessage);
 
            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Valider" />
            <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::login')?>">Login</a>
+           <?php if(isset($this->tMessage['success'])):?>
+            <p style="color:red"><?php echo $this->tMessage['success']?></p>
+           <?php endif;?>
 </form>
