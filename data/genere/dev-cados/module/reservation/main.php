@@ -178,10 +178,11 @@ class module_reservation extends abstract_module{
         
         public function viderCasier(){
 //            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
-            $requete = "python /kunden/homepages/46/d675115566/htdocs/CadosProject/data/genere/dev-cados/Casiers/ouverture2.py $iNumCasier";
+            $oUtilisateur = _root::getAuth()->getAccount();
+            $requete = "python /kunden/homepages/46/d675115566/htdocs/CadosProject/data/genere/dev-cados/Casiers/ouverture2.py $oUtilisateur->id_bouton";
             $resultat = system($requete);
             if($resultat == 'casier ouvert'){
-                $oUtilisateur = _root::getAuth()->getAccount();
+                
                 $oCasier = model_casier::getInstance()->findById($oUtilisateur->id_bouton);
                 
                 $oUtilisateur->id_bouton = 0;
