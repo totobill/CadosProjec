@@ -117,7 +117,7 @@ class module_configuration extends abstract_module{
             $sNewPassword=_root::getParam('newPassword');
             $sConfirmationPassword=_root::getParam('confirmationPassword');
             $tAccount=model_utilisateur::getInstance()->getListAccount();
-            
+            var_dump(isset($sPassword));
             if(!_root::getAuth()->checkLoginPass($tAccount,$sEmail,$sHashPassword)){
                 $tMessage['password'] = 'L\'ancien password ne correspond pas';
             }
