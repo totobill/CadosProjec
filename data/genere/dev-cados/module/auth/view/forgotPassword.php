@@ -1,5 +1,5 @@
 <h1 class="form-signing-heading">Réinitialisation mot de passe</h1>
-<?php $oForm=new plugin_form($this->oUser);
+<?php $oForm=new plugin_form($this->oUtilisateur);
 $oForm->setMessage($this->tMessage);
 ?>
 <form action="" method="POST" class="form-signin form-signin-inscription" role="form">
