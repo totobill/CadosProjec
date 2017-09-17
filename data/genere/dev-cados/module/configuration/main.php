@@ -8,7 +8,7 @@ class module_configuration extends abstract_module{
         
 	public function _profil(){
             echo'<br><br><br><br><br><br><br><br>';
-            var_dump($_SESSION['oAccount']);
+            var_dump(_root::getAuth()->getAccount());
             $oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id') );
             if(!$oUtilisateur){
                  $iId = (int)_root::getAuth()->getAccount()->id_utilisateur;
