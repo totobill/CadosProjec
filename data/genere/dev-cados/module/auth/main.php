@@ -115,18 +115,20 @@ class module_auth extends abstract_module{
             $this->oLayout->add('main',$oView);
         }
         
+        
         public function _forgotPasswordEmail(){
             $tMessage = $this->checkEmail();
             //Si tMessage est différent de null, c'est que le questionnaire a été soumis
             if(isset($tMessage)and array_key_exists('success', $tMessage)){
-                $oView = new _view('auth::forgotPasswordQuestion');
-                $sEmail = _root::getParam('email');
-                $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sEmail);
-                $oView->email=$sEmail;
-                $oView->oUser=$oUtilisateur;
-                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
-                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
-                $oView->sQuestion =$oQuestionSecrete->question;
+                $this->_forgotPasswordQuestion();
+//                $oView = new _view('auth::forgotPasswordQuestion');
+//                $sEmail = _root::getParam('email');
+//                $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sEmail);
+//                $oView->email=$sEmail;
+//                $oView->oUser=$oUtilisateur;
+//                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
+//                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
+//                $oView->sQuestion =$oQuestionSecrete->question;
             }else{
                 $oView = new _view('auth::forgotPasswordEmail');
                 $oView->oUser=new row_utilisateur;
@@ -158,13 +160,16 @@ class module_auth extends abstract_module{
         public function _forgotPasswordQuestion(){
             $tMessage = $this->checkSecretQuestion();
             if(isset($tMessage)and array_key_exists('success', $tMessage)){
-                $oView = new _view('auth::forgotPasswordNew');
-                $sLogin = _root::getParam('email');
-                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
-                $oView->oUser=$oUtilisateur;
+//                $oView = new _view('auth::forgotPasswordNew');
+//                $sLogin = _root::getParam('email');
+//                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
+//                $oView->oUser=$oUtilisateur;
+                $this->forgotPasswordNew();
             }else{
                 $oView = new _view('auth::forgotPasswordQuestion');
                 $oView->oUser=new row_utilisateur;
+                $sEmail = _root::getParam('email');
+                $oView->email=$sEmail;
 //                $sLogin = _root::getParam('email');
 //                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
 //                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
@@ -205,7 +210,8 @@ class module_auth extends abstract_module{
         public function _forgotPasswordNew(){
             $tMessage=$this->checkNewPassword();
             if(isset($tMessage)and array_key_exists('success', $tMessage)){
-                $oView = new _view('auth::login');
+//                $oView = new _view('auth::login');
+                _root::redirect(auth::login);
             }else{
                 $oView = new _view('auth::forgotPasswordNew');
                 $sLogin = _root::getParam('email');
