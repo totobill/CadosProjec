@@ -88,7 +88,7 @@ $oForm->setMessage($this->tMessage);
                                 <label class="col-sm-2 control-label">Confirmation mot de passe</label>
                                 <div class="col-sm-10">
                                     <div class="col-sm-10">
-                                    <input type="newPassword" name="confirmationPassword" value="" class="form-control"/>
+                                    <input type="password" name="confirmationPassword" value="" class="form-control"/>
                                     <?php if(isset($this->tMessage['confirmationPassword'])):?>
                                     <p class="error"><?php echo $this->tMessage['confirmationPassword']?></p>
                                     <?php endif;?>
