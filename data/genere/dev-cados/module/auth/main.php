@@ -115,31 +115,16 @@ class module_auth extends abstract_module{
             $this->oLayout->add('main',$oView);
         }
         
-        
-        public function _forgotPasswordEmail(){
+        public function _forgotPassword(){
             $tMessage = $this->checkEmail();
-            //Si tMessage est différent de null, c'est que le questionnaire a été soumis
-            if(isset($tMessage)and array_key_exists('success', $tMessage)){
-                _root::redirect('auth::forgotPasswordQuestion');
-//                $oView = new _view('auth::forgotPasswordQuestion');
-//                $sEmail = _root::getParam('email');
-//                $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sEmail);
-//                $oView->email=$sEmail;
-//                $oView->oUser=$oUtilisateur;
-//                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
-//                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
-//                $oView->sQuestion =$oQuestionSecrete->question;
-            }else{
-                $oView = new _view('auth::forgotPasswordEmail');
-                $oView->oUser=new row_utilisateur;
-            }
-            $oView->tMessage=$tMessage;
-            
+            $oView = new _view('auth::forgotPassword');
+            $oView->tMessage = $tMessage;
+            $oView->oUtilisateur= new row_utilisateur;
             $this->oLayout->add('main',$oView);
         }
         
         public function checkEmail(){
-           //si le formulaire n'est pas envoye on s'arrete la
+            //si le formulaire n'est pas envoye on s'arrete la
             if(!_root::getRequest()->isPost() ){
                     return null;
             }
@@ -152,103 +137,196 @@ class module_auth extends abstract_module{
                return array('email' => 'L\'adresse email fourni n\'existe pas.');
            //Si elle existe, alors on renvoie un message de succès.
            }else{
-               return array('success' => '');
+               $sNewPassword = uniqid();
+               $sNewPasswordHash = model_utilisateur::getInstance()->hashPassword($sNewPassword);
+               $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sLogin);
+               $oUtilisateur->password = $sNewPasswordHash;
+               if($oUtilisateur->save()==false){
+                    return $oUtilisateur->getListError();
+               }
+               $this->sendMailOneAndOne($sNewPassword,$sLogin);
+               return array('success' => 'Un email contenant un nouveau mot de passe vous a été envoyé, si vous n\'avez pas reçu d\'email, contactez un administrateur.');
            }
-           
         }
-        
-        public function _forgotPasswordQuestion(){
-            $tMessage = $this->checkSecretQuestion();
-            echo '<br><br><br><br><br><br>';
-            var_dump(_root::getRequest()->getParams());
-            if(isset($tMessage)and array_key_exists('success', $tMessage)){
+//        
+//        public function _forgotPasswordEmail(){
+//            $tMessage = $this->checkEmail();
+//            //Si tMessage est différent de null, c'est que le questionnaire a été soumis
+//            if(isset($tMessage)and array_key_exists('success', $tMessage)){
+//                $sEmail = _root::getParam('email');
+//                $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sEmail);
+//                $_SESSION['utilisateur'] = $oUtilisateur;
+//                _root::redirect('auth::forgotPasswordQuestion');
+////                $oView = new _view('auth::forgotPasswordQuestion');
+////                $sEmail = _root::getParam('email');
+////                $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sEmail);
+////                $oView->email=$sEmail;
+////                $oView->oUser=$oUtilisateur;
+////                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
+////                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
+////                $oView->sQuestion =$oQuestionSecrete->question;
+//            }else{
+//                $oView = new _view('auth::forgotPasswordEmail');
+//                $oView->oUser=new row_utilisateur;
+//            }
+//            $oView->tMessage=$tMessage;
+//            
+//            $this->oLayout->add('main',$oView);
+//        }
+//        
+//        public function _forgotPasswordQuestion(){
+//            $tMessage = $this->checkSecretQuestion();
+//            if(isset($tMessage)and array_key_exists('success', $tMessage)){
+////                $oView = new _view('auth::forgotPasswordNew');
+////                $sLogin = _root::getParam('email');
+////                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
+////                $oView->oUser=$oUtilisateur;
+//                _root::redirect('auth::forgotPasswordNew');
+//            }else{
+//                $oView = new _view('auth::forgotPasswordQuestion');
+//                $oUtilisateur = 
+//                $sEmail = $_SESSION['utilisateur']->email;
+//                $oView->email=$sEmail;
+//                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
+//                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
+////                echo '<br><br><br><br><br><br>';
+////                var_dump($oQuestionSecrete);
+////                var_dump($oQuestionsUsers);
+////                var_dump($oUtilisateur);
+//                $oView->sQuestion =$oQuestionSecrete->question;
+//            }
+//            $oView->tMessage=$tMessage;
+//
+//            $this->oLayout->add('main',$oView);
+//        }
+//        
+//        
+//        public function checkSecretQuestion(){
+//            //si le formulaire n'est pas envoye on s'arrete la
+//            if(!_root::getRequest()->isPost() ){
+//                    return null;
+//            }
+//            
+//            $sLogin = _root::getParam('email');
+//            $sAnswer = _root::getParam('answer');
+//            $oUtilisateur = $_SESSION['utilisateur'];
+//            if($oUtilisateur->email != $sLogin){
+//                return array('email' => 'L\'email à changé entre l\étape 1 et l\'étape 2.');
+//            }else if($oUtilisateur->answser != $sAnswer){
+//                return array('answer' => 'La réponse ne correspond pas');
+//            }else{
+//                return array('succes' => '');
+//            }
+//            
+//            
+//            if($oUtilisateur->answser != $sAnswer){
+//                return array('answer' => 'Le réponse fournie ne correspond pas avec la réponse en base de donnée');
+//            }
+//        }
+//        
+//        public function _forgotPasswordNew(){
+//            $tMessage=$this->checkNewPassword();
+//            if(isset($tMessage)and array_key_exists('success', $tMessage)){
+////                $oView = new _view('auth::login');
+//                _root::redirect(auth::login);
+//            }else{
 //                $oView = new _view('auth::forgotPasswordNew');
 //                $sLogin = _root::getParam('email');
 //                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
 //                $oView->oUser=$oUtilisateur;
-                _root::redirect('auth::forgotPasswordNew');
-            }else{
-                $oView = new _view('auth::forgotPasswordQuestion');
-                $oView->oUser=new row_utilisateur;
-                $sEmail = _root::getParam('email');
-                $oView->email=$sEmail;
-//                $sLogin = _root::getParam('email');
-                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sEmail);
-                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
-                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
-//                echo '<br><br><br><br><br><br>';
-//                var_dump($oQuestionSecrete);
-//                var_dump($oQuestionsUsers);
-//                var_dump($oUtilisateur);
-                $oView->sQuestion =$oQuestionSecrete->question;
-            }
-            $oView->tMessage=$tMessage;
+//            }
+//            $oView->tMessage=$tMessage;
+//            $this->oLayout->add('main',$oView);
+//        }
+//        
+//        public function checkNewPassword(){
+//            //si le formulaire n'est pas envoye on s'arrete la
+//            if(!_root::getRequest()->isPost() ){
+//                    return null;
+//            }
+//            $sLogin = _root::getParam('email');
+//            $sPassword = _root::getParam('password');
+//            $sConfirmationPassword = _root::getParam('confirmationPassword');
+//            if(strcmp($sPassword, $sConfirmationPassword) != 0){
+//                return array('password' => 'Le mot de passe et la confirmation ne sont pas identiques.');
+//            }else{
+//                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
+//                $sHashPassword=model_utlisateur::getInstance()->hashPassword($sPassword);
+//                $oUtilisateur->password=$sHashPassword;
+//                if($oUtilisateur->saveModification()){
+//                    return array('succes' => 'La modification du mot de passe à fonctionné.');
+//                }else{
+//                    return $oUtilisateur->getListErrorModification();
+//                }
+//                
+//            }
+//            
+//        }
+        
+        public function sendMailOneAndOne($sNewPassword,$sRecipient){
 
-            $this->oLayout->add('main',$oView);
+            $to  = $sRecipient;
+            
+            // Sujet
+            $subject = 'Réinitilisation mot de passe';
+
+            // message
+//            $message = '
+//            <html>
+//             <head>
+//              <title>Calendrier des anniversaires pour Août</title>
+//             </head>
+//             <body>
+//              <p>Voici les anniversaires à venir au mois d\'Août !</p>
+//              <table>
+//               <tr>
+//                <th>Personne</th><th>Jour</th><th>Mois</th><th>Année</th>
+//               </tr>
+//               <tr>
+//                <td>Josiane</td><td>3</td><td>Août</td><td>1970</td>
+//               </tr>
+//               <tr>
+//                <td>Emma</td><td>26</td><td>Août</td><td>1973</td>
+//               </tr>
+//              </table>
+//             </body>
+//            </html>
+//            ';
+            $sMessage = "
+                    <html>
+                    <head>
+                      <title align=\"center\">Nouveau mot de passe</title>
+                    </head>
+                    <body>
+                    <div style=\"width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;\">
+                      <h1 align=\"center\">Nouveau mot de passe</h1>
+                      <div align=\"center\">
+                        <img src=\"http://prod-cados.zapto.org/test.png\" height=\"154\" width=\"320\" alt=\"Cados logo\">
+                      </div>
+                      <div align=\"center\">
+                            <p><font size=\"4\">Tu as demandé de réinitilisé ton mot de passe. Nous avons générer un nouveaut mot de passe pour que tu puisses de nouveau te connecter, le voici :</font></p>
+                            <p><font size=\"5\">Nouveau mot de passe : $sNewPassword</font></p>
+                            <p><font size=\"4\">N'oubli pas de modifier ton mot de passe dans ton profil.</font></p> 
+                      </div>
+                    </div>
+                    </body>
+                    </html>";
+
+            // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+            // En-têtes additionnels
+            $headers .= 'To:'. $sRecipient . "\r\n";
+            $headers .= 'From: Team Cados <anthony.rohr@cados.website>' . "\r\n";
+//            $headers .= 'Cc: anniversaire_archive@example.com' . "\r\n";
+//            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
+
+            // Envoi
+            mail($to, $subject, $sMessage, $headers);
         }
         
-        
-        public function checkSecretQuestion(){
-            //si le formulaire n'est pas envoye on s'arrete la
-            if(!_root::getRequest()->isPost() ){
-                    return null;
-            }
-            
-            $sLogin = _root::getParam('email');
-            $sAnswer = _root::getParam('answer');
-            $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sLogin);
-            if($oUtilisateur->answser != $sAnswer){
-                return array('answer' => 'La réponse ne correspond pas');
-            }else{
-                return array('succes' => '');
-            }
-            
-            
-            if($oUtilisateur->answser != $sAnswer){
-                return array('answer' => 'Le réponse fournie ne correspond pas avec la réponse en base de donnée');
-            }
-        }
-        
-        public function _forgotPasswordNew(){
-            $tMessage=$this->checkNewPassword();
-            if(isset($tMessage)and array_key_exists('success', $tMessage)){
-//                $oView = new _view('auth::login');
-                _root::redirect(auth::login);
-            }else{
-                $oView = new _view('auth::forgotPasswordNew');
-                $sLogin = _root::getParam('email');
-                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
-                $oView->oUser=$oUtilisateur;
-            }
-            $oView->tMessage=$tMessage;
-            $this->oLayout->add('main',$oView);
-        }
-        
-        public function checkNewPassword(){
-            //si le formulaire n'est pas envoye on s'arrete la
-            if(!_root::getRequest()->isPost() ){
-                    return null;
-            }
-            $sLogin = _root::getParam('email');
-            $sPassword = _root::getParam('password');
-            $sConfirmationPassword = _root::getParam('confirmationPassword');
-            if(strcmp($sPassword, $sConfirmationPassword) != 0){
-                return array('password' => 'Le mot de passe et la confirmation ne sont pas identiques.');
-            }else{
-                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
-                $sHashPassword=model_utlisateur::getInstance()->hashPassword($sPassword);
-                $oUtilisateur->password=$sHashPassword;
-                if($oUtilisateur->saveModification()){
-                    return array('succes' => 'La modification du mot de passe à fonctionné.');
-                }else{
-                    return $oUtilisateur->getListErrorModification();
-                }
-                
-            }
-            
-        }
-        
-        public function sendEmailinscription($sRecipient,$sName,$sSurname,$cle){
+        public function sendEmail($sRecipient){
             //Create a new PHPMailer instance
             $mail = new PHPMailer;
 
@@ -292,8 +370,27 @@ class module_auth extends abstract_module{
             $mail->addReplyTo('cados.development@gmail.com', 'Cados');
 
             //Set who the message is to be sent to
-            $mail->addAddress($sRecipient, $sSurname);
+            $mail->addAddress($sRecipient);
+            
+            //Set the subject line
+            $mail->Subject = '';
+            
+            //Read an HTML message body from an external file, convert referenced images to embedded,
+            //convert HTML into a basic plain-text alternative body
+            //$mail->msgHTML(file_get_contents('/var/www/html/module/auth/view/contents.html'), dirname(__FILE__));
+            $mail->isHTML(true);
+            $mail->Body = '';
 
+            //Replace the plain text body with one created manually
+            $mail->AltBody = 'This is a plain-text message body';
+
+            //Attach an image file
+            //$mail->addAttachment('/var/www/html/dev-cados/CadosProject/data/genere/prod-cados/module/auth/view/Bleu Provence.png');
+            return $mail;
+        }
+        
+        public function sendEmailinscription($sRecipient,$sSurname,$cle){
+            $mail = $this->sendEmail($sRecipient);
             //Set the subject line
             $mail->Subject = 'Confirmation inscription Cados';
 
@@ -321,18 +418,8 @@ class module_auth extends abstract_module{
                 </div>
                 </body>
                 </html>";
-            //<a href=\"https://github.com/PHPMailer/PHPMailer/\"><img src=\"images/phpmailer.png\" height=\"90\" width=\"340\" alt=\"PHPMailer rocks\"></a>
-            //Read an HTML message body from an external file, convert referenced images to embedded,
-            //convert HTML into a basic plain-text alternative body
-            //$mail->msgHTML(file_get_contents('/var/www/html/module/auth/view/contents.html'), dirname(__FILE__));
-            $mail->isHTML(true);
+
             $mail->Body = $msgHtml;
-
-            //Replace the plain text body with one created manually
-            $mail->AltBody = 'This is a plain-text message body';
-
-            //Attach an image file
-            //$mail->addAttachment('/var/www/html/dev-cados/CadosProject/data/genere/prod-cados/module/auth/view/Bleu Provence.png');
 
             $mail->send();
     //		send the message, check for errors
@@ -344,7 +431,36 @@ class module_auth extends abstract_module{
 
             }
 
-
+//            public function sendEmailForgotEmail($sNewPassword,$sRecipient){
+//                $mail = $this->sendEmail($sRecipient);
+//                //Set the subject line
+//                $mail->Subject = 'Envoie d\'un nouveau mot de passe';
+//
+//                $msgHtml = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
+//                    <html>
+//                    <head>
+//                      <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">
+//                      <title align=\"center\">Nouveau mot de passe</title>
+//                    </head>
+//                    <body>
+//                    <div style=\"width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;\">
+//                      <h1 align=\"center\">Nouveau mot de passe</h1>
+//                      <div align=\"center\">
+//                        <img src=\"http://prod-cados.zapto.org/test.png\" height=\"154\" width=\"320\" alt=\"Cados logo\">
+//                      </div>
+//                      <div align=\"center\">
+//                            <p><font size=\"4\">Tu as demandé de réinitilisé ton mot de passe. Nous avons générer un nouveaut mot de passe pour que tu puisses de nouveau te connecter, le voici :</font></p>
+//                            <p><font size=\"5\">Nouveau mot de passe : $sNewPassword</font></p>
+//                            <p><font size=\"4\">N'oubli pas de modifier ton mot de passe dans ton profil.</font></p> 
+//                      </div>
+//                    </div>
+//                    </body>
+//                    </html>";
+//
+//                $mail->Body = $msgHtml;
+//
+//                $mail->send();
+//            }
 
 
             private function processInscription(){
@@ -390,7 +506,7 @@ class module_auth extends abstract_module{
                 if($oGroupsUsers->save()==false){
                     return $oGroupsUsers->getListError();
                 }
-                //$this->sendEmailinscription($sLogin,$sName,$sSurname,$cle);
+                //$this->sendEmailinscription($sLogin,$sSurname,$cle);
                 //Lors d'une inscription on met par defaut l'utilisateur avec un statut utilisateur
                 
                 //On enregistre dans la table de jointure la question choisie par l'utilisateur

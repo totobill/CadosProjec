@@ -9,5 +9,4 @@ $oForm->setMessage($this->tMessage);
 
            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Valider" />
            <a class="btn btn-lg btn-primary btn-block" href="<?php echo _root::getLink('auth::login')?>">Login</a>
-
 </form>
