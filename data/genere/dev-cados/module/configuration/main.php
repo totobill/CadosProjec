@@ -20,16 +20,8 @@ class module_configuration extends abstract_module{
             $tMessage=$this->processSave();
 		
             $oUtilisateur=_root::getAuth()->getAccount();
-            if(!$oUtilisateur){
-                 $iId = (int)_root::getAuth()->getAccount()->id_utilisateur;
-                 $oUtilisateur=model_utilisateur::getInstance()->findById($iId);
-            }
             $oView=new _view('configuration::modifier');
             $oView->oUtilisateur=$oUtilisateur;
-            $oView->tId=model_utilisateur::getInstance()->getIdTab();
-
-
-
             $oPluginXsrf=new plugin_xsrf();
             $oView->token=$oPluginXsrf->getToken();
             $oView->tMessage=$tMessage;
