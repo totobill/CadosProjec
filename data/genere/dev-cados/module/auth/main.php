@@ -317,8 +317,9 @@ class module_auth extends abstract_module{
             $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
             // En-têtes additionnels
-            $headers .= 'To: Test <'. $sRecipient . ">\r\n";
-            $headers .= 'From: TeamCados <anthony.rohr@cados.website>' . "\r\n";
+//            $headers .= 'To: Test <'. $sRecipient . ">\r\n";
+            $headers .= 'From: "TeamCados" <anthony.rohr@cados.website>' . "\r\n";
+            $headers .= 'Reply-To: cados.development@gmail.com'."\n";
 //            $headers .= 'Cc: anniversaire_archive@example.com' . "\r\n";
 //            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
 
