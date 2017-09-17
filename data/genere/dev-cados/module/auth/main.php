@@ -88,7 +88,6 @@ class module_auth extends abstract_module{
                         return 'Veuillez confirmer votre email pour pouvoir vous connecter.';
                     } 
                 }
-                $_SESSION['current_user_id'] = 
 		_root::redirect('default::index');
                 
                 

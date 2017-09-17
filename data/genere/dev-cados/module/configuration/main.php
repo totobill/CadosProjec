@@ -113,7 +113,7 @@ class module_configuration extends abstract_module{
             
             $sPassword=_root::getParam('password');
             $sHashPassword=model_utilisateur::getInstance()->hashPassword($sPassword);
-            $sEmail=_root::getParam('email');
+            $sEmail=$oUtilisateur->email;
             $sNewPassword=_root::getParam('newPassword');
             $sConfirmationPassword=_root::getParam('confirmationPassword');
             $tAccount=model_utilisateur::getInstance()->getListAccount();
