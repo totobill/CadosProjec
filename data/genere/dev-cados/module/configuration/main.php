@@ -117,17 +117,17 @@ class module_configuration extends abstract_module{
             $sNewPassword=_root::getParam('newPassword');
             $sConfirmationPassword=_root::getParam('confirmationPassword');
             $tAccount=model_utilisateur::getInstance()->getListAccount();
-            var_dump(isset($sPassword));
+
             if(!_root::getAuth()->checkLoginPass($tAccount,$sEmail,$sHashPassword)){
                 $tMessage['password'] = 'L\'ancien password ne correspond pas';
             }
-            if(!isset($sPassword)){
+            if(empty($sPassword)){
                 $tMessage['password'] = 'Le mot de passe ne doit pas être vide';
             }
-            if(!isset($sNewPassword)){
+            if(empty($sNewPassword)){
                 $tMessage['newPaswword'] = 'Le nouveau mot de passe ne doit pas être vide';
             }
-            if(!isset($sConfirmationPassword)){
+            if(empty($sConfirmationPassword)){
                 $tMessage['confirmationPassword'] = 'La confirmation du nouveau mot de passe ne doit pas être vide';
             }
             if(strcmp($sNewPassword, $sConfirmationPassword) != 0){
