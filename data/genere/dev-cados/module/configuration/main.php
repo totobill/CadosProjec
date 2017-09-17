@@ -7,19 +7,16 @@ class module_configuration extends abstract_module{
 	}
         
 	public function _profil(){
-            echo'<br><br><br><br><br><br><br><br>';
-            var_dump(_root::getAuth()->getAccount());
-            $oUtilisateur=_root::getAuth()->getAccount();
-            var_dump($oUtilisateur->id_utilisateur);
-            if(!$oUtilisateur){
-                 $iId = (int)_root::getAuth()->getAccount()->id_utilisateur;
-                 $oUtilisateur=model_utilisateur::getInstance()->findById($iId);
-            }
+//            echo'<br><br><br><br><br><br><br><br>';
+//            var_dump(_root::getAuth()->getAccount());
+//            $oUtilisateur=_root::getAuth()->getAccount();
+//            if(!$oUtilisateur){
+//                 $iId = (int)_root::getAuth()->getAccount()->id_utilisateur;
+//                 $oUtilisateur=model_utilisateur::getInstance()->findById($iId);
+//            }
             $oView=new _view('configuration::profil');
+            $oUtilisateur=_root::getAuth()->getAccount();
             $oView->oUtilisateur=$oUtilisateur;
-
-
-
             $this->oLayout->add('main',$oView);
 	}
         
