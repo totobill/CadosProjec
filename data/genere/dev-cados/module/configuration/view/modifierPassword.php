@@ -68,8 +68,8 @@ $oForm->setMessage($this->tMessage);
                                 <label class="col-sm-2 control-label">Ancien mot de passe</label>
                                 <div class="col-sm-10">
                                     <input type="password" name="password" value="" />
-                                    <?php if(isset($tMessage['password'])):?>
-                                        <p style="color:red"><?php echo $this->sError?></p>
+                                    <?php if(isset($this->$tMessage['password'])):?>
+                                    <p class="error"><?php echo $this->$tMessage['password']?></p>
                                     <?php endif;?>
                                 </div>
                         </div>

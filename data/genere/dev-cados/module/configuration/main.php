@@ -125,7 +125,7 @@ class module_configuration extends abstract_module{
                 $tMessage['password'] = 'Le mot de passe ne doit pas être vide';
             }
             if(empty($sNewPassword)){
-                $tMessage['newPaswword'] = 'Le nouveau mot de passe ne doit pas être vide';
+                $tMessage['newPassword'] = 'Le nouveau mot de passe ne doit pas être vide';
             }
             if(empty($sConfirmationPassword)){
                 $tMessage['confirmationPassword'] = 'La confirmation du nouveau mot de passe ne doit pas être vide';
