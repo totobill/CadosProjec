@@ -153,6 +153,11 @@ class module_configuration extends abstract_module{
 
             $oUtilisateur->password=model_utilisateur::getInstance()->hashPassword($sNewPassword);
 //          oUtilisateur->saveModification()
+            echo '<br><br><br><br><br><br>';
+            var_dump($oUtilisateur);
+            var_dump($sPassword);
+            var_dump($sNewPassword);
+            var_dump($sConfirmationPassword);
             if($oUtilisateur->save()){
                 //une fois enregistre on redirige (vers la page profil)
                 _root::getAuth()->setAccount($oUtilisateur);
