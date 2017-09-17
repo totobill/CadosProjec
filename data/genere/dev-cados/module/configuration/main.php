@@ -6,12 +6,14 @@ class module_configuration extends abstract_module{
             $this->oLayout->addModule('menu','menu::index');
 	}
         
+        
 	public function _profil(){
             $oView=new _view('configuration::profil');
             $oUtilisateur=_root::getAuth()->getAccount();
             $oView->oUtilisateur=$oUtilisateur;
             $this->oLayout->add('main',$oView);
 	}
+        
         
         public function _modifier(){
 
@@ -101,6 +103,66 @@ class module_configuration extends abstract_module{
             
         }
         
+        private function processSavePassword(){
+        
+            if(!_root::getRequest()->isPost() ){ //si ce n'est pas une requete POST on ne soumet pas
+                    return null;
+            }
+
+            $oPluginXsrf=new plugin_xsrf();
+            if(!$oPluginXsrf->checkToken( _root::getParam('token') ) ){ //on verifie que le token est valide
+                return array('token'=>$oPluginXsrf->getMessage() );
+            }
+
+//            $iId=_root::getParam('id',null);
+//            if($iId==null){
+//                $oUtilisateur=new row_utilisateur;	
+//            }else{
+//                $oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id',null) );
+//            }
+            $tMessage = array();
+            $oUtilisateur = _root::getAuth()->getAccount();
+            
+            $sPassword=_root::getParam('password');
+            $sHashPassword=model_utilisateur::getInstance()->hashPassword($sPassword);
+            $sEmail=_root::getParam('email');
+            $sNewPassword=_root::getParam('newPassword');
+            $sConfirmationPassword=_root::getParam('confirmationPassword');
+            $tAccount=model_utilisateur::getInstance()->getListAccount();
+            
+            if(!_root::getAuth()->checkLoginPass($tAccount,$sEmail,$sHashPassword)){
+                $tMessage['password'] = 'L\'ancien password ne correspond pas';
+            }
+            if(!isset($sPassword)){
+                $tMessage['password'] = 'Le mot de passe ne doit pas être vide';
+            }
+            if(!isset($sNewPassword)){
+                $tMessage['newPaswword'] = 'Le nouveau mot de passe ne doit pas être vide';
+            }
+            if(!isset($sConfirmationPassword)){
+                $tMessage['confirmationPassword'] = 'La confirmation du nouveau mot de passe ne doit pas être vide';
+            }
+            if(strcmp($sNewPassword, $sConfirmationPassword) != 0){
+                return array('newPassword' => 'Le nouveau mot de passe et la confirmation ne sont pas identiques');
+            }
+
+//            $tColumn=array('nom','prenom','date_de_naissance','numero','email','pseudo');
+//            foreach($tColumn as $sColumn){
+//                $oUtilisateur->$sColumn=_root::getParam($sColumn,null) ;
+//            }
+
+            $oUtilisateur->password=model_utilisateur::getInstance()->hashPassword($sNewPassword);
+//          oUtilisateur->saveModification()
+            if($oUtilisateur->save()){
+                //une fois enregistre on redirige (vers la page profil)
+                _root::getAuth()->setAccount($oUtilisateur);
+                _root::redirect('configuration::profil');
+            }else{
+                return $oUtilisateur->getListErrorModification();
+            }
+
+        }
+        
         public function _modifierPhoto(){
             $oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id') );
             if(!$oUtilisateur){
@@ -150,9 +212,7 @@ class module_configuration extends abstract_module{
             }
 
         }
-        
-        
-        
+
         public function _rappel(){
             $oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id') );
             if(!$oUtilisateur){
@@ -166,8 +226,8 @@ class module_configuration extends abstract_module{
 
             $this->oLayout->add('main',$oView);
         }
-        
-        
+
+
         public function _help(){
             $oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id') );
             if(!$oUtilisateur){
@@ -181,60 +241,10 @@ class module_configuration extends abstract_module{
 
             $this->oLayout->add('main',$oView);
         }
-        
-    private function processSavePassword(){
-        
-        if(!_root::getRequest()->isPost() ){ //si ce n'est pas une requete POST on ne soumet pas
-                return null;
-        }
-        
-        $oPluginXsrf=new plugin_xsrf();
-        if(!$oPluginXsrf->checkToken( _root::getParam('token') ) ){ //on verifie que le token est valide
-            return array('token'=>$oPluginXsrf->getMessage() );
-        }
 
-        $iId=_root::getParam('id',null);
-        if($iId==null){
-            $oUtilisateur=new row_utilisateur;	
-        }else{
-            $oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id',null) );
+        public function after(){
+            $this->oLayout->show();
         }
-        
-        $sPassword=_root::getParam('Password',null);
-        $sHashPassword=model_utilisateur::getInstance()->hashPassword($sPassword);
-        $sLogin=_root::getParam('email',null);
-        $tAccount=model_utilisateur::getInstance()->getListAccount();
-        echo "<br><br><br><br><br><br><br><br>";
-        var_dump($sLogin);
-        if(!_root::getAuth()->checkLoginPass($tAccount,$sLogin,$sHashPassword)){
-                return array('Password' => 'L\'ancien password ne correspond pas');
-        }
-        
-        $sNewPassword=_root::getParam('newPassword',null);
-        $sConfirmationPassword=_root::getParam('confirmationPassword',null);
-        if(strcmp($sNewPassword, $sConfirmationPassword) != 0){
-            return array('newPassword' => 'Le nouveau mot de passe et la confirmation ne sont pas identiques');
-        }
-        
-        $tColumn=array('nom','prenom','date_de_naissance','numero','email','pseudo');
-        foreach($tColumn as $sColumn){
-            $oUtilisateur->$sColumn=_root::getParam($sColumn,null) ;
-        }
-
-        $oUtilisateur->password=model_utilisateur::getInstance()->hashPassword($sNewPassword);
-        
-        if($oUtilisateur->saveModification()){
-            //une fois enregistre on redirige (vers la page profil)
-            _root::redirect('configuration::profil');
-        }else{
-            return $oUtilisateur->getListErrorModification();
-        }
-
-    }
-        
-    public function after(){
-        $this->oLayout->show();
-    }
 	
 	
 }

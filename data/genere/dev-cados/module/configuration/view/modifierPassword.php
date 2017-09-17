@@ -65,17 +65,17 @@ $oForm->setMessage($this->tMessage);
             <div class="profile-content">
                 <form class="form-horizontal" action="" method="POST" >
 
-                        <?php echo $oForm->getInputHidden('nom',array('class'=>'form-control')) ?>
-                        <?php echo $oForm->getInputHidden('prenom',array('class'=>'form-control')) ?>
-                        <?php echo $oForm->getInputHidden('date_de_naissance',array('class'=>'form-control')) ?>
-                        <?php echo $oForm->getInputHidden('numero',array('class'=>'form-control')) ?>
-                        <?php echo $oForm->getInputHidden('email',array('class'=>'form-control')) ?>
-                        <?php echo $oForm->getInputHidden('pseudo',array('class'=>'form-control')) ?>
+                        //<?php echo $oForm->getInputHidden('nom',array('class'=>'form-control')) ?>
+                        //<?php echo $oForm->getInputHidden('prenom',array('class'=>'form-control')) ?>
+                        //<?php echo $oForm->getInputHidden('date_de_naissance',array('class'=>'form-control')) ?>
+                        //<?php echo $oForm->getInputHidden('numero',array('class'=>'form-control')) ?>
+                        //<?php echo $oForm->getInputHidden('email',array('class'=>'form-control')) ?>
+                        //<?php echo $oForm->getInputHidden('pseudo',array('class'=>'form-control')) ?>
                         
                     
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">Ancien mot de passe</label>
-                                <div class="col-sm-10"><?php echo $oForm->getInputPassword('Password',array('class'=>'form-control')) ?></div>
+                                <div class="col-sm-10"><?php echo $oForm->getInputPassword('password',array('class'=>'form-control')) ?></div>
                         </div>
                     
                         <div class="form-group">
