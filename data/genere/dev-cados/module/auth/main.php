@@ -120,7 +120,7 @@ class module_auth extends abstract_module{
             $tMessage = $this->checkEmail();
             //Si tMessage est différent de null, c'est que le questionnaire a été soumis
             if(isset($tMessage)and array_key_exists('success', $tMessage)){
-                $this->_forgotPasswordQuestion();
+                _root::redirect(auth::forgotPasswordQuestion);
 //                $oView = new _view('auth::forgotPasswordQuestion');
 //                $sEmail = _root::getParam('email');
 //                $oUtilisateur = model_utilisateur::getInstance()->findByEmail($sEmail);
