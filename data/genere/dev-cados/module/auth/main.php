@@ -159,6 +159,8 @@ class module_auth extends abstract_module{
         
         public function _forgotPasswordQuestion(){
             $tMessage = $this->checkSecretQuestion();
+            echo '<br><br><br><br><br><br>';
+            var_dump(_root::getRequest()->getParams());
             if(isset($tMessage)and array_key_exists('success', $tMessage)){
 //                $oView = new _view('auth::forgotPasswordNew');
 //                $sLogin = _root::getParam('email');
