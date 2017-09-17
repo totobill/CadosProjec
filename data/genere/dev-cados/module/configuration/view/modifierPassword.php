@@ -85,7 +85,7 @@ $oForm->setMessage($this->tMessage);
                         </div>
                     
                         <div class="form-group">
-                                <label class="col-sm-2 control-label">confirmation mot de passe</label>
+                                <label class="col-sm-2 control-label">Confirmation mot de passe</label>
                                 <div class="col-sm-10">
                                     <div class="col-sm-10">
                                     <input type="newPassword" name="confirmationPassword" value="" class="form-control"/>
