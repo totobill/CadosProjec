@@ -168,9 +168,9 @@ class module_reservation extends abstract_module{
 //            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
             $oUtilisateur = _root::getAuth()->getAccount();
             $requete = "python /kunden/homepages/46/d675115566/htdocs/CadosProject/data/genere/dev-cados/Casiers/ouverture2.py $oUtilisateur->id_bouton";
-            $resultat = '';
-            system($requete,$resultat);
-            header_remove();
+            $resultat = shell_exec($requete);
+//            system($requete,$resultat);
+//            header_remove();
             if($resultat == 'casier ouvert'){
                 return array('resultat' => 'Le casier s\'est correctement ouvert');
             }else if ($resultat == 'probleme ouverture casier'){
@@ -182,9 +182,9 @@ class module_reservation extends abstract_module{
 //            $requete = "python /var/www/html/dev-cados/CadosProject/Casiers/ouverture2.py $iNumCasier";
             $oUtilisateur = _root::getAuth()->getAccount();
             $requete = "python /kunden/homepages/46/d675115566/htdocs/CadosProject/data/genere/dev-cados/Casiers/ouverture2.py $oUtilisateur->id_bouton";
-            $resultat = '';
-            system($requete,$resultat);
-            header_remove();
+            $resultat = shell_exec($requete);
+//            system($requete,$resultat);
+//            header_remove();
             if($resultat == 'casier ouvert'){
                 
                 $oCasier = model_casier::getInstance()->findById($oUtilisateur->id_bouton);
