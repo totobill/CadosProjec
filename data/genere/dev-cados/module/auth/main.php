@@ -71,8 +71,6 @@ class module_auth extends abstract_module{
 		
 		//on va verifier que l'on trouve dans le tableau retourne par notre model
 		//l'entree $tAccount[ login ][ mot de passe hashe ]
-                echo '<br><br><br><br><br><br>';
-                var_dump($tAccount[$sLogin]);
 		if(!_root::getAuth()->checkLoginPass($tAccount,$sLogin,$sHashPassword)){
 			return 'Mauvais login/mot de passe';
 		}
