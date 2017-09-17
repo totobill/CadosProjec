@@ -34,13 +34,16 @@ class module_reservation extends abstract_module{
         public function _utilisation(){
             $oUtilisateur = _root::getAuth()->getAccount();
             $oCasier = model_casier::getInstance()->findById($oUtilisateur->id_bouton);
-            $tMessage = $this->checkBoutonUtilisation();
-            if(isset($tMessage)){
-                if(isset($tMessage['ouvrir'])){
-                    $this->ouvertureCasier();
-                }elseif(isset($tMessage['vider'])){
-                    $this->viderCasier();
-                    _root::redirect('reservation::reserver');
+            $sMessage = $this->checkBoutonUtilisation();
+            if(isset($sMessage)){
+                if(strcmp($sMessage,'ouvrir') == 0){
+                    $tMessage = $this->ouvertureCasier();
+                }elseif(strcmp($sMessage,'vider') == 0){
+                    $tMessage = $this->viderCasier();
+                    if(isset($tMessage['success'])){
+                        _root::redirect('reservation::reserver');
+                    }
+                    
                 }
             }
             $oView = new _view('reservation::utilisation');
@@ -165,9 +168,9 @@ class module_reservation extends abstract_module{
             $requete = "python /kunden/homepages/46/d675115566/htdocs/CadosProject/data/genere/dev-cados/Casiers/ouverture2.py $oUtilisateur->id_bouton";
             $resultat = system($requete);
             if($resultat == 'casier ouvert'){
-                return true;
+                return array('resultat' => 'Le casier s\'est correctement ouvert');
             }else if ($resultat == 'probleme ouverture casier'){
-                return false;
+                return array('resultat' => 'Il y a eu un problème avec l\'ouverture du casier, contactez un administrateur');
             }
         }
         
@@ -188,9 +191,9 @@ class module_reservation extends abstract_module{
                 $oCasier->etat = 0;
                 $oCasier->id_utilisateur = 0;
                 $oCasier->save();
-                return true;
+                return array('success' => '');
             }else if ($resultat == 'probleme ouverture casier'){
-                return false;
+                return array('resultat' => 'Il y a eu un problème pour vider le casier, contactez un administrateur');
             }
         }
         
@@ -203,9 +206,9 @@ class module_reservation extends abstract_module{
             $sVider = _root::getParam('vider');
 
             if(isset($sOuvrir)){
-                return array('ouvrir' =>'');
+                return 'ouvrir';
             }else if (isset($sVider)){
-                return array('vider' => '');
+                return 'vider';
             }
             
         }

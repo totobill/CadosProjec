@@ -1,5 +1,5 @@
 <?php 
-    $InfoReservation = $this->infoReservation;
+
     $sMessage = $this->sMessage;
     $Numero = $InfoReservation->id_bouton; 
 ?>
@@ -10,18 +10,18 @@
         </div>
         <div class="reservation_utilisation_casier col-xs-12">
             <p class="reservation_utilisation_titre"><b>Casier Choisit :</b></p>
-            <p class="reservation_utilisation_attribut">numero <?php echo $Numero ?> </p>
+            <p class="reservation_utilisation_attribut">numero <?php echo $this->oCasier->id_bouton ?> </p>
         </div>
         <div class="reservation_utilisation_casier col-xs-12">
             <p class="reservation_utilisation_titre"><b>Heure du début de réservation :</b></p>
-            <p class="reservation_utilisation_attribut"><?php echo $this->oCasier->start_location?></p>
+            <p class="reservation_utilisation_attribut"><?php echo $this->oCasier->start_location ?></p>
         </div>
         <div class="reservation_utilisation_casier col-xs-12">
             <p class="reservation_utilisation_titre"><b>Heure de fin de réservation :</b></p>
-            <p class="reservation_utilisation_attribut"><?php echo $this->oCasier->end_location?></p>
+            <p class="reservation_utilisation_attribut"><?php echo $this->oCasier->end_location ?></p>
         </div>
         <div class="reservation_utilisation_casier col-xs-12">
-            <p><?php echo $sMessage; ?></p>
+            <p><?php echo $this->tMessage['resultat']; ?></p>
         </div>
         <div class="reservation_utilisation_button col-xs-6">
             <button type="submit" name="ouvrir" class="btn btn-primary">Ouvrir</button>
