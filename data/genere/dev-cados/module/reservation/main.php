@@ -173,9 +173,9 @@ class module_reservation extends abstract_module{
             $oUtilisateur = _root::getAuth()->getAccount();
             $requete = "python /kunden/homepages/46/d675115566/htdocs/CadosProject/data/genere/dev-cados/Casiers/ouverture2.py $oUtilisateur->id_bouton";
             $resultat = shell_exec($requete);
-            if($resultat == 'casier ouvert'){
+            if(strcmp($resultat,'casier ouvert') == 0){
                 return array('resultat' => 'Le casier s\'est correctement ouvert');
-            }else if ($resultat == 'probleme ouverture casier'){
+            }else if (strcmp($resultat,'probleme ouverture casier') == 0){
                 return array('resultat' => 'Il y a eu un problème avec l\'ouverture du casier, contactez un administrateur');
             }
         }
