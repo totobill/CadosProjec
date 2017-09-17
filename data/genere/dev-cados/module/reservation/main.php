@@ -183,6 +183,8 @@ class module_reservation extends abstract_module{
             $oUtilisateur = _root::getAuth()->getAccount();
             $requete = "python /kunden/homepages/46/d675115566/htdocs/CadosProject/data/genere/dev-cados/Casiers/ouverture2.py $oUtilisateur->id_bouton";
             $resultat = shell_exec($requete);
+            echo '<br><br><br><br><br>';
+            var_dump($resultat);
 //            system($requete,$resultat);
 //            header_remove();
             if($resultat == 'casier ouvert'){
