@@ -46,7 +46,7 @@ class module_reservation extends abstract_module{
                     
                 }
             }else{
-                $tMessage = array();
+                $tMessage = array('resultat' => '');
             }
             $oView = new _view('reservation::utilisation');
             $this->oLayout->add('main',$oView);
