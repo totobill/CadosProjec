@@ -67,7 +67,7 @@ $oForm->setMessage($this->tMessage);
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">Ancien mot de passe</label>
                                 <div class="col-sm-10">
-                                    <input type="password" name="password" value="" />
+                                    <input type="password" name="password" value="" class="form-control"/>
                                     <?php if(isset($this->tMessage['password'])):?>
                                     <p class="error"><?php echo $this->tMessage['password']?></p>
                                     <?php endif;?>
@@ -76,12 +76,23 @@ $oForm->setMessage($this->tMessage);
                     
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">Nouveau mot de passe</label>
-                                <div class="col-sm-10"><?php echo $oForm->getInputPassword('newPassword',array('class'=>'form-control')) ?></div>
+                                <div class="col-sm-10">
+                                    <input type="password" name="newPassword" value="" class="form-control"/>
+                                    <?php if(isset($this->tMessage['newPassword'])):?>
+                                    <p class="error"><?php echo $this->tMessage['newPassword']?></p>
+                                    <?php endif;?>
+                                </div>
                         </div>
                     
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">confirmation mot de passe</label>
-                                <div class="col-sm-10"><?php echo $oForm->getInputPassword('confirmationPassword',array('class'=>'form-control')) ?></div>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-10">
+                                    <input type="newPassword" name="confirmationPassword" value="" class="form-control"/>
+                                    <?php if(isset($this->tMessage['confirmationPassword'])):?>
+                                    <p class="error"><?php echo $this->tMessage['confirmationPassword']?></p>
+                                    <?php endif;?>
+                                </div>
                         </div>
 
 
