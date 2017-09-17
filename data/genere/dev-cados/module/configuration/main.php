@@ -84,16 +84,10 @@ class module_configuration extends abstract_module{
 
             $tMessage=$this->processSavePassword();
 		
-            $oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id') );
-            if(!$oUtilisateur){
-                 $iId = (int)_root::getAuth()->getAccount()->id_utilisateur;
-                 $oUtilisateur=model_utilisateur::getInstance()->findById($iId);
-            }
+            $oUtilisateur=_root::getAuth()->getAccount();
             $oView=new _view('configuration::modifierPassword');
             $oView->oUtilisateur=$oUtilisateur;
             $oView->tId=model_utilisateur::getInstance()->getIdTab();
-
-
 
             $oPluginXsrf=new plugin_xsrf();
             $oView->token=$oPluginXsrf->getToken();
@@ -114,12 +108,6 @@ class module_configuration extends abstract_module{
                 return array('token'=>$oPluginXsrf->getMessage() );
             }
 
-//            $iId=_root::getParam('id',null);
-//            if($iId==null){
-//                $oUtilisateur=new row_utilisateur;	
-//            }else{
-//                $oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id',null) );
-//            }
             $tMessage = array();
             $oUtilisateur = _root::getAuth()->getAccount();
             
@@ -143,28 +131,22 @@ class module_configuration extends abstract_module{
                 $tMessage['confirmationPassword'] = 'La confirmation du nouveau mot de passe ne doit pas être vide';
             }
             if(strcmp($sNewPassword, $sConfirmationPassword) != 0){
-                return array('newPassword' => 'Le nouveau mot de passe et la confirmation ne sont pas identiques');
+                $tMessage['newPassword'] = 'Le nouveau mot de passe et la confirmation ne sont pas identiques';
             }
 
-//            $tColumn=array('nom','prenom','date_de_naissance','numero','email','pseudo');
-//            foreach($tColumn as $sColumn){
-//                $oUtilisateur->$sColumn=_root::getParam($sColumn,null) ;
-//            }
-
-            $oUtilisateur->password=model_utilisateur::getInstance()->hashPassword($sNewPassword);
-//          oUtilisateur->saveModification()
-            echo '<br><br><br><br><br><br>';
-            var_dump($oUtilisateur);
-            var_dump($sPassword);
-            var_dump($sNewPassword);
-            var_dump($sConfirmationPassword);
-            if($oUtilisateur->save()){
-                //une fois enregistre on redirige (vers la page profil)
-                _root::getAuth()->setAccount($oUtilisateur);
-                _root::redirect('configuration::profil');
+            if(isset($tMessage)){
+                $oUtilisateur->password=model_utilisateur::getInstance()->hashPassword($sNewPassword);
+                if($oUtilisateur->save()){
+                    //une fois enregistre on redirige (vers la page profil)
+                    _root::getAuth()->setAccount($oUtilisateur);
+                    _root::redirect('configuration::profil');
+                }else{
+                    return $oUtilisateur->getListErrorModification();
+                }
             }else{
-                return $oUtilisateur->getListErrorModification();
+                return $tMessage;
             }
+            
 
         }
         

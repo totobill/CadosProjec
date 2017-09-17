@@ -63,19 +63,15 @@ $oForm->setMessage($this->tMessage);
         </div>
         <div class="col-md-9">
             <div class="profile-content">
-                <form class="form-horizontal" action="" method="POST" >
-
-                        //<?php echo $oForm->getInputHidden('nom',array('class'=>'form-control')) ?>
-                        //<?php echo $oForm->getInputHidden('prenom',array('class'=>'form-control')) ?>
-                        //<?php echo $oForm->getInputHidden('date_de_naissance',array('class'=>'form-control')) ?>
-                        //<?php echo $oForm->getInputHidden('numero',array('class'=>'form-control')) ?>
-                        //<?php echo $oForm->getInputHidden('email',array('class'=>'form-control')) ?>
-                        //<?php echo $oForm->getInputHidden('pseudo',array('class'=>'form-control')) ?>
-                        
-                    
+                <form class="form-horizontal" action="" method="POST" >                    
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">Ancien mot de passe</label>
-                                <div class="col-sm-10"><?php echo $oForm->getInputPassword('password',array('class'=>'form-control')) ?></div>
+                                <div class="col-sm-10">
+                                    <input type="password" name="password" value="" />
+                                    <?php if(isset($tMessage['password'])):?>
+                                        <p style="color:red"><?php echo $this->sError?></p>
+                                    <?php endif;?>
+                                </div>
                         </div>
                     
                         <div class="form-group">
