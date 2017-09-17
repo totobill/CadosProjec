@@ -164,21 +164,21 @@ class module_auth extends abstract_module{
 //                $sLogin = _root::getParam('email');
 //                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
 //                $oView->oUser=$oUtilisateur;
-                $this->forgotPasswordNew();
+                _root::redirect('auth::forgotPasswordNew');
             }else{
                 $oView = new _view('auth::forgotPasswordQuestion');
                 $oView->oUser=new row_utilisateur;
                 $sEmail = _root::getParam('email');
                 $oView->email=$sEmail;
 //                $sLogin = _root::getParam('email');
-//                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sLogin);
-//                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
-//                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
+                $oUtilisateur=model_utilisateur::getInstance()->findByEmail($sEmail);
+                $oQuestionsUsers= model_QuestionsUsers::getInstance()->findByUserId($oUtilisateur->id_utilisateur);
+                $oQuestionSecrete= model_QuestionSecrete::getInstance()->findById($oQuestionsUsers->id_question);
 //                echo '<br><br><br><br><br><br>';
 //                var_dump($oQuestionSecrete);
 //                var_dump($oQuestionsUsers);
 //                var_dump($oUtilisateur);
-//                $oView->sQuestion =$oQuestionSecrete->question;
+                $oView->sQuestion =$oQuestionSecrete->question;
             }
             $oView->tMessage=$tMessage;
 
