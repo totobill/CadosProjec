@@ -78,7 +78,8 @@
 		<td><?php echo $oUtilisateur->connecte ?></td>
 		
 		<td><?php echo $oUtilisateur->type_user ?></td>
-		
+
+                <td><?php echo $oUtilisateur->nbr_jour_reservation ?></td>
 			<td>
 				
 				
