@@ -108,8 +108,11 @@ class model_utilisateur extends abstract_model{
             //utiliser ici la methode de votre choix pour hasher votre mot de passe
             return sha1('bonja2AdnERk'.$sPassword);
         }
-			
 	
+        //méthode pour récupérer tous les utilisateurs ayant un nbr_jour_reservation > 0
+	public function getAllReservationActive(){
+            return $this->findMany('SELECT * FROM '.$this->sTable.' WHERE id_bouton > 0');
+        }
 
 }
 
