@@ -32,15 +32,19 @@
 		<?php switch ($oUtilisateur->nbr_jour_reservation){
                     case 0:
                         $color = '#36F253';
+                        $font = '#000000';
                         break;
                     case 1:
                         $color = '#FEF201';
+                        $font = '#000000';
                         break;
                     case 2:
                         $color = '#FE7C01';
+                        $font = '#000000';
                         break;
                     case 3:
                         $color = '#FE0601';
+                        $font = '#000000';
                         break;
                         
                     default:
