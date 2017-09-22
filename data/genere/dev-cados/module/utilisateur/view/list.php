@@ -53,7 +53,7 @@
                         break;
                 }
                 ?>
-        <tr <?php echo plugin_tpl::alternate(array('','class="alt"'))?> BGCOLOR="<?php echo $color; ?>" style="color:<?php echo $font;?>">
+        <tr <?php /*echo plugin_tpl::alternate(array('','class="alt"'))*/?> BGCOLOR="<?php echo $color; ?>" style="color:<?php echo $font;?>">
 			
 		<td><?php echo $oUtilisateur->nom ?></td>
 		
