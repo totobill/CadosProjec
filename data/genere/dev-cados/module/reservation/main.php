@@ -194,6 +194,7 @@ class module_reservation extends abstract_module{
                 $oCasier->end_location = null;
                 $oCasier->etat = 0;
                 $oCasier->id_utilisateur = 0;
+                $oCasier->nbr_jour_reservation = 0;
                 $oCasier->save();
                 return array('success' => '');
             }else if ($resultat == 'probleme ouverture casier'){
