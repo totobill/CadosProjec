@@ -344,3 +344,8 @@ body {
     background-color: #000000 !important;
     color: #FEFEFE !important;
 }
+
+
+.form-horizontal .control-label {
+    text-align: right;
+}
