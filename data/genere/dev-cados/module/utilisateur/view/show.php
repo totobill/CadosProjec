@@ -1,65 +1,57 @@
 <form class="form-horizontal" action="" method="POST" >
 	
 	<div class="form-group">
-		<label class="col-sm-2 control-label">nom</label>
+		<label class="col-sm-2 control-label">Nom</label>
 		<div class="col-sm-10"><?php echo $this->oUtilisateur->nom ?></div>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">prenom</label>
+		<label class="col-sm-2 control-label">Prénom</label>
 		<div class="col-sm-10"><?php echo $this->oUtilisateur->prenom ?></div>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">date_de_naissance</label>
+		<label class="col-sm-2 control-label">Date de naissance</label>
 		<div class="col-sm-10"><?php echo $this->oUtilisateur->date_de_naissance ?></div>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">adresse</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->adresse ?></div>
-	</div>
-		
-	<div class="form-group">
-		<label class="col-sm-2 control-label">numero</label>
+		<label class="col-sm-2 control-label">Numero</label>
 		<div class="col-sm-10"><?php echo $this->oUtilisateur->numero ?></div>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">email</label>
+		<label class="col-sm-2 control-label">Email</label>
 		<div class="col-sm-10"><?php echo $this->oUtilisateur->email ?></div>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">pseudo</label>
+		<label class="col-sm-2 control-label">Pseudo</label>
 		<div class="col-sm-10"><?php echo $this->oUtilisateur->pseudo ?></div>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">password</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->password ?></div>
+		<label class="col-sm-2 control-label">Casier réservé</label>
+                <div class="col-sm-10"><?php switch ($this->oUtilisateur->id_bouton){
+                    case 0:
+                        echo "Aucun";
+                        break;
+                    default:
+                        echo $this->oUtilisateur->id_bouton;
+                }?></div>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">Abonnement</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->Abonnement ?></div>
+		<label class="col-sm-2 control-label">En ligne ?</label>
+                <div class="col-sm-10"><?php switch ($this->oUtilisateur->connecte){
+                    case 0:
+                        echo "Hors Ligne";
+                        break;
+                    case 1:
+                        echo "En ligne";
+                        break;
+                }?></div>
 	</div>
-		
-	<div class="form-group">
-		<label class="col-sm-2 control-label">id_bouton</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->id_bouton ?></div>
-	</div>
-		
-	<div class="form-group">
-		<label class="col-sm-2 control-label">connecte</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->connecte ?></div>
-	</div>
-		
-	<div class="form-group">
-		<label class="col-sm-2 control-label">type_user</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->type_user ?></div>
-	</div>
-		
 	
 	<div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
