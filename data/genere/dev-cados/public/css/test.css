@@ -317,3 +317,30 @@ body {
    border-left-color: red;
    background-color: #ce8483; 
 }
+
+/* Css de la page administration des utilisateurs */
+
+tr .table_vert {
+    background-color: #36F253 !important;
+    color: #000000 !important;
+}
+
+tr .table_jaune {
+    background-color: #FEF201 !important;
+    color: #000000 !important;
+}
+
+tr .table_orange {
+    background-color: #FE7C01 !important;
+    color: #000000 !important;
+}
+
+tr .table_rouge {
+    background-color: #FE0601 !important;
+    color: #000000 !important;
+}
+
+tr .table_noir {
+    background-color: #000000 !important;
+    color: #FEFEFE !important;
+}

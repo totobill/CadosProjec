@@ -31,29 +31,23 @@
 		<?php foreach($this->tUtilisateur as $oUtilisateur):?>
 		<?php switch ($oUtilisateur->nbr_jour_reservation){
                     case 0:
-                        $color = '#36F253';
-                        $font = '#000000';
+                        $color = 'table_vert';
                         break;
                     case 1:
-                        $color = '#FEF201';
-                        $font = '#000000';
+                        $color = 'table_jaune';
                         break;
                     case 2:
-                        $color = '#FE7C01';
-                        $font = '#000000';
+                        $color = 'table_orange';
                         break;
                     case 3:
-                        $color = '#FE0601';
-                        $font = '#000000';
+                        $color = 'table_rouge';
                         break;
-                        
                     default:
-                        $color = '#000000';
-                        $font = '#FEFEFE';
+                        $color = 'table_noir';
                         break;
                 }
                 ?>
-        <tr <?php /*echo plugin_tpl::alternate(array('','class="alt"'))*/?> BGCOLOR="<?php echo $color; ?>" style="color:<?php echo $font;?>">
+        <tr <?php /*echo plugin_tpl::alternate(array('','class="alt"'))*/?> class="<?php  echo $color;?>">
 			
 		<td><?php echo $oUtilisateur->nom ?></td>
 		
