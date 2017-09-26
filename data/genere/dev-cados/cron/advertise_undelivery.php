@@ -60,7 +60,8 @@ try{
         foreach ($oUserUndelivery as $oUser){
             array_push($aListUsers, $oUser['email']);
 	}
-        
+	$oAU = new Advertise_undelivery();
+	$oAU->sendEmail($aListUsers);
 }catch(Exception $e){
 
 	die('Erreur :'.$e->getMessage());
