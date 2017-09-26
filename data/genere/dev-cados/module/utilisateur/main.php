@@ -123,7 +123,7 @@ class module_utilisateur extends abstract_module{
 			$oUtilisateur=model_utilisateur::getInstance()->findById( _root::getParam('id',null) );
 		}
 		
-		$tColumn=array('nom','prenom','date_de_naissance','numero','email','pseudo','Abonnement','id_bouton','connecte');
+		$tColumn=array('nom','prenom','date_de_naissance','numero','email','pseudo','id_bouton','connecte');
 		foreach($tColumn as $sColumn){
 			$oUtilisateur->$sColumn=_root::getParam($sColumn,null) ;
 		}
@@ -132,7 +132,7 @@ class module_utilisateur extends abstract_module{
 		
 		if($oUtilisateur->save()){
 			//une fois enregistre on redirige (vers la page liste)
-			_root::redirect('utilisateur::list');
+			_root::redirect('utilisateur::list'); 
 		}else{
 			return $oUtilisateur->getListError();
 		}
