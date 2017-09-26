@@ -1,61 +1,79 @@
 <form class="form-horizontal" action="" method="POST" >
-	
+    <table>
+        
+        <div class="form-group">
+		<tr>
+                    <td><label class="col-sm-2 control-label">Nom</label></td>
+                    <td><div class="col-sm-10"><?php echo $this->oUtilisateur->nom ?></div></td>
+                </tr>	
+
+	</div>
 	<div class="form-group">
-		<label class="col-sm-2 control-label">Nom</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->nom ?></div>
+            <tr>
+                    <td><label class="col-sm-2 control-label">Prénom</label></td>
+                    <td><div class="col-sm-10"><?php echo $this->oUtilisateur->prenom ?></div></td>
+            </tr>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">Prénom</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->prenom ?></div>
+            <tr>
+		<td><label class="col-sm-2 control-label">Date de naissance</label></td>
+		<td><div class="col-sm-10"><?php echo $this->oUtilisateur->date_de_naissance ?></div></td>
+            </tr>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">Date de naissance</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->date_de_naissance ?></div>
+            <tr>
+		<td><label class="col-sm-2 control-label">Numero</label></td>
+		<td><div class="col-sm-10"><?php echo $this->oUtilisateur->numero ?></div></td>
+            </tr>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">Numero</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->numero ?></div>
+            <tr>
+		<td><label class="col-sm-2 control-label">Email</label></td>
+		<td><div class="col-sm-10"><?php echo $this->oUtilisateur->email ?></div></td>
+            </tr>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">Email</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->email ?></div>
+            <tr>
+		<td><label class="col-sm-2 control-label">Pseudo</label></td>
+		<td><div class="col-sm-10"><?php echo $this->oUtilisateur->pseudo ?></div></td>
+            </tr>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">Pseudo</label>
-		<div class="col-sm-10"><?php echo $this->oUtilisateur->pseudo ?></div>
-	</div>
-		
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Casier réservé</label>
-                <div class="col-sm-10"><?php switch ($this->oUtilisateur->id_bouton){
+            <tr>
+		<td><label class="col-sm-2 control-label">Casier réservé</label></td>
+                <td><div class="col-sm-10"><?php switch ($this->oUtilisateur->id_bouton){
                     case 0:
                         echo "Aucun";
                         break;
                     default:
                         echo $this->oUtilisateur->id_bouton;
-                }?></div>
+                }?></div></td>
+            </tr>
 	</div>
 		
 	<div class="form-group">
-		<label class="col-sm-2 control-label">En ligne ?</label>
-                <div class="col-sm-10"><?php switch ($this->oUtilisateur->connecte){
+            <tr>
+		<td><label class="col-sm-2 control-label">En ligne ?</label></td>
+                <td><div class="col-sm-10"><?php switch ($this->oUtilisateur->connecte){
                     case 0:
                         echo "Hors Ligne";
                         break;
                     case 1:
                         echo "En ligne";
                         break;
-                }?></div>
+                }?></div></td>
+            </tr>
 	</div>
-	
+        </table>
 	<div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
 			 <a class="btn btn-default" href="<?php echo $this->getLink('utilisateur::list')?>">Retour</a>
 		</div>
 	</div>
+    
 </form>
