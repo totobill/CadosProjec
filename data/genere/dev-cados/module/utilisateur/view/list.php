@@ -19,7 +19,7 @@
                 
                 <th>Nombre de jour sans rendre le casier</th>
                 
-                <th colspan="3">Action sur Utilisateur</th>
+                <th>Action sur Utilisateur                  </th>
 		
 		<th></th>
 	</tr>
@@ -78,7 +78,7 @@
 
                             <td><?php echo $oUtilisateur->nbr_jour_reservation ?></td>
 
-                            <td colspan="3">
+                            <td>
                                 <a class="btn btn-success" href="<?php echo $this->getLink('utilisateur::edit',array('id'=>$oUtilisateur->getId()))?>">Editer</a>
                                                         | 
                                 <a class="btn btn-danger" href="<?php echo $this->getLink('utilisateur::delete',array('id'=>$oUtilisateur->getId()) )?>">Supprimer</a>
