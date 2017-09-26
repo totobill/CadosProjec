@@ -19,7 +19,7 @@
                 
                 <th>Nombre de jour sans rendre le casier</th>
                 
-                <th>Action sur Utilisateur</th>
+                <th colspan="3">Action sur Utilisateur</th>
 		
 		<th></th>
 	</tr>
@@ -78,23 +78,18 @@
 
                             <td><?php echo $oUtilisateur->nbr_jour_reservation ?></td>
 
-                            <td>
-                                <div>
-
-                                <a class="btn btn-success" href="<?php echo $this->getLink('utilisateur::edit',array('id'=>$oUtilisateur->getId()))?>">Edit</a>
+                            <td colspan="3">
+                                <a class="btn btn-success" href="<?php echo $this->getLink('utilisateur::edit',array('id'=>$oUtilisateur->getId()))?>">Editer</a>
                                                         | 
-                                <a class="btn btn-danger" href="<?php echo $this->getLink('utilisateur::delete',array('id'=>$oUtilisateur->getId()) )?>">Delete</a>
+                                <a class="btn btn-danger" href="<?php echo $this->getLink('utilisateur::delete',array('id'=>$oUtilisateur->getId()) )?>">Supprimer</a>
                                                         | 
-                                <a class="btn btn-default" href="<?php echo $this->getLink('utilisateur::show',array('id'=>$oUtilisateur->getId()) )?>">Show</a>
-
-                                </div>
-
+                                <a class="btn btn-default" href="<?php echo $this->getLink('utilisateur::show',array('id'=>$oUtilisateur->getId()) )?>">Afficher</a>
                             </td>
                     </tr>	
                 <?php endforeach;?>
 	<?php else:?>
             <tr>
-                <td colspan="13">Aucune ligne</td>
+                <td colspan="13">Aucun utilisateurs</td>
             </tr>
 	<?php endif;?>
 </table>
