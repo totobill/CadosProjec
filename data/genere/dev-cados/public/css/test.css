@@ -120,9 +120,9 @@ img.reservation_image_centrale {
     width: 100%;
 }
 
-input.casier_libre, button.casier_reserver {
+/*.casier_libre, button.casier_reserver {
     border: none;
-}
+}*/
 
 /* CSS Page réservation avec affichage du casier réservé et ses informations */
 
