@@ -120,7 +120,7 @@ img.reservation_image_centrale {
     width: 100%;
 }
 
-input.casier_libre, input.casier_reserver {
+input.casier_libre, button.casier_reserver {
     border: none;
 }
 
