@@ -2,69 +2,69 @@
     <table class="table">
         
 		<tr>
-                    <td><label class="col-sm-2 control-label">Nom</label></td>
-                    <td><div class="col-sm-10"><?php echo $this->oUtilisateur->nom ?></div></td>
+                    <td><label class="control-label">Nom</label></td>
+                    <td><?php echo $this->oUtilisateur->nom ?></td>
                 </tr>	
 
 
             <tr>
-                    <td><label class="col-sm-2 control-label">Prénom</label></td>
-                    <td><div class="col-sm-10"><?php echo $this->oUtilisateur->prenom ?></div></td>
+                    <td><label class="control-label">Prénom</label></td>
+                    <td><?php echo $this->oUtilisateur->prenom ?></td>
             </tr>
 
 		
 
             <tr>
-		<td><label class="col-sm-2 control-label">Date de naissance</label></td>
-		<td><div class="col-sm-10"><?php echo $this->oUtilisateur->date_de_naissance ?></div></td>
+		<td><label class="control-label">Date de naissance</label></td>
+		<td><?php echo $this->oUtilisateur->date_de_naissance ?></td>
             </tr>
 
 		
 
             <tr>
-		<td><label class="col-sm-2 control-label">Numero</label></td>
-		<td><div class="col-sm-10"><?php echo $this->oUtilisateur->numero ?></div></td>
+		<td><label class="control-label">Numero</label></td>
+		<td><?php echo $this->oUtilisateur->numero ?></td>
             </tr>
 
 		
 
             <tr>
-		<td><label class="col-sm-2 control-label">Email</label></td>
-		<td><div class="col-sm-10"><?php echo $this->oUtilisateur->email ?></div></td>
+		<td><label class="control-label">Email</label></td>
+		<td><?php echo $this->oUtilisateur->email ?></td>
             </tr>
 
 		
 
             <tr>
-		<td><label class="col-sm-2 control-label">Pseudo</label></td>
-		<td><div class="col-sm-10"><?php echo $this->oUtilisateur->pseudo ?></div></td>
+		<td><label class="control-label">Pseudo</label></td>
+		<td><?php echo $this->oUtilisateur->pseudo ?></td>
             </tr>
 
 		
 
             <tr>
-		<td><label class="col-sm-2 control-label">Casier réservé</label></td>
-                <td><div class="col-sm-10"><?php switch ($this->oUtilisateur->id_bouton){
+		<td><label class="control-label">Casier réservé</label></td>
+                <td><?php switch ($this->oUtilisateur->id_bouton){
                     case 0:
                         echo "Aucun";
                         break;
                     default:
                         echo $this->oUtilisateur->id_bouton;
-                }?></div></td>
+                }?></td>
             </tr>
 
 		
 
             <tr>
-		<td><label class="col-sm-2 control-label">En ligne ?</label></td>
-                <td><div class="col-sm-10"><?php switch ($this->oUtilisateur->connecte){
+		<td><label class="control-label">En ligne ?</label></td>
+                <td><?php switch ($this->oUtilisateur->connecte){
                     case 0:
                         echo "Hors Ligne";
                         break;
                     case 1:
                         echo "En ligne";
                         break;
-                }?></div></td>
+                }?></td>
             </tr>
 
         </table>
