@@ -79,7 +79,7 @@
                             <td><?php echo $oUtilisateur->nbr_jour_reservation ?></td>
 
                             <td>
-
+                                <div>
 
                                 <a class="btn btn-success" href="<?php echo $this->getLink('utilisateur::edit',array('id'=>$oUtilisateur->getId()))?>">Edit</a>
                                                         | 
@@ -87,7 +87,7 @@
                                                         | 
                                 <a class="btn btn-default" href="<?php echo $this->getLink('utilisateur::show',array('id'=>$oUtilisateur->getId()) )?>">Show</a>
 
-
+                                </div>
 
                             </td>
                     </tr>	
