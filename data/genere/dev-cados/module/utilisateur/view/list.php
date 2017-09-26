@@ -1,29 +1,25 @@
 <table class="table">
 	<tr>
 		
-		<th>nom</th>
+		<th>Nom</th>
 		
-		<th>prenom</th>
+		<th>Prénom</th>
 		
-		<th>date_de_naissance</th>
+		<th>Date de naissance</th>
 		
-		<th>adresse</th>
+		<th>Numero</th>
 		
-		<th>numero</th>
+		<th>Email</th>
 		
-		<th>email</th>
+		<th>Pseudo</th>
 		
-		<th>pseudo</th>
+		<th>Casier réserver</th>
 		
-		<th>password</th>
+		<th>Connecté ?</th>
 		
-		<th>Abonnement</th>
-		
-		<th>id_bouton</th>
-		
-		<th>connecte</th>
-		
-		<th>type_user</th>
+		<th>Type d'utilisateur</th>
+                
+                <th>Action sur Utilisateur</th>
 		
 		<th></th>
 	</tr>
@@ -55,23 +51,42 @@
 		
 		<td><?php echo $oUtilisateur->date_de_naissance ?></td>
 		
-		<td><?php echo $oUtilisateur->adresse ?></td>
-		
 		<td><?php echo $oUtilisateur->numero ?></td>
 		
 		<td><?php echo $oUtilisateur->email ?></td>
 		
 		<td><?php echo $oUtilisateur->pseudo ?></td>
 		
-		<td><?php echo $oUtilisateur->password ?></td>
+                <td><?php switch ($oUtilisateur->id_bouton){
+                    case 0:
+                        echo "aucun";
+                        break;
+                    default:
+                        echo $oUtilisateur->id_bouton;
+                        break;
+                }?></td>
 		
-		<td><?php echo $oUtilisateur->Abonnement ?></td>
+                <td><?php switch ($oUtilisateur->connecte){
+                    case 0:
+                        echo "Non";
+                        break;
+                    case 1:
+                        echo "Oui";
+                        break;
+                    }?></td>
 		
-		<td><?php echo $oUtilisateur->id_bouton ?></td>
-		
-		<td><?php echo $oUtilisateur->connecte ?></td>
-		
-		<td><?php echo $oUtilisateur->type_user ?></td>
+                <td><?php switch ($oUtilisateur->type_user){
+                    case 2:
+                        echo "Administrateur";
+                        break;
+                    case 3:
+                        echo "Super Administrateur";
+                        break;
+                    case 4:
+                        echo "Utilisateur";
+                        break;
+                }?></td>
+                
 
                 <td><?php echo $oUtilisateur->nbr_jour_reservation ?></td>
 			<td>
