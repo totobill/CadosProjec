@@ -16,8 +16,8 @@
 		<th>Casier réserver</th>
 		
 		<th>Connecté ?</th>
-		
-		<th>Type d'utilisateur</th>
+                
+                <th>Nombre de jour sans rendre le casier</th>
                 
                 <th>Action sur Utilisateur</th>
 		
@@ -25,88 +25,77 @@
 	</tr>
 	<?php if($this->tUtilisateur):?>
 		<?php foreach($this->tUtilisateur as $oUtilisateur):?>
-		<?php switch ($oUtilisateur->nbr_jour_reservation){
-                    case 0:
-                        $color = 'table_vert';
-                        break;
-                    case 1:
-                        $color = 'table_jaune';
-                        break;
-                    case 2:
-                        $color = 'table_orange';
-                        break;
-                    case 3:
-                        $color = 'table_rouge';
-                        break;
-                    default:
-                        $color = 'table_noir';
-                        break;
-                }
-                ?>
-        <tr <?php /*echo plugin_tpl::alternate(array('','class="alt"'))*/?> class="<?php  echo $color;?>">
-			
-		<td><?php echo $oUtilisateur->nom ?></td>
-		
-		<td><?php echo $oUtilisateur->prenom ?></td>
-		
-		<td><?php echo $oUtilisateur->date_de_naissance ?></td>
-		
-		<td><?php echo $oUtilisateur->numero ?></td>
-		
-		<td><?php echo $oUtilisateur->email ?></td>
-		
-		<td><?php echo $oUtilisateur->pseudo ?></td>
-		
-                <td><?php switch ($oUtilisateur->id_bouton){
-                    case 0:
-                        echo "aucun";
-                        break;
-                    default:
-                        echo $oUtilisateur->id_bouton;
-                        break;
-                }?></td>
-		
-                <td><?php switch ($oUtilisateur->connecte){
-                    case 0:
-                        echo "Non";
-                        break;
-                    case 1:
-                        echo "Oui";
-                        break;
-                    }?></td>
-		
-                <td><?php switch ($oUtilisateur->type_user){
-                    case 2:
-                        echo "Administrateur";
-                        break;
-                    case 3:
-                        echo "Super Administrateur";
-                        break;
-                    case 4:
-                        echo "Utilisateur";
-                        break;
-                }?></td>
-                
+                    <?php switch ($oUtilisateur->nbr_jour_reservation){
+                        case 0:
+                            $color = 'table_vert';
+                            break;
+                        case 1:
+                            $color = 'table_jaune';
+                            break;
+                        case 2:
+                            $color = 'table_orange';
+                            break;
+                        case 3:
+                            $color = 'table_rouge';
+                            break;
+                        default:
+                            $color = 'table_noir';
+                            break;
+                    }
+                    ?>
+                    <tr <?php /*echo plugin_tpl::alternate(array('','class="alt"'))*/?> class="<?php  echo $color;?>">
 
-                <td><?php echo $oUtilisateur->nbr_jour_reservation ?></td>
-			<td>
-				
-				
-<a class="btn btn-success" href="<?php echo $this->getLink('utilisateur::edit',array('id'=>$oUtilisateur->getId()))?>">Edit</a>
-			| 
-<a class="btn btn-danger" href="<?php echo $this->getLink('utilisateur::delete',array('id'=>$oUtilisateur->getId()) )?>">Delete</a>
-			| 
-<a class="btn btn-default" href="<?php echo $this->getLink('utilisateur::show',array('id'=>$oUtilisateur->getId()) )?>">Show</a>
-			
-				
-				
-			</td>
-		</tr>	
-		<?php endforeach;?>
+                            <td><?php echo $oUtilisateur->nom ?></td>
+
+                            <td><?php echo $oUtilisateur->prenom ?></td>
+
+                            <td><?php echo $oUtilisateur->date_de_naissance ?></td>
+
+                            <td><?php echo $oUtilisateur->numero ?></td>
+
+                            <td><?php echo $oUtilisateur->email ?></td>
+
+                            <td><?php echo $oUtilisateur->pseudo ?></td>
+
+                            <td><?php switch ($oUtilisateur->id_bouton){
+                                case 0:
+                                    echo "aucun";
+                                    break;
+                                default:
+                                    echo $oUtilisateur->id_bouton;
+                                    break;
+                            }?></td>
+
+                            <td><?php switch ($oUtilisateur->connecte){
+                                case 0:
+                                    echo "Non";
+                                    break;
+                                case 1:
+                                    echo "Oui";
+                                    break;
+                                }?></td>
+
+
+                            <td><?php echo $oUtilisateur->nbr_jour_reservation ?></td>
+
+                            <td>
+
+
+                                <a class="btn btn-success" href="<?php echo $this->getLink('utilisateur::edit',array('id'=>$oUtilisateur->getId()))?>">Edit</a>
+                                                        | 
+                                <a class="btn btn-danger" href="<?php echo $this->getLink('utilisateur::delete',array('id'=>$oUtilisateur->getId()) )?>">Delete</a>
+                                                        | 
+                                <a class="btn btn-default" href="<?php echo $this->getLink('utilisateur::show',array('id'=>$oUtilisateur->getId()) )?>">Show</a>
+
+
+
+                            </td>
+                    </tr>	
+                <?php endforeach;?>
 	<?php else:?>
-		<tr>
-			<td colspan="13">Aucune ligne</td>
-		</tr>
+            <tr>
+                <td colspan="13">Aucune ligne</td>
+            </tr>
 	<?php endif;?>
 </table>
 
