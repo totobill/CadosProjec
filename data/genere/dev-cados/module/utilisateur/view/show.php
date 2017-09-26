@@ -1,5 +1,5 @@
 <form class="form-horizontal" action="" method="POST" >
-    <table>
+    <table class="table">
         
 		<tr>
                     <td><label class="col-sm-2 control-label">Nom</label></td>
