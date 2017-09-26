@@ -295,17 +295,6 @@ body {
         text-align: center;
 }
 
-/*.communaute_affichage_prenom, .communaute_affichage_nom {
-	text-align: center;
-        margin-top: auto;
-        margin-bottom: auto;
-        
-}
-
-.communaute_affichage_deco, .communaute_affichage_co {
-	text-align: center;
-}*/
-
 .ligne_co {
    border-left-style: solid;
    border-left-color: green;

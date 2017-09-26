@@ -30,7 +30,7 @@ $oForm->setMessage($this->tMessage);
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
                         <button type="button" class="btn btn-success btn-sm">Follower</button>
-                        <button type="button" class="btn btn-danger btn-sm">Change Photo</button>
+                        <button type="button" class="btn btn-danger btn-sm">Changer Photo</button>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
@@ -66,32 +66,32 @@ $oForm->setMessage($this->tMessage);
                 <form class="form-horizontal" action="" method="POST" >
 
                         <div class="form-group">
-                                <label class="col-sm-2 control-label">nom</label>
+                                <label class="col-sm-2 control-label">Nom</label>
                                 <div class="col-sm-10"><?php echo $oForm->getInputText('nom',array('class'=>'form-control')) ?></div>
                         </div>
 
                         <div class="form-group">
-                                <label class="col-sm-2 control-label">prenom</label>
+                                <label class="col-sm-2 control-label">Prénom</label>
                                 <div class="col-sm-10"><?php echo $oForm->getInputText('prenom',array('class'=>'form-control')) ?></div>
                         </div>
 
                         <div class="form-group">
-                                <label class="col-sm-2 control-label">date de naissance</label>
+                                <label class="col-sm-2 control-label">Date de naissance</label>
                                 <div class="col-sm-10"><?php echo $oForm->getInputDate('date_de_naissance',array('class'=>'form-control')) ?></div>
                         </div>
 
                         <div class="form-group">
-                                <label class="col-sm-2 control-label">numero</label>
+                                <label class="col-sm-2 control-label">Numero</label>
                                 <div class="col-sm-10"><?php echo $oForm->getInputText('numero',array('class'=>'form-control')) ?></div>
                         </div>
 
                         <div class="form-group">
-                                <label class="col-sm-2 control-label">email</label>
+                                <label class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10"><?php echo $oForm->getInputEmail('email',array('class'=>'form-control')) ?></div>
                         </div>
 
                         <div class="form-group">
-                                <label class="col-sm-2 control-label">pseudo</label>
+                                <label class="col-sm-2 control-label">Pseudo</label>
                                 <div class="col-sm-10"><?php echo $oForm->getInputText('pseudo',array('class'=>'form-control')) ?></div>
                         </div>
 
@@ -102,7 +102,7 @@ $oForm->setMessage($this->tMessage);
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                                    <input type="submit" class="btn btn-success" value="Modifier" /> <a class="btn btn-link" href="<?php echo $this->getLink('configuration::modifierPassword',array('id'=>$this->oUtilisateur->getId()))?>">Changer mot de passe</a> <a class="btn btn-link" href="<?php echo $this->getLink('configuration::profil')?>">Annuler</a>
+                                    <input type="submit" class="btn btn-success" value="Modifier" /> <a class="btn btn-link" href="<?php echo $this->getLink('configuration::modifierPassword',array('id'=>$this->oUtilisateur->getId()))?>">Changer de Mot de passe</a> <a class="btn btn-link" href="<?php echo $this->getLink('configuration::profil')?>">Annuler</a>
                         </div>
                     </div>
                 </form>
@@ -110,8 +110,3 @@ $oForm->setMessage($this->tMessage);
         </div>
     </div>
 </div>
-<center>
-<strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">KeenThemes</a></strong>
-</center>
-<br>
-<br>

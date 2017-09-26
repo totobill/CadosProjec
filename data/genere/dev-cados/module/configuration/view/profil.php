@@ -27,7 +27,7 @@
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
                         <button type="button" class="btn btn-success btn-sm">Follower</button>
-                        <a href="<?php echo $this->getLink("configuration::modifierPhoto",array('id'=>$this->oUtilisateur->getId())); ?>"><button type="button" class="btn btn-danger btn-sm">Change Photo</button></a>
+                        <a href="<?php echo $this->getLink("configuration::modifierPhoto",array('id'=>$this->oUtilisateur->getId())); ?>"><button type="button" class="btn btn-danger btn-sm">Changer Photo</button></a>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
@@ -62,46 +62,41 @@
             <div class="profile-content">
                <form class="form-horizontal" action="" method="POST" >
                     <div class="form-group">
-                            <label class="col-sm-2 control-label">nom</label>
+                            <label class="col-sm-2 control-label">Nom</label>
                             <div class="col-sm-10"><?php echo $this->oUtilisateur->nom ?>
                                 <input type="hidden" name="id" value="<?php echo $this->oUtilisateur->id_utilisateur;?>">
                             </div>
                     </div>
 
                     <div class="form-group">
-                            <label class="col-sm-2 control-label">prenom</label>
+                            <label class="col-sm-2 control-label">Prénom</label>
                             <div class="col-sm-10"><?php echo $this->oUtilisateur->prenom ?></div>
                     </div>
 
                     <div class="form-group">
-                            <label class="col-sm-2 control-label">date de naissance</label>
+                            <label class="col-sm-2 control-label">Date de naissance</label>
                             <div class="col-sm-10"><?php echo $this->oUtilisateur->date_de_naissance ?></div>
                     </div>
 
                     <div class="form-group">
-                            <label class="col-sm-2 control-label">numero</label>
+                            <label class="col-sm-2 control-label">Numero</label>
                             <div class="col-sm-10"><?php echo $this->oUtilisateur->numero ?></div>
                     </div>
 
                     <div class="form-group">
-                            <label class="col-sm-2 control-label">email</label>
+                            <label class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-10"><?php echo $this->oUtilisateur->email ?></div>
                     </div>
 
                     <div class="form-group">
-                            <label class="col-sm-2 control-label">pseudo</label>
+                            <label class="col-sm-2 control-label">Pseudo</label>
                             <div class="col-sm-10"><?php echo $this->oUtilisateur->pseudo ?></div>
                     </div>
 
                     <div class="form-group">
-                            <label class="col-sm-2 control-label">password</label>
+                            <label class="col-sm-2 control-label">Mot de passe</label>
                             <!--<div class="col-sm-10"><?php //echo $this->oUtilisateur->password ?></div>-->
                             <div class="col-sm-10">***********</div>
-                    </div>
-
-                    <div class="form-group">
-                            <label class="col-sm-2 control-label">Abonnement</label>
-                            <div class="col-sm-10"><?php echo $this->oUtilisateur->Abonnement ?></div>
                     </div>
 
                     <div class="form-group">
@@ -113,8 +108,3 @@
         </div>
     </div>
 </div>
-<center>
-<strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">KeenThemes</a></strong>
-</center>
-<br>
-<br>

@@ -26,7 +26,7 @@
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
                         <button type="button" class="btn btn-success btn-sm">Follower</button>
-                        <a href="<?php echo $this->getLink("configuration::modifierPhoto",array('id'=>$this->oUtilisateur->getId())); ?>"><button type="button" class="btn btn-danger btn-sm">Change Photo</button></a>
+                        <a href="<?php echo $this->getLink("configuration::modifierPhoto",array('id'=>$this->oUtilisateur->getId())); ?>"><button type="button" class="btn btn-danger btn-sm">Changer Photo</button></a>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
@@ -73,8 +73,3 @@
         </div>
     </div>
 </div>
-<center>
-<strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">KeenThemes</a></strong>
-</center>
-<br>
-<br>
