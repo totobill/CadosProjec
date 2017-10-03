@@ -174,7 +174,7 @@ class plugin_check{
 	public function isEmailValid($uValueA,$sErrorMsg='KO isEmailValid'){
 		if(preg_match('/^[\w.\-_]+@[\w.\-_]+\.[a-zA-Z]{2,6}$/',$uValueA)){
 			return true;
-		}else if(preg_match('/^[\w.\-_]+@[\w.\-_]$/',$uValueA)){
+		}else if(preg_match('/^[\w.\-_]+@[\w.\-_]+\.[a-zA-Z]{2,7}$/',$uValueA)){
 			return true;
 		}
 		$this->sErrorMsg=$sErrorMsg;
