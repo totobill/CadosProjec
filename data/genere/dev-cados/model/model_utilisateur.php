@@ -153,7 +153,7 @@ class row_utilisateur extends abstract_row{
             $oPluginValid->isNotEmpty('prenom','Le champ ne doit pas être vide');
             $oPluginValid->isNotEmpty('date_de_naissance','Le champ ne doit pas être vide');
             $oPluginValid->matchExpression('date_de_naissance','/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/','Le champ n\'est pas au bon format (AAAA-MM-JJ)');
-            if(strlen($this->getTab()["numero"]) > 0){
+            if(isset($this->getTab()["numero"]) and (strlen($this->getTab()["numero"]) > 0)){
                 $oPluginValid->matchExpression('numero','/[0-9]{10}/','Le champ n\'est pas au bon format');
             }    
 		/* renseigner vos check ici
