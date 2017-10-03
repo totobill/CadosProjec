@@ -88,6 +88,8 @@ class module_auth extends abstract_module{
                         return 'Veuillez confirmer votre email pour pouvoir vous connecter.';
                     } 
                 }
+		$logConnexion = 'L\'utilisateur : ' . $oUser->email . ' vient de se connecter';
+		_root::getLog()->info($logConnexion);
 		_root::redirect('default::index');
                 
                 
