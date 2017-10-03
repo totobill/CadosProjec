@@ -89,7 +89,7 @@ class module_auth extends abstract_module{
                     } 
                 }
 		$logConnexion = 'L\'utilisateur : ' . $oUser->email . ' vient de se connecter';
-		_root::getLog()->info($logConnexion);
+		_root::getLog()->log($logConnexion);
 		_root::redirect('default::index');
                 
                 
