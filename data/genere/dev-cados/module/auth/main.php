@@ -107,8 +107,9 @@ class module_auth extends abstract_module{
         public function _inscription(){
             $tMessage=$this->processInscription();
             if(isset($tMessage) and array_key_exists('success', $tMessage)){
-//                $oView=new _view('auth::login');
                 $_SESSION['tMessage'] = $tMessage;
+                $inscriptionLog = 'L\'utilisateur : ' . _root::getParam('email') . ' vient de s\'inscrire.';
+                _root::getLog()->log($inscriptionLog);
                 _root::redirect('auth::login');
             }else{
                 $oView=new _view('auth::inscription');
@@ -202,7 +203,12 @@ class module_auth extends abstract_module{
         
         
         public function sendMailOneAndOneInscription($sRecipient,$sSurname,$cle){
-
+            if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)){
+                $passage_ligne = "\r\n";
+            }else{
+                $passage_ligne = "\n";
+            }
+            
             $to  = $sRecipient;
             $subject = 'Confirmation inscription Cados';
             $sMessage = "
@@ -229,16 +235,16 @@ class module_auth extends abstract_module{
                         </body>
                     </html>";
 
-            // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
-            $headers  = 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
             // En-têtes additionnels
 //            $headers .= 'To: Test <'. $sRecipient . ">\r\n";
-            $headers .= 'From: "TeamCados" <anthony.rohr@cados.website>' . "\r\n";
-            $headers .= 'Reply-To: cados.development@gmail.com'."\n";
+            $headers .= 'From: "TeamCados" <anthony.rohr@cados.website>' . $passage_ligne;
+            $headers .= 'Reply-To: "Admin" <cados.development@gmail.com>'. $passage_ligne;
 //            $headers .= 'Cc: anniversaire_archive@example.com' . "\r\n";
 //            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
+            
+             // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
+            $headers  = 'MIME-Version: 1.0' . $passage_ligne;
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' . $passage_ligne;
 
             if(mail($to, $subject, $sMessage, $headers)){
                 return true;
