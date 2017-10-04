@@ -45,8 +45,13 @@ class module_auth extends abstract_module{
             $oView=new _view('auth::login');
             $oView->sError=$sMessage;
             
-            if(isset($_GET['log'])){$oView->sEmail=$email;}
+            if(isset(_root::getParam('log'))){$oView->sEmail=$email;}
             $oView->sConfirmation=$sConfirmation;
+            
+            if(isset($_SESSION['tMessage'])){
+                $oView->tMessage = $_SESSION['tMessage'];
+            }
+            
             $this->oLayout->add('main',$oView);
 
 	}
@@ -102,7 +107,9 @@ class module_auth extends abstract_module{
         public function _inscription(){
             $tMessage=$this->processInscription();
             if(isset($tMessage) and array_key_exists('success', $tMessage)){
-                $oView=new _view('auth::login');
+//                $oView=new _view('auth::login');
+                $_SESSION['tMessage'] = $tMessage;
+                root::redirect('auth::login');
             }else{
                 $oView=new _view('auth::inscription');
                 $tQuestions=model_QuestionSecrete::getInstance()->getSelect();

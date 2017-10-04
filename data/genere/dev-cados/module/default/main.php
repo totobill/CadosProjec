@@ -16,6 +16,7 @@ class module_default extends abstract_module{
                 'Communaute' => 'communaute::index',
                 'Map' => 'map::index'
             );
+            
             $oView->tLink=$tLink;
 	}
 	
