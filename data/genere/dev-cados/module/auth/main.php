@@ -109,7 +109,7 @@ class module_auth extends abstract_module{
             if(isset($tMessage) and array_key_exists('success', $tMessage)){
 //                $oView=new _view('auth::login');
                 $_SESSION['tMessage'] = $tMessage;
-                root::redirect('auth::login');
+                _root::redirect('auth::login');
             }else{
                 $oView=new _view('auth::inscription');
                 $tQuestions=model_QuestionSecrete::getInstance()->getSelect();
