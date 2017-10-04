@@ -45,7 +45,7 @@ class module_auth extends abstract_module{
             $oView=new _view('auth::login');
             $oView->sError=$sMessage;
             
-            if(isset(_root::getParam('log'))){$oView->sEmail=$email;}
+            if(_root::getParam('log')){$oView->sEmail=$email;}
             $oView->sConfirmation=$sConfirmation;
             
             if(isset($_SESSION['tMessage'])){
