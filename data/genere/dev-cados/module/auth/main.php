@@ -203,7 +203,7 @@ class module_auth extends abstract_module{
         
         
         public function sendMailOneAndOneInscription($sRecipient,$sSurname,$cle){
-            if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)){
+            if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $sRecipient)){
                 $passage_ligne = "\r\n";
             }else{
                 $passage_ligne = "\n";
