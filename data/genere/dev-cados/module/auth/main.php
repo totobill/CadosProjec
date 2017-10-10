@@ -237,7 +237,7 @@ class module_auth extends abstract_module{
 
             // En-têtes additionnels
 //            $headers .= 'To: Test <'. $sRecipient . ">\r\n";
-            $headers .= 'From: "TeamCados" <anthony.rohr@cados.website>' . $passage_ligne;
+            $headers = 'From: "TeamCados" <anthony.rohr@cados.website>' . $passage_ligne;
             $headers .= 'Reply-To: "Admin" <cados.development@gmail.com>'. $passage_ligne;
 //            $headers .= 'Cc: anniversaire_archive@example.com' . "\r\n";
 //            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
