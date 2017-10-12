@@ -101,7 +101,14 @@
 
                     <div class="form-group">
                             <label class="col-sm-2 control-label">N° Casier réservé</label>
-                            <div class="col-sm-10"><?php echo $this->oUtilisateur->id_bouton ?></div>
+                            <div class="col-sm-10"><?php switch($this->oUtilisateur->id_bouton){
+						case 0:
+							echo "aucun";
+							break;
+						default:
+							echo $this->oUtilisateur->id_bouton;
+							break;
+					}?></div>
                     </div>
                 </form>   
             </div>
