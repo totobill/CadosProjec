@@ -204,11 +204,11 @@ class module_auth extends abstract_module{
         
         
         public function sendMailOneAndOneInscription($sRecipient,$sSurname,$cle){
-            if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $sRecipient)){
-                $passage_ligne = "\r\n";
-            }else{
-                $passage_ligne = "\n";
-            }
+//            if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $sRecipient)){
+//                $passage_ligne = "\r\n";
+//            }else{
+//                $passage_ligne = "\n";
+//            }
             
             $to  = $sRecipient;
             $subject = 'Confirmation inscription Cados';
@@ -238,11 +238,11 @@ class module_auth extends abstract_module{
 
             // En-têtes additionnels
             //  // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
-            $headers  = 'MIME-Version: 1.0' . $passage_ligne;
-            $headers .= 'Content-type: text/html; charset=iso-8859-1' . $passage_ligne;
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' ."\r\n";
 //            $headers .= 'To: Test <'. $sRecipient . ">\r\n";
-            $headers = 'From: TeamCados <anthony.rohr@cados.website>' . $passage_ligne;
-            $headers .= 'Reply-To: Admin <cados.development@gmail.com>'. $passage_ligne;
+            $headers = 'From: TeamCados <anthony.rohr@cados.website>' . "\r\n";
+            $headers .= 'Reply-To: Admin <cados.development@gmail.com>'. "\r\n";
             $headers .= 'Cc: antho.rohr@yahoo.fr' . "\n";
 //            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
             
