@@ -236,15 +236,15 @@ class module_auth extends abstract_module{
                     </html>";
 
             // En-têtes additionnels
-//            $headers .= 'To: Test <'. $sRecipient . ">\r\n";
-            $headers = 'From: "TeamCados" <anthony.rohr@cados.website>' . $passage_ligne;
-            $headers .= 'Reply-To: "Admin" <cados.development@gmail.com>'. $passage_ligne;
-//            $headers .= 'Cc: anniversaire_archive@example.com' . "\r\n";
-//            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
-            
-             // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
+            //  // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
             $headers  = 'MIME-Version: 1.0' . $passage_ligne;
             $headers .= 'Content-type: text/html; charset=iso-8859-1' . $passage_ligne;
+//            $headers .= 'To: Test <'. $sRecipient . ">\r\n";
+            $headers = 'From: TeamCados <anthony.rohr@cados.website>' . $passage_ligne;
+            $headers .= 'Reply-To: Admin <cados.development@gmail.com>'. $passage_ligne;
+            $headers .= 'Cc: antho.rohr@yahoo.fr' . "\r\n";
+//            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
+            
 
             if(mail($to, $subject, $sMessage, $headers)){
                 return true;
@@ -401,8 +401,8 @@ class module_auth extends abstract_module{
                 if($oGroupsUsers->save()==false){
                     return $oGroupsUsers->getListError();
                 }
-                //$this->sendEmailinscription($sLogin,$sSurname,$cle);
-                $this->sendMailOneAndOneInscription($sLogin,$sSurname,$cle);
+                
+                
                 //Lors d'une inscription on met par defaut l'utilisateur avec un statut utilisateur
                 
                 //On enregistre dans la table de jointure la question choisie par l'utilisateur
@@ -416,8 +416,13 @@ class module_auth extends abstract_module{
                     return $oQuestionsUsers->getListError();
 
                 }
+                //$this->sendEmailinscription($sLogin,$sSurname,$cle);
+                if(!$this->sendMailOneAndOneInscription($sLogin,$sSurname,$cle)){
+                    return array('success'=>array('Il y a eu un problème avec l\'envoie d\'email'));
+                }else{
+                    return array('success'=>array('Votre compte a bien été créé. Veuillez confirmer votre compte, un email vous a été envoyé.'));
+                }
                 
-                return array('success'=>array('Votre compte a bien été créé. Veuillez confirmer votre compte, un email vous a été envoyé.'));
 
             }
 
