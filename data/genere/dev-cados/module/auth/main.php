@@ -196,8 +196,10 @@ class module_auth extends abstract_module{
 //            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
 
             if(mail($to, $subject, $sMessage, $headers)){
+                _root::getLog()->log('L\'utilisateur $to à demandé une réinitialisation du mdp. Un mail contenant un nouveau mdp lui a été envoyé.');
                 return true;
             }else{
+                _root::getLog()->log('L\'utilisateur $to à demandé une réinitialisation du mdp. Le mail contenant le nouveau mdp n\'a pas été envoyé à cause d\'un problème.');
                 return false;
             }
         }
@@ -247,8 +249,10 @@ class module_auth extends abstract_module{
             
 
             if(mail($to, $subject, $sMessage, $headers)){
+                _root::getLog()->log("Un email de confirmation d\'inscription à été envoyé à $to.");
                 return true;
             }else{
+                _root::getLog()->log('L\'envoie de l\'email de confirmation à &to à échoué.');
                 return false;
             }
         }
