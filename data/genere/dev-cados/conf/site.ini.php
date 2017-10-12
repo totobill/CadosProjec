@@ -67,9 +67,9 @@ xsrf.session.enabled=0
 
 [log]
 class=plugin_log
-error=0
-warning=0
-application=0
+error=1
+warning=1
+application=1
 information=1
 file.enabled=1
 apache.enabled=1
