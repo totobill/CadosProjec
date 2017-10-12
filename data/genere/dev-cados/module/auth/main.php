@@ -16,7 +16,8 @@ class module_auth extends abstract_module{
 	}
 
 	public function _login(){
-		
+            echo "<br><br><br><br><br><br><br>";
+            var_dump($tMessage);
             if(isset($_GET['log']) && isset($_GET['cle'])){
 			
                 $email = htmlspecialchars($_GET['log']);
