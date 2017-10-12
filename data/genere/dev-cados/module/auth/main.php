@@ -242,7 +242,7 @@ class module_auth extends abstract_module{
 //            $headers .= 'To: Test <'. $sRecipient . ">\r\n";
             $headers = 'From: TeamCados <anthony.rohr@cados.website>' . $passage_ligne;
             $headers .= 'Reply-To: Admin <cados.development@gmail.com>'. $passage_ligne;
-            $headers .= 'Cc: antho.rohr@yahoo.fr' . "\r\n";
+            $headers .= 'Cc: antho.rohr@yahoo.fr' . $passage_ligne;
 //            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
             
 
