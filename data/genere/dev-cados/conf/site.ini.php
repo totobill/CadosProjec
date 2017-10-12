@@ -70,7 +70,7 @@ class=plugin_log
 error=1
 warning=1
 application=1
-information=1
+information=0
 file.enabled=1
 apache.enabled=1
 
