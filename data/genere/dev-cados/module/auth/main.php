@@ -71,7 +71,7 @@ class module_auth extends abstract_module{
 		$sPassword=_root::getParam('password');
 		
 		if(strlen($sPassword) > $this->maxPasswordLength){
-                    _root::getLog()->log("L\'utilisateur $sLogin à essayé de s\'identifier avec un password trop long, len max = 100");
+                    _root::getLog()->log("L'utilisateur $sLogin à essayé de s'identifier avec un password trop long, len max = 100");
                     return 'Mot de passe trop long';
 		}
 		
@@ -82,7 +82,7 @@ class module_auth extends abstract_module{
 		//on va verifier que l'on trouve dans le tableau retourne par notre model
 		//l'entree $tAccount[ login ][ mot de passe hashe ]
 		if(!_root::getAuth()->checkLoginPass($tAccount,$sLogin,$sHashPassword)){
-                    _root::getLog()->log("L\'utilisateur $sLogin n\'a pas réussi à s'identifier, le mot de passe ou le login ne sont pas corrects.");
+                    _root::getLog()->log("L'utilisateur $sLogin n'a pas réussi à s'identifier, le mot de passe ou le login ne sont pas corrects.");
                     return 'Mauvais login/mot de passe';
 		}
 		
@@ -96,11 +96,11 @@ class module_auth extends abstract_module{
                     if($aInfoConfirmation->actif == 1){
                         model_utilisateur::getInstance()->setConnecte1($iIdUtilisateur);
                     }else{
-                        _root::getLog()->log("L\'utilisateur $sLogin n\'a pas pu se connecter car il n'a pas validé son compte.");
+                        _root::getLog()->log("L'utilisateur $sLogin n'a pas pu se connecter car il n'a pas validé son compte.");
                         return 'Veuillez confirmer votre email pour pouvoir vous connecter.';
                     } 
                 }       
-		_root::getLog()->log("L\'utilisateur $sLogin vient de se connecter avec succès");
+		_root::getLog()->log("L'utilisateur $sLogin vient de se connecter avec succès");
 		_root::redirect('default::index');
                 
                 
@@ -148,7 +148,7 @@ class module_auth extends abstract_module{
            //Si elle n'existe pas en renvoie un message d'erreur
            if(!_root::getAuth()->checkEmail($tAccount,$sLogin)){
                _root::getLog()->log("$sLogin essai de réinitialiser son password mais l'adresse n'existe pas en bdd.");
-               return array('email' => 'L\'adresse email fourni n\'existe pas.');
+               return array('email' => "L'adresse email fourni n'existe pas.");
            //Si elle existe, alors on renvoie un message de succès.
            }else{
                $sNewPassword = uniqid();
@@ -159,9 +159,9 @@ class module_auth extends abstract_module{
                     return $oUtilisateur->getListError();
                }
                if($this->sendMailOneAndOneForgotPassword($sNewPassword,$sLogin)){
-                   return array('success' => 'Un email contenant un nouveau mot de passe vous a été envoyé, si vous n\'avez pas reçu d\'email, contactez un administrateur.');
+                   return array('success' => "Un email contenant un nouveau mot de passe vous a été envoyé, si vous n'avez pas reçu d'email, contactez un administrateur.");
                }else{
-                   return array('email' => 'L\'envoie de l\'email n\'a pas fonctioné, merci de contacter un administrateur');
+                   return array('email' => "L'envoie de l'email n'a pas fonctioné, merci de contacter un administrateur");
                }
            }
         }
@@ -205,7 +205,7 @@ class module_auth extends abstract_module{
                 _root::getLog()->log("L'utilisateur $to à demandé une réinitialisation du mdp. Un mail contenant un nouveau mdp lui a été envoyé.");
                 return true;
             }else{
-                _root::getLog()->log("L'utilisateur $to à demandé une réinitialisation du mdp. Le mail contenant le nouveau mdp n\'a pas été envoyé à cause d\'un problème.");
+                _root::getLog()->log("L'utilisateur $to à demandé une réinitialisation du mdp. Le mail contenant le nouveau mdp n'a pas été envoyé à cause d'un problème.");
                 return false;
             }
         }
@@ -428,9 +428,9 @@ class module_auth extends abstract_module{
                 }
                 //$this->sendEmailinscription($sLogin,$sSurname,$cle);
                 if(!$this->sendMailOneAndOneInscription($sLogin,$sSurname,$cle)){
-                    return array('success'=>array('Il y a eu un problème avec l\'envoie d\'email'));
+                    return array('success'=>array("Il y a eu un problème avec l'envoie d'email"));
                 }else{
-                    return array('success'=>array('Votre compte a bien été créé. Veuillez confirmer votre compte, un email vous a été envoyé.'));
+                    return array('success'=>array("Votre compte a bien été créé. Veuillez confirmer votre compte, un email vous a été envoyé."));
                 }
                 
 
