@@ -26,13 +26,16 @@ class module_auth extends abstract_module{
                 $aConfirmation = model_utilisateur::getInstance()->getConfirmation($iIdUtilisateur->id_utilisateur);
 
                 if($aConfirmation->actif == 1){
-                        $sConfirmation = "Vous avez déjà confirmé votre compte.";
+                    _root::getLog()->log("L\'utilisateur $email à essayer d'activer une deuxième son compte.");
+                    $sConfirmation = "Vous avez déjà confirmé votre compte.";
                 } else {
                     if($aConfirmation->cle != $cle){
-                            $sConfirmation = "Erreur. Votre compte ne peux pas être activé.";
+                        _root::getLog()->log("L\'utilisateur $email n'a pas pu acitiver son compte. La clé fournie n'est pas la bonne.");
+                        $sConfirmation = "Erreur. Votre compte ne peux pas être activé, la clé fournie n'est pas correcte.";
                     }else{
-                            model_utilisateur::getInstance()->setActif($iIdUtilisateur->id_utilisateur);
-                            $sConfirmation = "Votre compte à bien été activé.";
+                        _root::getLog()->log("L'utilisateur $email à activer son compte");
+                        model_utilisateur::getInstance()->setActif($iIdUtilisateur->id_utilisateur);
+                        $sConfirmation = "Votre compte à bien été activé.";
                     }
                 }			
             }else{
@@ -68,7 +71,8 @@ class module_auth extends abstract_module{
 		$sPassword=_root::getParam('password');
 		
 		if(strlen($sPassword) > $this->maxPasswordLength){
-			return 'Mot de passe trop long';
+                    _root::getLog()->log("L\'utilisateur $sLogin à essayé de s\'identifier avec un password trop long, len max = 100");
+                    return 'Mot de passe trop long';
 		}
 		
 		//on stoque les mots de passe hashe dans la classe model_utilisateur
@@ -78,7 +82,8 @@ class module_auth extends abstract_module{
 		//on va verifier que l'on trouve dans le tableau retourne par notre model
 		//l'entree $tAccount[ login ][ mot de passe hashe ]
 		if(!_root::getAuth()->checkLoginPass($tAccount,$sLogin,$sHashPassword)){
-			return 'Mauvais login/mot de passe';
+                    _root::getLog()->log("L\'utilisateur $sLogin n\'a pas réussi à s'identifier, le mot de passe ou le login ne sont pas corrects.");
+                    return 'Mauvais login/mot de passe';
 		}
 		
                 $oUser=_root::getAuth()->getAccount();
@@ -91,11 +96,11 @@ class module_auth extends abstract_module{
                     if($aInfoConfirmation->actif == 1){
                         model_utilisateur::getInstance()->setConnecte1($iIdUtilisateur);
                     }else{
+                        _root::getLog()->log("L\'utilisateur $sLogin n\'a pas pu se connecter car il n'a pas validé son compte.");
                         return 'Veuillez confirmer votre email pour pouvoir vous connecter.';
                     } 
-                }
-		$logConnexion = 'L\'utilisateur : ' . $oUser->email . ' vient de se connecter';
-		_root::getLog()->log($logConnexion);
+                }       
+		_root::getLog()->log("L\'utilisateur $sLogin vient de se connecter avec succès");
 		_root::redirect('default::index');
                 
                 
@@ -142,6 +147,7 @@ class module_auth extends abstract_module{
            //On vérifie si l'adresse email entrée existe en base.
            //Si elle n'existe pas en renvoie un message d'erreur
            if(!_root::getAuth()->checkEmail($tAccount,$sLogin)){
+               _root::getLog()->log("$sLogin essai de réinitialiser son password mais l'adresse n'existe pas en bdd.");
                return array('email' => 'L\'adresse email fourni n\'existe pas.');
            //Si elle existe, alors on renvoie un message de succès.
            }else{
@@ -196,10 +202,10 @@ class module_auth extends abstract_module{
 //            $headers .= 'Bcc: anniversaire_verif@example.com' . "\r\n";
 
             if(mail($to, $subject, $sMessage, $headers)){
-                _root::getLog()->log('L\'utilisateur $to à demandé une réinitialisation du mdp. Un mail contenant un nouveau mdp lui a été envoyé.');
+                _root::getLog()->log("L'utilisateur $to à demandé une réinitialisation du mdp. Un mail contenant un nouveau mdp lui a été envoyé.");
                 return true;
             }else{
-                _root::getLog()->log('L\'utilisateur $to à demandé une réinitialisation du mdp. Le mail contenant le nouveau mdp n\'a pas été envoyé à cause d\'un problème.');
+                _root::getLog()->log("L'utilisateur $to à demandé une réinitialisation du mdp. Le mail contenant le nouveau mdp n\'a pas été envoyé à cause d\'un problème.");
                 return false;
             }
         }
@@ -249,10 +255,10 @@ class module_auth extends abstract_module{
             
 
             if(mail($to, $subject, $sMessage, $headers)){
-                _root::getLog()->log("Un email de confirmation d\'inscription à été envoyé à $to.");
+                _root::getLog()->log("Un email de confirmation d'inscription à été envoyé à $to.");
                 return true;
             }else{
-                _root::getLog()->log('L\'envoie de l\'email de confirmation à &to à échoué.');
+                _root::getLog()->log("L'envoie de l'email de confirmation à $to à échoué.");
                 return false;
             }
         }
@@ -432,12 +438,13 @@ class module_auth extends abstract_module{
 
             public function _logout(){
                 $iIdUtilisateur = (int)_root::getAuth()->getAccount()->id_utilisateur;
+                $sLogin = _root::getAuth()->getAccount()->email;
                 model_utilisateur::getInstance()->setConnecte0($iIdUtilisateur);		
-
-               _root::getAuth()->logout();
+                _root::getLog()->log("$sLogin s'est déconnecté.");
+                _root::getAuth()->logout();
             }
 
             public function after(){
-                    $this->oLayout->show();
+                $this->oLayout->show();
             }
 }
