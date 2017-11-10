@@ -1,7 +1,5 @@
-
-
 <div id="map"></div>
-
+<p>Bonjour</p>
     <script>
       var customLabel = {
         restaurant: {
@@ -62,7 +60,7 @@
             new XMLHttpRequest;
 
         request.onreadystatechange = function() {
-          if (request.readyState == 4) {
+          if (request.readyState === 4) {
             request.onreadystatechange = doNothing;
             callback(request, request.status);
           }
