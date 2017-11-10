@@ -1,4 +1,6 @@
+<div class="row">
 <div id="map"></div>
+</div>
     <script>
       var customLabel = {
         restaurant: {
