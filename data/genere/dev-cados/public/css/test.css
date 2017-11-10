@@ -340,5 +340,6 @@ body {
 }
 
 #map {
+    display: inline-block;
     height: 100%;
 }
